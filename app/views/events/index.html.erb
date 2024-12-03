@@ -1,0 +1,40 @@
+<div class="container mt-4">
+  <%# Container Bootstrap com margem superior %>
+
+  <%= turbo_frame_tag "events_results" do %>
+    <%# Frame Turbo para atualizações parciais %>
+
+    <div class="row">
+      <%# Grid sistema do Bootstrap %>
+
+      <% @events.each do |event| %>
+        <%# Loop pelos eventos %>
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+          <%# Coluna responsiva: 12 (mobile), 6 (tablet), 3 (desktop) com margem inferior %>
+          <%= render partial: 'events/event_card', locals: { event: event } %>
+          <%# Renderiza o card do evento %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="d-flex justify-content-center gap-2 mb-4">
+      <%# Container flex centralizado com espaçamento entre botões %>
+
+      <% if @events.prev_page %>
+        <%# Exibe botão 'Anterior' se houver página anterior %>
+        <%= link_to_prev_page @events, 'Anterior',
+            class: 'btn btn-outline-primary',
+            data: { turbo_frame: "events_results" } %>
+            <%# Link para página anterior que atualiza apenas o frame %>
+      <% end %>
+
+      <% if @events.next_page %>
+        <%# Exibe botão 'Próxima' se houver próxima página %>
+        <%= link_to_next_page @events, 'Próxima',
+            class: 'btn btn-outline-primary',
+            data: { turbo_frame: "events_results" } %>
+            <%# Link para próxima página que atualiza apenas o frame %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

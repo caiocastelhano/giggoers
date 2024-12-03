@@ -1,12 +1,61 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: white;
-}
+.navbar-giggoers {
+  background-color: #2f1965;
+  padding: 15px 0;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
+  .logo {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+  }
 
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
+  .app-title {
+    font-family: $headers-font;
+    font-size: 40px;
+    color: #ED4E4E;
+    margin-bottom: 5px;
+    text-align: center;
+  }
+
+  .app-subtitle {
+    font-family: $body-font;
+    font-weight: bold;
+    font-size: 10px;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+
+  .search-input {
+    border-radius: 20px;
+    padding: 10px 15px;
+    margin-right: 5px;
+  }
+
+  .input-group {
+    .input-group-text {
+      background-color: transparent;
+      border: none;
+      color: #ED4E4E;
+      position: absolute;
+      margin: 0;
+      width: auto;
+      right: 10px;
+      z-index: 10;
+    }
+
+    .input-group-text {
+      i.bi-search {
+        font-size: 24px; 
+      }
+    }
+
+    .form-control {
+      padding-right: 40px;
+    }
+  }
+
+  .nav-link{
+    color: #FFFFFF;
+  }
 }

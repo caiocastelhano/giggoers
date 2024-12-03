@@ -18,3 +18,4 @@ class Venue < ApplicationRecord
     allow_blank: true
   }
 end
+

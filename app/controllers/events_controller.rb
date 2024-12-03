@@ -24,4 +24,8 @@ class EventsController < ApplicationController
     @events = @events.page(params[:page]).per(8)
     # Pagina resultados, 8 por página
   end
+
+  def show
+    @event = Event.includes(:venue, :genres).find(params[:id])
+  end
 end

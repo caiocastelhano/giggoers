@@ -1,0 +1,39 @@
+.event-details-container {
+  margin: 2rem auto;
+  max-width: 600px;
+
+  .event-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: $primary; // Utilize a variável definida no _colors.scss
+  }
+
+  .event-image {
+    border-radius: 10px;
+    margin: 1rem 0;
+    max-width: 100%;
+    height: auto;
+  }
+
+  .event-description {
+    font-size: 1rem;
+    color: #fffff; // Utilize a variável definida no _colors.scss
+    margin-bottom: 1rem;
+  }
+
+  .event-details {
+    p {
+      font-size: 1rem;
+      margin: 0.5rem 0;
+    }
+  }
+
+  .btn-primary {
+    background-color: $primary;
+    border: none;
+
+    &:hover {
+      background-color: darken($primary, 10%);
+    }
+  }
+}

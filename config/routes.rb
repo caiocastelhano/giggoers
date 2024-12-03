@@ -10,4 +10,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
   resources :events, only: [:index, :show]
+
+  # criando rota de eventos pra lidar com a busca
+  resources :events do
+    get 'search', on: :collection
+  end
 end

@@ -1,0 +1,15 @@
+<h1>Your Favorite Events</h1>
+
+<% if @favorites.any? %>
+  <ul>
+    <% @favorites.each do |favorite| %>
+      <li>
+        <strong><%= favorite.event.title %></strong> - <%= favorite.event.start_date %> at <%= favorite.event.start_time %>
+        <p><%= favorite.event.description %></p>
+        <p>Venue: <%= favorite.event.venue.name %></p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>You have no favorite events yet.</p>
+<% end %>

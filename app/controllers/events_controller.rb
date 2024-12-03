@@ -24,4 +24,9 @@ class EventsController < ApplicationController
     @events = @events.page(params[:page]).per(8)
     # Pagina resultados, 8 por página
   end
+
+  def search
+    @query = params[:query]
+    @events = Event.where("name LIKE ?", "%#{@query}%")
+  end
 end

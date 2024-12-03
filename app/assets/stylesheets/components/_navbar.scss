@@ -2,6 +2,8 @@
   background-color: #2f1965;
   padding: 15px 0;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: center;
+  justify-content: flex-start;
 
   .logo {
     max-width: 100px;
@@ -11,19 +13,17 @@
 
   .app-title {
     font-family: $headers-font;
-    font-size: 40px;
+    font-size: 50px;
     color: #ED4E4E;
     margin-bottom: 5px;
-    text-align: center;
   }
 
   .app-subtitle {
     font-family: $body-font;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 12px;
     color: #FFFFFF;
     margin-bottom: 10px;
-    text-align: center;
   }
 
   .search-input {
@@ -36,7 +36,7 @@
     .input-group-text {
       background-color: transparent;
       border: none;
-      color: #ED4E4E;
+      border-radius: 15px;
       position: absolute;
       margin: 0;
       width: auto;
@@ -46,7 +46,8 @@
 
     .input-group-text {
       i.bi-search {
-        font-size: 24px; 
+        font-size: 24px;
+        color: #ED4E4E;
       }
     }
 
@@ -57,5 +58,6 @@
 
   .nav-link{
     color: #FFFFFF;
+    padding: 12px 5px;
   }
 }

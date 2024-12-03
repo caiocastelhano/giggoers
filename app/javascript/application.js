@@ -3,3 +3,5 @@ import "@hotwired/turbo-rails"
 import "controllers"
 import "@popperjs/core"
 import "bootstrap"
+import VenueMap from './components/VenueMap'
+import 'mapbox-gl/dist/mapbox-gl.css'

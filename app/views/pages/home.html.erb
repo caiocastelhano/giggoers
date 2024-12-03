@@ -1,4 +1,64 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<!-- Título "DESTAQUES", centralizado e em negrito -->
+<div style="text-align: center; font-weight: bold;">
+  <h1>DESTAQUES</h1>
+</div>
+
+<!-- Carrossel de Eventos -->
+<div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    <% @carousel_events.each_with_index do |event, index| %>
+      <div class="carousel-item <%= 'active' if index == 0 %>">
+        <% if event.url_image.present? && event.url_image != "" %>
+          <img src="<%= event.url_image %>" class="d-block w-100" alt="<%= event.title %>">
+        <% else %>
+          <img src="default-image.jpg" class="d-block w-100" alt="Imagem do evento">
+        <% end %>
+        <div class="carousel-caption d-none d-md-block">
+          <h5><%= event.title %></h5>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Botões de navegação do carrossel -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<!-- Cards dos Eventos, agora um embaixo do outro -->
+<div class="container" style="padding: 1rem;">
+  <% @card_events.each do |event| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h4 class="card-title"><%= event.title %></h4>
+        <p class="card-text"><%= truncate(event.description, length: 100) %></p>
+
+        <div class="d-flex justify-content-between align-items-center">
+          <small class="text-muted">
+            <%= event.start_date.strftime("%d/%m/%Y") %>
+            <%= event.start_time.strftime("%H:%M") if event.start_time %>
+          </small>
+
+          <span class="badge bg-primary">
+            R$ <%= number_with_precision(event.price, precision: 2) %>
+          </span>
+        </div>
+
+        <div class="mt-2">
+          <% event.genres.each do |genre| %>
+            <span class="badge bg-secondary"><%= genre.name %></span>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
 <%= render 'shared/footer' %>

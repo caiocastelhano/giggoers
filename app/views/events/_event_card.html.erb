@@ -1,0 +1,38 @@
+<div class="card">
+  <%# Container Bootstrap para card %>
+
+  <div class="card-body">
+    <%# Corpo do card %>
+
+    <h4 class="card-title"><%= event.title %></h4>
+    <%# Título do evento em heading 4 %>
+
+    <p class="card-text"><%= truncate(event.description, length: 100) %></p>
+    <%# Descrição do evento limitada a 100 caracteres %>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <%# Container flex que distribui itens nas extremidades e centraliza verticalmente %>
+
+      <small class="text-muted">
+        <%# Texto pequeno em cor mais clara %>
+        <%= event.start_date.strftime("%d/%m/%Y") %>
+        <%# Data formatada do evento %>
+        <%= event.start_time.strftime("%H:%M") if event.start_time %>
+        <%# Hora formatada do evento, se existir %>
+      </small>
+
+      <span class="badge bg-primary">R$ <%= number_with_precision(event.price, precision: 2) %></span>
+      <%# Badge azul com preço formatado com 2 casas decimais %>
+    </div>
+
+    <div class="mt-2">
+      <%# Container com margem superior de 2 unidades %>
+
+      <% event.genres.each do |genre| %>
+        <%# Loop pelos gêneros do evento %>
+        <span class="badge bg-secondary"><%= genre.name %></span>
+        <%# Badge cinza para cada gênero %>
+      <% end %>
+    </div>
+  </div>
+</div>

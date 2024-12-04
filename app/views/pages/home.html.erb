@@ -35,7 +35,12 @@
 <!-- Cards dos Eventos, agora um embaixo do outro -->
 <div class="container" style="padding: 1rem;">
   <% @card_events.each do |event| %>
-    <div class="card mb-3">
+    <div class="card mb-3 position-relative">
+      <!-- Botão de coração -->
+      <a href="#" class="position-absolute top-0 end-0 m-2" style="z-index: 1; color: black; font-size: 1.5rem;">
+        <i class="fas fa-heart"></i> <!-- Ícone do coração -->
+      </a>
+
       <div class="card-body">
         <h4 class="card-title"><%= event.title %></h4>
         <p class="card-text"><%= truncate(event.description, length: 100) %></p>

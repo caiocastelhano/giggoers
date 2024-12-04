@@ -5,14 +5,16 @@
     <div class="row align-items-center">
       <div class="col-3">
         <!-- Link para a home com a logo -->
-        <%= link_to "#", class: "navbar-brand" do %>
+        <%= link_to "/", class: "navbar-brand" do %>
           <%= image_tag "logo.png", class: 'logo' %> <!-- Logo da aplicação -->
         <% end %>
       </div>
       <div class="col-6 text-left">
         <!-- Título e subtítulo do app -->
-        <h1 class="app-title">GigGoers</h1>
-        <p class="app-subtitle">Você no lugar quando a música começar!</p>
+        <%= link_to "/", class: "text-decoration-none text-dark" do %>
+          <h1 class="app-title">GigGoers</h1>
+          <p class="app-subtitle">Você no lugar quando a música começar!</p>
+        <% end %>
       </div>
       <div class="col-3 d-flex justify-content-end">
         <% if user_signed_in? %>
@@ -42,6 +44,7 @@
             <input type="text" name="query"
                    class="form-control rounded-pill me-2"
                    placeholder="Qual o seu plano?"
+                   value="<%= params[:query] %>" <!-- Campo de busca mantém o texto digitado -->
                    style="width: 95%;" />
             <!-- Botão de busca com ícone -->
             <%= link_to events_path(query: params[:query]),
@@ -53,3 +56,5 @@
         <% end %>
       </div>
     </div>
+  </div>
+</nav>

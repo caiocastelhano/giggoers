@@ -1,26 +1,59 @@
-<div class="event-details-container text-center">
-  <!-- Título do evento -->
-  <h1 class="event-title"><%= @event.title %></h1>
+<div class="container">
+  <h1 class="text-center my-4">Saiba Mais</h1>
 
-  <!-- Imagem do evento -->
-  <% if @event.url_image.present? %>
-    <img src="<%= @event.url_image %>" class="event-image img-fluid" alt="<%= @event.title %>">
-  <% else %>
-    <img src="default-image.jpg" class="event-image img-fluid" alt="Imagem não disponível">
-  <% end %>
+  <div class="event-details-container">
+    <div class="card">
+      <% if @event.url_image.present? && @event.url_image != "" %>
+        <%= image_tag @event.url_image, class: "card-img-top event-image", alt: @event.title %>
+      <% else %>
+        <%= image_tag "default-event-image.jpg", class: "card-img-top event-image", alt: "Imagem padrão do evento" %>
+      <% end %>
 
-  <!-- Descrição -->
-  <p class="event-description"><%= @event.description %></p>
+      <div class="card-body">
+        <h2 class="card-title event-title"><%= @event.title %></h2>
 
-  <!-- Local e Data -->
-  <div class="event-details">
-    <p><strong>Local:</strong> <%= @event.venue.name %> - <%= @event.venue.address %></p>
-    <p><strong>Data:</strong> <%= @event.start_date.strftime("%d/%m/%Y") %></p>
-    <p><strong>Hora:</strong> <%= @event.start_time.strftime("%H:%M") if @event.start_time %></p>
+        <div class="event-details mb-3">
+          <p>
+            <strong>Data:</strong>
+            <%= @event.start_date.strftime("%d/%m/%Y") %>
+            às <%= @event.start_time.strftime("%H:%M") if @event.start_time %>
+          </p>
+
+          <p>
+            <strong>Local:</strong>
+            <%= @event.venue.name %>,
+            <%= @event.venue.address %>
+          </p>
+        </div>
+
+        <div class="event-description mb-3">
+          <%= @event.description %>
+        </div>
+
+        <div class="mb-3">
+          <h5>Gêneros</h5>
+          <div>
+            <% @event.genres.each do |genre| %>
+              <span class="badge bg-secondary me-2"><%= genre.name %></span>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="text-end mb-3">
+          <span class="badge bg-primary fs-5">
+            R$ <%= number_with_precision(@event.price, precision: 2) %>
+          </span>
+        </div>
+      </div>
+
+      <%= link_to "Ingressos", @event.purchase_link,
+        class: "btn btn-primary rounded-15 py-3 mx-auto d-block",
+        style: "width: 80%;",
+        target: "_blank",
+        rel: "noopener noreferrer" %>
+
+    <div class="text-center mt-3">
+      <%= link_to "Voltar para Eventos", events_path, class: "btn btn-outline-secondary" %>
+    </div>
   </div>
-
-  <!-- Botão de Ingressos -->
-  <a href="#" class="btn btn-primary">Ingressos</a>
 </div>
-
-

@@ -1,11 +1,18 @@
+.container {
+  .text-center {
+    color: $warning;
+  }
+}
+
 .event-details-container {
   margin: 2rem auto;
   max-width: 600px;
+  justify-content: center;
 
   .event-title {
     font-size: 2rem;
     font-weight: bold;
-    color: $primary; // Utilize a variável definida no _colors.scss
+    color: $body-color; // Já definido como $blue
   }
 
   .event-image {
@@ -17,7 +24,7 @@
 
   .event-description {
     font-size: 1rem;
-    color: #fffff; // Utilize a variável definida no _colors.scss
+    color: $gray; // Corrigi de #fffff para $gray
     margin-bottom: 1rem;
   }
 
@@ -30,7 +37,10 @@
 
   .btn-primary {
     background-color: $primary;
-    border: none;
+    border-radius: 15px;
+    margin: 3px;
+    max-width: 80%;
+    font-size: 16px;
 
     &:hover {
       background-color: darken($primary, 10%);

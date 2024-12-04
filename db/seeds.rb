@@ -76,36 +76,36 @@ genres = Genre.create!([
   { name: 'Festival' }
 ])
 
-# 6. Associate Events with Genres
-puts "Associating events with genres..."
-{
-  'Beethoven Symphony Night' => ['Classical'],
-  'Jazz Evenings with John Doe Quartet' => ['Jazz'],
-  'Opera Night: Carmen' => ['Opera', 'Classical'],
-  'Electronic Music Festival' => ['Electronic', 'Festival', 'DJ'],
-  'MPB Live Show' => ['MPB'],
-  'Chamber Orchestra Concert' => ['Classical', 'Chamber Music'],
-  'Rock in SP' => ['Rock', 'Festival'],
-  'Samba Night' => ['Samba'],
-  'Piano Masters' => ['Classical', 'Piano'],
-  'World Music Festival' => ['World Music', 'Festival'],
-  'Alternative Rock Night' => ['Rock', 'Alternative'],
-  'Electronic Dance Party' => ['Electronic', 'DJ']
-}.each do |event_title, genre_names|
-  event = events.find { |e| e.title == event_title }
-  genre_names.each do |genre_name|
-    genre = genres.find { |g| g.name == genre_name }
-    EventGenre.create!(event: event, genre: genre)
-  end
-end
+# # 6. Associate Events with Genres
+# puts "Associating events with genres..."
+# {
+#   'Beethoven Symphony Night' => ['Classical'],
+#   'Jazz Evenings with John Doe Quartet' => ['Jazz'],
+#   'Opera Night: Carmen' => ['Opera', 'Classical'],
+#   'Electronic Music Festival' => ['Electronic', 'Festival', 'DJ'],
+#   'MPB Live Show' => ['MPB'],
+#   'Chamber Orchestra Concert' => ['Classical', 'Chamber Music'],
+#   'Rock in SP' => ['Rock', 'Festival'],
+#   'Samba Night' => ['Samba'],
+#   'Piano Masters' => ['Classical', 'Piano'],
+#   'World Music Festival' => ['World Music', 'Festival'],
+#   'Alternative Rock Night' => ['Rock', 'Alternative'],
+#   'Electronic Dance Party' => ['Electronic', 'DJ']
+# }.each do |event_title, genre_names|
+#   event = events.find { |e| e.title == event_title }
+#   genre_names.each do |genre_name|
+#     genre = genres.find { |g| g.name == genre_name }
+#     EventGenre.create!(event: event, genre: genre)
+#   end
+# end
 
-# 7. Add Favorites
-puts "Adding favorites..."
-# Each user gets 2 random favorite events
-users.each do |user|
-  events.sample(2).each do |event|
-    Favorite.create!(user: user, event: event)
-  end
-end
+# # 7. Add Favorites
+# puts "Adding favorites..."
+# # Each user gets 2 random favorite events
+# users.each do |user|
+#   events.sample(2).each do |event|
+#     Favorite.create!(user: user, event: event)
+#   end
+# end
 
 puts "Database seeding completed!"

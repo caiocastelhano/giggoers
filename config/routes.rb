@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   resources :events, only: [:index, :show]
 
   # criando rota de eventos pra lidar com a busca
-  resources :events do
-    get 'search', on: :collection
-  end
+  # resources :events do
+  #   get 'search', on: :collection
+  # end
 end

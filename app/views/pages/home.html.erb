@@ -37,9 +37,17 @@
   <% @card_events.each do |event| %>
     <div class="card mb-3 position-relative">
       <!-- Botão de coração -->
-      <a href="#" class="position-absolute top-0 end-0 m-2" style="z-index: 1; color: black; font-size: 1.5rem;">
-        <i class="fas fa-heart"></i> <!-- Ícone do coração -->
-      </a>
+      <% if user_signed_in? %>
+        <!-- Para usuários logados, não faz nada aqui ainda -->
+        <a href="#" class="position-absolute top-0 end-0 m-2" style="z-index: 1; color: black; font-size: 1.5rem;">
+          <i class="fas fa-heart"></i>
+        </a>
+      <% else %>
+        <!-- Para usuários não logados, redireciona para a página de login -->
+        <a href="<%= new_user_session_path %>" class="position-absolute top-0 end-0 m-2" style="z-index: 1; color: black; font-size: 1.5rem;">
+          <i class="fas fa-heart"></i>
+        </a>
+      <% end %>
 
       <div class="card-body">
         <h4 class="card-title"><%= event.title %></h4>

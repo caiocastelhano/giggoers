@@ -24,7 +24,6 @@ users = User.create!([
   { name: 'Julia', email: 'julia@gmail.com', password: 'julia456' },
   { name: 'Gabriel', email: 'gabriel@hotmail.com', password: 'gabriel789' }
 ])
-
 # 3. Create Venues
 puts "Creating venues..."
 venues = [
@@ -41,7 +40,6 @@ venues = [
   Venue.create!(name: 'Cine Joia', address: 'Praça Carlos Gomes, 82, São Paulo, SP, Brazil', latitude: -23.5504, longitude: -46.6392, capacity: 600),
   Venue.create!(name: 'Lions Nightclub', address: 'Av. Brigadeiro Luís Antônio, 277, São Paulo, SP, Brazil', latitude: -23.5495, longitude: -46.6384, capacity: 1000)
 ]
-
 # 4. Create Events with url_image
 puts "Creating events..."
 events = [
@@ -58,7 +56,6 @@ events = [
   Event.create!(title: 'Alternative Rock Night', description: 'An evening of alternative rock music.', venue: venues[10], price: 100.0, start_date: '2025-01-20', start_time: '19:00', end_date: '2025-01-20', end_time: '23:00', url_image: 'https://images.pexels.com/photos/1647166/pexels-photo-1647166.jpeg?auto=compress&cs=tinysrgb&w=600'),
   Event.create!(title: 'Electronic Dance Party', description: 'A high-energy night of electronic dance music.', venue: venues[11], price: 90.0, start_date: '2025-01-25', start_time: '22:00', end_date: '2025-01-26', end_time: '04:00', url_image: 'https://images.pexels.com/photos/2820891/pexels-photo-2820891.jpeg?auto=compress&cs=tinysrgb&w=600')
 ]
-
 # 5. Create Genres
 puts "Creating genres..."
 genres = Genre.create!([
@@ -77,7 +74,6 @@ genres = Genre.create!([
   { name: 'DJ' },
   { name: 'Festival' }
 ])
-
 # 6. Associate Events with Genres
 puts "Associating events with genres..."
 
@@ -131,5 +127,4 @@ users.each do |user|
     Favorite.create!(user: user, event: event)
   end
 end
-
 puts "Database seeding completed!"

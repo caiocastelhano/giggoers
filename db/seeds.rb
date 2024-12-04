@@ -54,7 +54,9 @@ events = [
   Event.create!(title: 'Rock in SP', description: 'A festival of rock bands from São Paulo.', venue: venues[6], price: 90.0, start_date: '2024-12-30', start_time: '18:00', end_date: '2024-12-31', end_time: '02:00', url_image: 'https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=600'),
   Event.create!(title: 'Samba Night', description: 'Traditional samba night with live band.', venue: venues[7], price: 80.0, start_date: '2025-01-05', start_time: '21:00', end_date: '2025-01-06', end_time: '04:00', url_image: 'https://images.pexels.com/photos/3801118/pexels-photo-3801118.jpeg?auto=compress&cs=tinysrgb&w=600'),
   Event.create!(title: 'Piano Masters', description: 'Classical piano recital by renowned pianists.', venue: venues[8], price: 200.0, start_date: '2025-01-10', start_time: '20:00', end_date: '2025-01-10', end_time: '22:30', url_image: 'https://images.pexels.com/photos/586415/pexels-photo-586415.jpeg?auto=compress&cs=tinysrgb&w=600'),
-  Event.create!(title: 'World Music Festival', description: 'Celebrating diverse musical traditions.', venue: venues[9], price: 70.0, start_date: '2025-01-15', start_time: '16:00', end_date: '2025-01-15', end_time: '22:00', url_image: 'https://images.pexels.com/photos/1537637/pexels-photo-1537637.jpeg?auto=compress&cs=tinysrgb&w=600')
+  Event.create!(title: 'World Music Festival', description: 'Celebrating diverse musical traditions.', venue: venues[9], price: 70.0, start_date: '2025-01-15', start_time: '16:00', end_date: '2025-01-15', end_time: '22:00', url_image: 'https://images.pexels.com/photos/1537637/pexels-photo-1537637.jpeg?auto=compress&cs=tinysrgb&w=600'),
+  Event.create!(title: 'Alternative Rock Night', description: 'An evening of alternative rock music.', venue: venues[10], price: 100.0, start_date: '2025-01-20', start_time: '19:00', end_date: '2025-01-20', end_time: '23:00', url_image: 'https://images.pexels.com/photos/1647166/pexels-photo-1647166.jpeg?auto=compress&cs=tinysrgb&w=600'),
+  Event.create!(title: 'Electronic Dance Party', description: 'A high-energy night of electronic dance music.', venue: venues[11], price: 90.0, start_date: '2025-01-25', start_time: '22:00', end_date: '2025-01-26', end_time: '04:00', url_image: 'https://images.pexels.com/photos/2820891/pexels-photo-2820891.jpeg?auto=compress&cs=tinysrgb&w=600')
 ]
 
 # 5. Create Genres
@@ -78,7 +80,9 @@ genres = Genre.create!([
 
 # 6. Associate Events with Genres
 puts "Associating events with genres..."
-{
+
+# Hash com eventos e gêneros
+event_genre_map = {
   'Beethoven Symphony Night' => ['Classical'],
   'Jazz Evenings with John Doe Quartet' => ['Jazz'],
   'Opera Night: Carmen' => ['Opera', 'Classical'],
@@ -91,13 +95,33 @@ puts "Associating events with genres..."
   'World Music Festival' => ['World Music', 'Festival'],
   'Alternative Rock Night' => ['Rock', 'Alternative'],
   'Electronic Dance Party' => ['Electronic', 'DJ']
-}.each do |event_title, genre_names|
+}
+
+# Loop pelos eventos
+event_genre_map.each do |event_title, genre_names|
+  # Encontrar o evento pelo título
   event = events.find { |e| e.title == event_title }
+
+  if event.nil?
+    puts "Warning: Event '#{event_title}' not found. Skipping."
+    next
+  end
+
+  # Loop pelos gêneros associados
   genre_names.each do |genre_name|
     genre = genres.find { |g| g.name == genre_name }
+
+    if genre.nil?
+      puts "Warning: Genre '#{genre_name}' not found for event '#{event_title}'. Skipping."
+      next
+    end
+
+    # Criar a associação entre evento e gênero
     EventGenre.create!(event: event, genre: genre)
   end
 end
+
+puts "Finished associating events with genres."
 
 # 7. Add Favorites
 puts "Adding favorites..."

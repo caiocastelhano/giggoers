@@ -1,28 +1,33 @@
 class EventsController < ApplicationController
   def index
-    @events = Event.includes(:venue, :genres)
-    # Carrega eventos com seus relacionamentos para evitar N+1 queries
+    if params[:query].present?
+      @events = Event.where("title ILIKE ?", "%#{params[:query]}%")
+    else
+      @events = Event.all
+    end
 
-    @events = @events.where('start_date >= ?', Date.current)
-    # Filtra apenas eventos futuros
+    @events = @events.page(params[:page]).per(12)
 
-    @events = @events.where('title ILIKE ? OR description ILIKE ?',
-                           "%#{params[:query]}%",
-                           "%#{params[:query]}%") if params[:query].present?
-    # Busca por título ou descrição se houver query
+    # Preparar markers para o mapa
+    @markers = @events.map do |event|
+      venue = event.venue
+      {
+        lat: event.venue.latitude,
+        lng: event.venue.longitude,
+        info_window_html: render_to_string(
+          partial: "events/info_window",
+          locals: {
+            event: event,
+            venue: venue
+          }
+        )
+      }
+    end
+  end
 
-    @events = @events.joins(:genres)
-                    .where(genres: { id: params[:genre_id] }) if params[:genre_id].present?
-    # Filtra por gênero se especificado
-
-    @events = @events.where(start_date: Date.parse(params[:date])) if params[:date].present?
-    # Filtra por data se especificada
-
-    @events = @events.order(start_date: :asc)
-    # Ordena por data crescente
-
-    @events = @events.page(params[:page]).per(8)
-    # Pagina resultados, 8 por página
+  def search
+    @query = params[:query]
+    @events = Event.where("name LIKE ?", "%#{@query}%")
   end
 
   def show

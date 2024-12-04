@@ -25,10 +25,10 @@ class EventsController < ApplicationController
     end
   end
 
-  def search
-    @query = params[:query]
-    @events = Event.where("name LIKE ?", "%#{@query}%")
-  end
+  # def search
+  #   @query = params[:query]
+  #   @events = Event.where("name LIKE ?", "%#{@query}%")
+  # end
 
   def show
     @event = Event.includes(:venue, :genres).find(params[:id])

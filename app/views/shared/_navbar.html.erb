@@ -1,7 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light navbar-giggoers">
   <!-- Container principal para o layout do navbar -->
   <div class="container">
-
     <!-- Primeira linha do navbar: Logo, Título e Botão Login/Logout -->
     <div class="row align-items-center">
       <div class="col-3">
@@ -45,7 +44,7 @@
                    placeholder="Qual o seu plano?"
                    style="width: 95%;" />
             <!-- Botão de busca com ícone -->
-            <%= link_to events_path,
+            <%= link_to events_path(query: params[:query]),
                         class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y me-2',
                         style: 'z-index: 10;' do %>
               <i class="bi bi-search"></i> <!-- Ícone de lupa do Bootstrap Icons -->
@@ -54,6 +53,3 @@
         <% end %>
       </div>
     </div>
-
-  </div>
-</nav>

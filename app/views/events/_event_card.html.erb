@@ -33,6 +33,8 @@
         <span class="badge bg-secondary"><%= genre.name %></span>
         <%# Badge cinza para cada gênero %>
       <% end %>
+
+    <%= link_to 'Add to Favorites', event_favorites_path(event), data: {turbo_method: :post}, class:'btn btn-primary' %>
     </div>
   </div>
 </div>

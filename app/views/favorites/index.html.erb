@@ -5,21 +5,15 @@
   <ul>
     <% @favorites.each do |favorite| %>
       <li>
-        <h2><%= favorite[:event_title] %></h2>
-        <p><strong>Description:</strong> <%= favorite[:event_description] %></p>
-        <p><strong>Venue:</strong> <%= favorite[:event_venue] %></p>
-        <p><strong>Start Date:</strong> <%= favorite[:event_start_date] %></p>
-        <p><strong>End Date:</strong> <%= favorite[:event_end_date] %></p>
-        <p><strong>Start Time:</strong> <%= favorite[:event_start_time] %></p>
-        <p><strong>Genres:</strong> <%= favorite[:event_genres].join(', ') %></p>
-        <%= link_to 'Remove from Favorites', user_favorite_path(current_user, favorite[:id]), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <h2><strong>Title:</strong><%= favorite.event.title %></h2>
+        <p><strong>Description:</strong> <%= favorite.event.description %></p>
+        <p><strong>Start Date:</strong> <%= favorite.event.start_date %></p>
+        <p><strong>End Date:</strong> <%= favorite.event.end_date %></p>
+        <p><strong>Start Time:</strong> <%= favorite.event.start_time%></p>
+        <%= link_to 'Remove from Favorites', favorite_path(favorite), data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to remove this event from your list of favorites'}%>
       </li>
     <% end %>
   </ul>
 <% else %>
   <p>You have no favorite events yet.</p>
 <% end %>
-
-
-
-

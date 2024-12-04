@@ -11,6 +11,10 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "pages/show";
+
+body {
+  background-color: $primary;
 
 /* Adicione estes estilos ao seu arquivo CSS */
 .map-container {

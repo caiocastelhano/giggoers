@@ -1,0 +1,29 @@
+/* Botão de login */
+.btn-login {
+  color: #ED4E4E;
+  border: none;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-login:hover {
+  background-color: #c93c3c;
+  color: #FFFFFF;
+}
+
+/* Botão de logout */
+.btn-logout {
+  color: #ED4E4E;
+  border: none;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-logout:hover {
+  background-color: #c93c3c;
+  color: #FFFFFF;
+}

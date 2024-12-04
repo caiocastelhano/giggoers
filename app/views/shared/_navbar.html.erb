@@ -1,35 +1,55 @@
 <nav class="navbar navbar-expand-lg navbar-light navbar-giggoers">
- <div class="container-fluid">
-   <div class="row w-100 align-items-center">
-     <div class="col-3">
-       <%= link_to "#", class: "navbar-brand" do %>
-         <%= image_tag "logo.png", class: 'logo' %>
-       <% end %>
-     </div>
-     <div class="col-9 text-left">
-       <h1 class="app-title">GigGoers</h1>
-       <p class="app-subtitle">Você no lugar quando a música começar!</p>
-     </div>
-   </div>
+  <!-- Container principal para o layout do navbar -->
+  <div class="container">
+    <!-- Primeira linha do navbar: Logo, Título e Botão Login/Logout -->
+    <div class="row align-items-center">
+      <div class="col-3">
+        <!-- Link para a home com a logo -->
+        <%= link_to "#", class: "navbar-brand" do %>
+          <%= image_tag "logo.png", class: 'logo' %> <!-- Logo da aplicação -->
+        <% end %>
+      </div>
+      <div class="col-6 text-left">
+        <!-- Título e subtítulo do app -->
+        <h1 class="app-title">GigGoers</h1>
+        <p class="app-subtitle">Você no lugar quando a música começar!</p>
+      </div>
+      <div class="col-3 d-flex justify-content-end">
+        <% if user_signed_in? %>
+          <!-- Botão de logout: visível apenas se o usuário estiver logado -->
+          <%= button_to destroy_user_session_path, method: :delete,
+                        class: 'btn btn-logout rounded-pill px-4 py-2 d-flex align-items-center gap-2',
+                        data: { confirm: 'Tem certeza que deseja sair?' } do %>
+            <i class="bi bi-box-arrow-right"></i>
+          <% end %>
+        <% else %>
+          <!-- Link de login: visível apenas se o usuário NÃO estiver logado -->
+          <%= link_to new_user_session_path,
+                      class: 'btn btn-login rounded-pill px-4 py-2 d-flex align-items-center gap-2' do %>
+            <i class="bi bi-box-arrow-in-right"></i>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
 
-   <div class="row w-100">
-     <div class="col-12 position-relative">
-      <%= form_tag search_events_path, method: :get, class: "d-flex" do %>
-  <div class="input-group">
-    <input type="text" name="query"
-           class="form-control rounded-pill me-2"
-           placeholder="Qual o seu plano?"
-           style="width: 95%;" />
-    <%= link_to events_path,
-                class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y me-2',
-                style: 'z-index: 10;' do %>
-      <i class="bi bi-search"></i>
-    <% end %>
-  </div>
-<% end %>
-     </div>
-   </div>
-
-   <%= link_to "Login", new_user_session_path, class: "nav-link" %>
- </div>
-</nav>
+    <!-- Segunda linha do navbar: Campo de busca -->
+    <div class="row w-100">
+      <div class="col-12 position-relative">
+        <!-- Formulário para busca de eventos -->
+        <%= form_tag search_events_path, method: :get, class: "d-flex" do %>
+          <div class="input-group">
+            <!-- Campo de entrada para busca -->
+            <input type="text" name="query"
+                   class="form-control rounded-pill me-2"
+                   placeholder="Qual o seu plano?"
+                   style="width: 95%;" />
+            <!-- Botão de busca com ícone -->
+            <%= link_to events_path(query: params[:query]),
+                        class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y me-2',
+                        style: 'z-index: 10;' do %>
+              <i class="bi bi-search"></i> <!-- Ícone de lupa do Bootstrap Icons -->
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>

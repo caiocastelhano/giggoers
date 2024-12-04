@@ -5,14 +5,16 @@
     <div class="row align-items-center">
       <div class="col-3">
         <!-- Link para a home com a logo -->
-        <%= link_to "#", class: "navbar-brand" do %>
+        <%= link_to "/", class: "navbar-brand" do %>
           <%= image_tag "logo.png", class: 'logo' %> <!-- Logo da aplicação -->
         <% end %>
       </div>
       <div class="col-6 text-left">
         <!-- Título e subtítulo do app -->
-        <h1 class="app-title">GigGoers</h1>
-        <p class="app-subtitle">Você no lugar quando a música começar!</p>
+        <%= link_to "/", class: "text-decoration-none text-dark" do %>
+          <h1 class="app-title">GigGoers</h1>
+          <p class="app-subtitle">Você no lugar quando a música começar!</p>
+        <% end %>
       </div>
       <div class="col-3 d-flex justify-content-end">
         <% if user_signed_in? %>
@@ -33,25 +35,26 @@
     </div>
 
     <!-- Segunda linha do navbar: Campo de busca -->
-<div class="row w-100">
-  <div class="col-12 position-relative">
-    <!-- Formulário para busca de eventos -->
-    <%= form_tag events_path, method: :get, class: "d-flex" do %>
-      <div class="input-group">
-        <!-- Campo de entrada para busca -->
-        <input type="text" name="query"
-               class="form-control rounded-pill me-2"
-               placeholder="Qual o seu plano?"
-               style="width: 95%;"
-               value="<%= params[:query] %>" /> <!-- Mantém o valor buscado no campo -->
-        <!-- Botão de busca com ícone -->
-        <%= link_to events_path(query: params[:query]),
-                    class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y me-2',
-                    style: 'z-index: 10;' do %>
-          <i class="bi bi-search"></i> <!-- Ícone de lupa do Bootstrap Icons -->
+    <div class="row w-100">
+      <div class="col-12 position-relative">
+        <!-- Formulário para busca de eventos -->
+        <%= form_tag events_path, method: :get, class: "d-flex" do %>
+          <div class="input-group">
+            <!-- Campo de entrada para busca -->
+            <input type="text" name="query"
+                   class="form-control rounded-pill me-2"
+                   placeholder="Qual o seu plano?"
+                   value="<%= params[:query] %>" <!-- Campo de busca mantém o texto digitado -->
+                   style="width: 95%;" />
+            <!-- Botão de busca com ícone -->
+            <%= link_to events_path(query: params[:query]),
+                        class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y me-2',
+                        style: 'z-index: 10;' do %>
+              <i class="bi bi-search"></i> <!-- Ícone de lupa do Bootstrap Icons -->
+            <% end %>
+          </div>
         <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
-</div>
-
+</nav>

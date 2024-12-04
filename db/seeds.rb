@@ -6,6 +6,7 @@ Genre.destroy_all
 Event.destroy_all
 Venue.destroy_all
 User.destroy_all
+
 # 2. Create Users
 puts "Creating users..."
 users = User.create!([
@@ -75,6 +76,7 @@ genres = Genre.create!([
 ])
 # 6. Associate Events with Genres
 puts "Associating events with genres..."
+
 # Hash com eventos e gêneros
 event_genre_map = {
   'Beethoven Symphony Night' => ['Classical'],
@@ -90,26 +92,33 @@ event_genre_map = {
   'Alternative Rock Night' => ['Rock', 'Alternative'],
   'Electronic Dance Party' => ['Electronic', 'DJ']
 }
+
 # Loop pelos eventos
 event_genre_map.each do |event_title, genre_names|
   # Encontrar o evento pelo título
   event = events.find { |e| e.title == event_title }
+
   if event.nil?
     puts "Warning: Event '#{event_title}' not found. Skipping."
     next
   end
+
   # Loop pelos gêneros associados
   genre_names.each do |genre_name|
     genre = genres.find { |g| g.name == genre_name }
+
     if genre.nil?
       puts "Warning: Genre '#{genre_name}' not found for event '#{event_title}'. Skipping."
       next
     end
+
     # Criar a associação entre evento e gênero
     EventGenre.create!(event: event, genre: genre)
   end
 end
+
 puts "Finished associating events with genres."
+
 # 7. Add Favorites
 puts "Adding favorites..."
 # Each user gets 2 random favorite events

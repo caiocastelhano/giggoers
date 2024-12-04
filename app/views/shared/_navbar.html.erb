@@ -14,17 +14,17 @@
 
    <div class="row w-100">
      <div class="col-12 position-relative">
-      <%= form_tag search_events_path, method: :get, class: "d-flex" do %>
+      <%= form_tag events_path, method: :get, class: "d-flex" do %>
   <div class="input-group">
     <input type="text" name="query"
            class="form-control rounded-pill me-2"
            placeholder="Qual o seu plano?"
            style="width: 95%;" />
-    <%= link_to events_path,
-                class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y me-2',
-                style: 'z-index: 10;' do %>
-      <i class="bi bi-search"></i>
-    <% end %>
+ <%= link_to events_path(query: params[:query]),
+            class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y me-2',
+            style: 'z-index: 10;' do %>
+  <i class="bi bi-search"></i>
+<% end %>
   </div>
 <% end %>
      </div>

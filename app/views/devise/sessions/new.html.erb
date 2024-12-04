@@ -1,20 +1,30 @@
 <h2>Log in</h2>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f| %>
   <div class="form-inputs">
+    <!-- Campo para email, obrigatório -->
     <%= f.input :email,
-                required: false,
-                autofocus: true,
+                required: true,
                 input_html: { autocomplete: "email" } %>
+
+    <!-- Campo para senha, obrigatório -->
     <%= f.input :password,
-                required: false,
+                required: true,
                 input_html: { autocomplete: "current-password" } %>
+
+    <!-- Campo para lembrar login, opcional -->
     <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
+    <!-- Botão de login -->
+    <%= f.button :submit, "Log in", class: "btn btn-outline" %>
   </div>
 <% end %>
 
+<div class="form-links">
+    <%= link_to "Não tem cadastro?", new_user_registration_path, style: "color: blue; text-decoration: underline;" %>
+</div>
+
+<!-- Links compartilhados do Devise -->
 <%= render "devise/shared/links" %>

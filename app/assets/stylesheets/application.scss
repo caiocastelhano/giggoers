@@ -2,6 +2,7 @@
 @import "config/fonts";
 @import "config/colors";
 @import "config/bootstrap_variables";
+@import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
 
 // External libraries
 @import "bootstrap";
@@ -10,3 +11,26 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+@import "pages/show";
+@import 'components/button';
+
+
+body {
+  background-color: $primary;
+}
+
+/* Adicione estes estilos ao seu arquivo CSS */
+.map-container {
+  width: 100%;
+  height: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.mapboxgl-popup {
+  max-width: 300px;
+}
+
+.mapboxgl-popup-content {
+  padding: 15px;
+}

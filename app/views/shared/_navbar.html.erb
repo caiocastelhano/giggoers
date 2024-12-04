@@ -1,51 +1,60 @@
 <nav class="navbar navbar-expand-lg navbar-light navbar-giggoers">
- <div class="container-fluid">
-   <div class="row w-100 align-items-center">
-     <div class="col-3">
-       <%= link_to "#", class: "navbar-brand" do %>
-         <%= image_tag "logo.png", class: 'logo' %>
-       <% end %>
-     </div>
-     <div class="col-9 text-left">
-       <h1 class="app-title">GigGoers</h1>
-       <p class="app-subtitle">Você no lugar quando a música começar!</p>
-     </div>
-   </div>
+  <!-- Container principal para o layout do navbar -->
+  <div class="container">
+    <!-- Primeira linha do navbar: Logo, Título e Botão Login/Logout -->
+    <div class="row align-items-center">
+      <div class="col-3">
+        <!-- Link para a home com a logo -->
+        <%= link_to "/", class: "navbar-brand" do %>
+          <%= image_tag "logo.png", class: 'logo' %> <!-- Logo da aplicação -->
+        <% end %>
+      </div>
+      <div class="col-6 text-left">
+        <!-- Título e subtítulo do app -->
+        <%= link_to "/", class: "text-decoration-none text-dark" do %>
+          <h1 class="app-title">GigGoers</h1>
+          <p class="app-subtitle">Você no lugar quando a música começar!</p>
+        <% end %>
+      </div>
+      <div class="col-3 d-flex justify-content-end">
+        <% if user_signed_in? %>
+          <!-- Botão de logout: visível apenas se o usuário estiver logado -->
+          <%= button_to destroy_user_session_path, method: :delete,
+                        class: 'btn btn-logout rounded-pill px-4 py-2 d-flex align-items-center gap-2',
+                        data: { confirm: 'Tem certeza que deseja sair?' } do %>
+            <i class="bi bi-box-arrow-right"></i>
+          <% end %>
+        <% else %>
+          <!-- Link de login: visível apenas se o usuário NÃO estiver logado -->
+          <%= link_to new_user_session_path,
+                      class: 'btn btn-login rounded-pill px-4 py-2 d-flex align-items-center gap-2' do %>
+            <i class="bi bi-box-arrow-in-right"></i>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
 
-   <div class="row w-100">
-     <div class="col-12">
-       <div class="input-group">
-         <span class="input-group-text"><i class="bi bi-search"></i></span>
-         <input type="text" class="form-control search-input" placeholder="Qual o seu plano?" />
-       </div>
-     </div>
-   </div>
-
-   <% if user_signed_in? %>
-     <ul class="navbar-nav me-auto">
-       <li class="nav-item active">
-         <%= link_to "Home", "#", class: "nav-link" %>
-       </li>
-       <li class="nav-item">
-         <%= link_to "Messages", "#", class: "nav-link" %>
-       </li>
-       <li class="nav-item dropdown">
-         <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-           <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
-         </a>
-         <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-           <%= link_to "Action", "#", class: "dropdown-item" %>
-           <%= link_to "Another action", "#", class: "dropdown-item" %>
-           <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-         </div>
-       </li>
-     </ul>
-   <% else %>
-     <ul class="navbar-nav">
-       <li class="nav-item">
-         <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-       </li>
-     </ul>
-   <% end %>
- </div>
+    <!-- Segunda linha do navbar: Campo de busca -->
+    <div class="row w-100">
+      <div class="col-12 position-relative">
+        <!-- Formulário para busca de eventos -->
+        <%= form_tag events_path, method: :get, class: "d-flex" do %>
+          <div class="input-group">
+            <!-- Campo de entrada para busca -->
+            <input type="text" name="query"
+                   class="form-control rounded-pill me-2"
+                   placeholder="Qual o seu plano?"
+                   value="<%= params[:query] %>" <!-- Campo de busca mantém o texto digitado -->
+                   style="width: 95%;" />
+            <!-- Botão de busca com ícone -->
+            <%= link_to events_path(query: params[:query]),
+                        class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y me-2',
+                        style: 'z-index: 10;' do %>
+              <i class="bi bi-search"></i> <!-- Ícone de lupa do Bootstrap Icons -->
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </nav>

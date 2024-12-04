@@ -1,0 +1,8 @@
+.custom-marker {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-marker:hover {
+  transform: scale(1.2);
+}

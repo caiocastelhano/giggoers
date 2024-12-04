@@ -33,23 +33,25 @@
     </div>
 
     <!-- Segunda linha do navbar: Campo de busca -->
-    <div class="row w-100">
-      <div class="col-12 position-relative">
-        <!-- Formulário para busca de eventos -->
-        <%= form_tag events_path, method: :get, class: "d-flex" do %>
-          <div class="input-group">
-            <!-- Campo de entrada para busca -->
-            <input type="text" name="query"
-                   class="form-control rounded-pill me-2"
-                   placeholder="Qual o seu plano?"
-                   style="width: 95%;" />
-            <!-- Botão de busca com ícone -->
-            <%= link_to events_path(query: params[:query]),
-                        class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y me-2',
-                        style: 'z-index: 10;' do %>
-              <i class="bi bi-search"></i> <!-- Ícone de lupa do Bootstrap Icons -->
-            <% end %>
-          </div>
+<div class="row w-100">
+  <div class="col-12 position-relative">
+    <!-- Formulário para busca de eventos -->
+    <%= form_tag events_path, method: :get, class: "d-flex" do %>
+      <div class="input-group">
+        <!-- Campo de entrada para busca -->
+        <input type="text" name="query"
+               class="form-control rounded-pill me-2"
+               placeholder="Qual o seu plano?"
+               style="width: 95%;"
+               value="<%= params[:query] %>" /> <!-- Mantém o valor buscado no campo -->
+        <!-- Botão de busca com ícone -->
+        <%= link_to events_path(query: params[:query]),
+                    class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y me-2',
+                    style: 'z-index: 10;' do %>
+          <i class="bi bi-search"></i> <!-- Ícone de lupa do Bootstrap Icons -->
         <% end %>
       </div>
-    </div>
+    <% end %>
+  </div>
+</div>
+

@@ -12,9 +12,12 @@
 @import "components/index";
 @import "pages/index";
 @import "pages/show";
+@import 'components/button';
+
 
 body {
   background-color: $primary;
+}
 
 /* Adicione estes estilos ao seu arquivo CSS */
 .map-container {

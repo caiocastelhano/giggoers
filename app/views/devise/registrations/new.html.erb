@@ -1,25 +1,36 @@
 <h2>Sign up</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %>
+  <%= f.error_notification %> <!-- Exibe notificações de erro no formulário -->
 
   <div class="form-inputs">
+    <!-- Campo para o nome do usuário, obrigatório -->
+    <%= f.input :name,
+                required: true,
+                input_html: { autocomplete: "name" } %>
+
+    <!-- Campo para o email do usuário, obrigatório -->
     <%= f.input :email,
                 required: true,
-                autofocus: true,
-                input_html: { autocomplete: "email" }%>
+                input_html: { autocomplete: "email" } %>
+
+    <!-- Campo para a senha, obrigatório -->
     <%= f.input :password,
                 required: true,
                 hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                 input_html: { autocomplete: "new-password" } %>
+
+    <!-- Campo para confirmar a senha, obrigatório -->
     <%= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
   </div>
 
   <div class="form-actions">
+    <!-- Botão para enviar o formulário -->
     <%= f.button :submit, "Sign up" %>
   </div>
 <% end %>
 
+<!-- Links adicionais compartilhados, como para login ou recuperação de senha -->
 <%= render "devise/shared/links" %>

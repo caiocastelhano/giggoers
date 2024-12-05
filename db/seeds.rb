@@ -123,12 +123,18 @@ end
 puts "Finished associating events with genres."
 
 # 7. Add Favorites
-puts "Adding favorites..."
+
+puts "Adding favorites with different dates..."
+# Cada usuário recebe 2 eventos favoritos com datas em meses diferentes users.each do |user| events.sample(2).each_with_index do |event, index|
+# Define uma data para o favorito com base no índice (exemplo: meses passados) favorite_date = Date.today - (index + 1).months
+# Cria o favorito com a data personalizada Favorite.create!(user: user, event: event, created_at: favorite_date, updated_at: favorite_date) end end puts "Favorites with different dates added!"
 # Each user gets 2 random favorite events
 users.each do |user|
-  events.sample(2).each do |event|
-    Favorite.create!(user: user, event: event)
+  events.sample(2).each_with_index do |event, index|
+      favorite_date = Date.today - (index + 1).months
+      Favorite.create!(user: user, event: event, created_at: favorite_date, updated_at: favorite_date)
   end
 end
+puts "Favorites with different dates added!"
 
 puts "Database seeding completed!"

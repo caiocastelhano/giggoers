@@ -17,11 +17,11 @@
         <% end %>
       </div>
       <div class="col-3 d-flex justify-content-end">
-        <% if user_signed_in? %>
+        <% if current_user %>
           <!-- Botão de logout: visível apenas se o usuário estiver logado -->
-          <%= button_to destroy_user_session_path, method: :delete,
+          <%= link_to destroy_user_session_path,
                         class: 'btn btn-logout rounded-pill px-4 py-2 d-flex align-items-center gap-2',
-                        data: { confirm: 'Tem certeza que deseja sair?' } do %>
+                        data: { turbo_confirm: 'Tem certeza que deseja sair?', turbo_method: :delete } do %>
             <i class="bi bi-box-arrow-right"></i>
           <% end %>
         <% else %>
@@ -44,8 +44,7 @@
             <input type="text" name="query"
                    class="form-control rounded-pill me-2"
                    placeholder="Qual o seu plano?"
-                   value="<%= params[:query] %>" <!-- Campo de busca mantém o texto digitado -->
-                   style="width: 95%;" />
+                   value="<%= params[:query] %>"/>
             <!-- Botão de busca com ícone -->
             <%= link_to events_path(query: params[:query]),
                         class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y me-2',

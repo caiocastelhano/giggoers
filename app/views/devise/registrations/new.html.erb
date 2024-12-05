@@ -1,36 +1,63 @@
-<h2>Sign up</h2>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center bg-light">
+          <!-- Título com cor escura -->
+          <h2 class="text-dark">Criar conta</h2>
+        </div>
+        <div class="card-body">
+          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "needs-validation" }) do |f| %>
+            <%= f.error_notification %>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= f.error_notification %> <!-- Exibe notificações de erro no formulário -->
+            <div class="form-inputs">
+              <!-- Campo Nome -->
+              <div class="mb-3">
+                <%= f.input :name, 
+                            required: true, 
+                            label: "Nome", 
+                            input_html: { autocomplete: "name", class: "form-control" }, 
+                            label_html: { class: "form-label" } %>
+              </div>
 
-  <div class="form-inputs">
-    <!-- Campo para o nome do usuário, obrigatório -->
-    <%= f.input :name,
-                required: true,
-                input_html: { autocomplete: "name" } %>
+              <!-- Campo Email -->
+              <div class="mb-3">
+                <%= f.input :email, 
+                            required: true, 
+                            label: "E-mail", 
+                            input_html: { autocomplete: "email", class: "form-control" }, 
+                            label_html: { class: "form-label" } %>
+              </div>
 
-    <!-- Campo para o email do usuário, obrigatório -->
-    <%= f.input :email,
-                required: true,
-                input_html: { autocomplete: "email" } %>
+              <!-- Campo Senha -->
+              <div class="mb-3">
+                <%= f.input :password, 
+                            required: true, 
+                            label: "Senha", 
+                            hint: ("#{@minimum_password_length} caracteres no mínimo" if @minimum_password_length), 
+                            input_html: { autocomplete: "new-password", class: "form-control" }, 
+                            label_html: { class: "form-label" } %>
+              </div>
 
-    <!-- Campo para a senha, obrigatório -->
-    <%= f.input :password,
-                required: true,
-                hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                input_html: { autocomplete: "new-password" } %>
+              <!-- Campo Confirmar Senha -->
+              <div class="mb-3">
+                <%= f.input :password_confirmation, 
+                            required: true, 
+                            label: "Confirmar Senha", 
+                            input_html: { autocomplete: "new-password", class: "form-control" }, 
+                            label_html: { class: "form-label" } %>
+              </div>
+            </div>
 
-    <!-- Campo para confirmar a senha, obrigatório -->
-    <%= f.input :password_confirmation,
-                required: true,
-                input_html: { autocomplete: "new-password" } %>
+            <div class="form-actions text-center">
+              <%= f.button :submit, "Criar", class: "btn btn-primary w-100" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+        <%= render "devise/shared/links" %>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <!-- Botão para enviar o formulário -->
-    <%= f.button :submit, "Sign up" %>
-  </div>
-<% end %>
-
-<!-- Links adicionais compartilhados, como para login ou recuperação de senha -->
-<%= render "devise/shared/links" %>
+</div>

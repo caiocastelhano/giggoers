@@ -1,30 +1,59 @@
-<h2>Log in</h2>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center bg-light">
+          <!-- Título com cor escura -->
+          <h2 class="text-dark">Entrar</h2>
+        </div>
+        <div class="card-body">
+          <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }, html: { class: "needs-validation" }) do |f| %>
+            <div class="form-inputs">
+              <!-- Campo E-mail -->
+              <div class="mb-3">
+                <%= f.input :email, 
+                            required: true, 
+                            label: "E-mail", 
+                            input_html: { autocomplete: "email", class: "form-control" }, 
+                            label_html: { class: "form-label" } %>
+              </div>
 
-<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: false }) do |f| %>
-  <div class="form-inputs">
-    <!-- Campo para email, obrigatório -->
-    <%= f.input :email,
-                required: true,
-                input_html: { autocomplete: "email" } %>
+              <!-- Campo Senha -->
+              <div class="mb-3">
+                <%= f.input :password, 
+                            required: true, 
+                            label: "Senha", 
+                            input_html: { autocomplete: "current-password", class: "form-control" }, 
+                            label_html: { class: "form-label" } %>
+              </div>
 
-    <!-- Campo para senha, obrigatório -->
-    <%= f.input :password,
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
+              <!-- Campo Lembrar de mim -->
+              <% if devise_mapping.rememberable? %>
+                <div class="form-check mb-3">
+                  <%= f.input :remember_me, 
+                              as: :boolean, 
+                              label: "Lembrar de mim", 
+                              input_html: { class: "form-check-input" }, 
+                              label_html: { class: "form-check-label" } %>
+                </div>
+              <% end %>
+            </div>
 
-    <!-- Campo para lembrar login, opcional -->
-    <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
+            <div class="form-actions text-center">
+              <!-- Botão de Login -->
+              <%= f.button :submit, "Entrar", class: "btn btn-primary w-100" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="text-center mt-3">
+        <!-- Botão para Sign Up com fundo sólido -->
+        <%= link_to "Não tem cadastro?", new_user_registration_path, class: "btn btn-secondary w-100" %>
+        <div class="mt-2">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <!-- Botão de login -->
-    <%= f.button :submit, "Log in", class: "btn btn-outline" %>
-  </div>
-<% end %>
-
-<div class="form-links">
-    <%= link_to "Não tem cadastro?", new_user_registration_path, style: "color: blue; text-decoration: underline;" %>
 </div>
-
-<!-- Links compartilhados do Devise -->
-<%= render "devise/shared/links" %>

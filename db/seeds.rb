@@ -26,7 +26,7 @@ users = User.create!([
 ])
 
 # 3. Create Venues
-puts "Creating venues..."
+#puts "Creating venues..."
 venues = [
   Venue.create!(name: 'Sala São Paulo', address: 'Praça Júlio Prestes, 16, São Paulo, SP, Brazil', latitude: -23.5341, longitude: -46.6392, capacity: 1498),
   Venue.create!(name: 'Blue Bird', address: 'R. Baluarte, 269, São Paulo, SP, Brazil', latitude: -23.5933, longitude: -46.6840, capacity: 500),

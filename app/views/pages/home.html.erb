@@ -1,3 +1,40 @@
+<!-- Título "DESTAQUES", centralizado e em negrito -->
+<div style="text-align: center; font-weight: bold;">
+ <h1>DESTAQUES</h1>
+</div>
+
+<!-- Carrossel de Eventos -->
+<div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <% @carousel_events.each_with_index do |event, index| %>
+      <div class="carousel-item <%= 'active' if index == 0 %>">
+        <!-- Imagem do evento -->
+        <% if event.url_image.present? && event.url_image != "" %>
+          <img src="<%= event.url_image %>" class="d-block w-100" alt="<%= event.title %>">
+        <% else %>
+          <img src="default-image.jpg" class="d-block w-100" alt="Imagem do evento">
+        <% end %>
+
+        <!-- Barra com o título do evento -->
+        <div class="carousel-caption d-block text-start p-3" style="background: rgba(0, 0, 0, 0.5); bottom: 0; left: 0; right: 0;">
+          <h5 class="text-white m-0"><%= event.title %></h5>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Botões de navegação do carrossel -->
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Anterior</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Próximo</span>
+  </button>
+</div>
+
+<!-- Cards dos Eventos, agora um embaixo do outro -->
 <div class="container" style="padding: 1rem;">
   <% @card_events.each do |event| %>
     <div class="card mb-3 position-relative">

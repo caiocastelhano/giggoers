@@ -14,7 +14,7 @@
                 <%= f.input :email,
                             required: true,
                             label: "E-mail",
-                            input_html: { autocomplete: "email", class: "form-control" },
+                            input_html: { autocomplete: "email", class: "form-control text-dark" },
                             label_html: { class: "form-label" } %>
               </div>
 
@@ -23,7 +23,7 @@
                 <%= f.input :password,
                             required: true,
                             label: "Senha",
-                            input_html: { autocomplete: "current-password", class: "form-control" },
+                            input_html: { autocomplete: "current-password", class: "form-control text-dark" },
                             label_html: { class: "form-label" } %>
               </div>
 
@@ -53,13 +53,6 @@
         </div>
       </div>
 
-      <div class="text-center mt-3">
-        <!-- Botão para Sign Up com fundo sólido -->
-        <%= link_to "Não tem cadastro?", new_user_registration_path, class: "btn btn-secondary w-100" %>
-        <div class="mt-2">
-          <%= render "devise/shared/links" %>
-        </div>
-      </div>
     </div>
   </div>
 </div>

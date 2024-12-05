@@ -2,7 +2,7 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card">
-        <div class="card-header text-center bg-light">
+        <div class="card-header text-center bg-light" id="login-header">
           <!-- Título com cor escura -->
           <h2 class="text-dark">Entrar</h2>
         </div>
@@ -11,35 +11,41 @@
             <div class="form-inputs">
               <!-- Campo E-mail -->
               <div class="mb-3">
-                <%= f.input :email, 
-                            required: true, 
-                            label: "E-mail", 
-                            input_html: { autocomplete: "email", class: "form-control" }, 
+                <%= f.input :email,
+                            required: true,
+                            label: "E-mail",
+                            input_html: { autocomplete: "email", class: "form-control" },
                             label_html: { class: "form-label" } %>
               </div>
 
               <!-- Campo Senha -->
               <div class="mb-3">
-                <%= f.input :password, 
-                            required: true, 
-                            label: "Senha", 
-                            input_html: { autocomplete: "current-password", class: "form-control" }, 
+                <%= f.input :password,
+                            required: true,
+                            label: "Senha",
+                            input_html: { autocomplete: "current-password", class: "form-control" },
                             label_html: { class: "form-label" } %>
               </div>
 
               <!-- Campo Lembrar de mim -->
               <% if devise_mapping.rememberable? %>
                 <div class="form-check mb-3">
-                  <%= f.input :remember_me, 
-                              as: :boolean, 
-                              label: "Lembrar de mim", 
-                              input_html: { class: "form-check-input" }, 
+                  <%= f.input :remember_me,
+                              as: :boolean,
+                              label: "Lembrar de mim",
+                              input_html: { class: "form-check-input" },
                               label_html: { class: "form-check-label" } %>
                 </div>
               <% end %>
             </div>
 
-            <div class="form-actions text-center">
+      <div class="text-center mt-3">
+
+        <!-- Link para Não tem cadastro? e Esqueceu a senha? -->
+          <%= render "devise/shared/links" %>
+        </div>
+            <div class="form-actions text-center mt-3">
+
               <!-- Botão de Login -->
               <%= f.button :submit, "Entrar", class: "btn btn-primary w-100" %>
             </div>
@@ -47,12 +53,6 @@
         </div>
       </div>
 
-      <div class="text-center mt-3">
-        <!-- Link para cadastro -->
-        <%= link_to "Não tem cadastro? Crie sua conta.", new_user_registration_path, class: "text-primary text-decoration-underline" %>
-        <div class="mt-2">
-          <%= render "devise/shared/links" %>
-        </div>
       </div>
     </div>
   </div>

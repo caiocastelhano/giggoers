@@ -1,49 +1,36 @@
 <div class="card position-relative">
   <%# Adicionado "position-relative" para posicionar o botão de coração %>
 
+  <!-- Adicionando a imagem do evento no topo do card -->
+  <%= image_tag(event.url_image, alt: "Imagem do evento") if event.url_image.present? %>
+
   <!-- Botão de coração -->
   <a href="#" class="position-absolute top-0 end-0 m-2" style="z-index: 1; color: black; font-size: 1.5rem;">
     <i class="fas fa-heart"></i> <%# Ícone do coração %>
   </a>
 
-    <%# Corpo do card %>
+  <%# Corpo do card %>
   <div class="card-body">
-
     <%# Título do evento em heading 4 %>
     <h4 class="card-title mb-3"><%= event.title %></h4>
-
-    <%# Adicionando a imagem do evento %>
-    <%= image_tag(event.url_image, class: "card-img-top", alt: "Imagem do evento") if event.url_image.present? %>
-    <%# A imagem será exibida se a URL da imagem estiver presente no evento %>
-    <%# "card-img-top" é uma classe do Bootstrap que formata imagens para cards %>
 
     <%# Descrição do evento limitada a 100 caracteres %>
     <p class="card-text mt-3"><%= truncate(event.description, length: 100) %></p>
 
     <%# Container flex que distribui itens nas extremidades e centraliza verticalmente %>
     <div class="d-flex justify-content-between align-items-center">
-
-      <%# Texto pequeno em cor mais clara %>
       <small class="text-muted">
-        <%# Data formatada do evento %>
         <%= event.start_date.strftime("%d/%m/%Y") %>
-        <%# Hora formatada do evento, se existir %>
         <%= event.start_time.strftime("%H:%M") if event.start_time %>
       </small>
-
-      <%# Badge azul com preço formatado com 2 casas decimais %>
       <span class="badge bg-primary">R$ <%= number_with_precision(event.price, precision: 2) %></span>
     </div>
 
     <%# Container com margem superior de 2 unidades %>
     <div class="mt-2">
-
-      <%# Loop pelos gêneros do evento %>
       <% event.genres.each do |genre| %>
-        <%# Badge cinza para cada gênero %>
         <span class="badge bg-secondary"><%= genre.name %></span>
       <% end %>
-
     </div>
   </div>
 </div>

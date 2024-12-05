@@ -52,6 +52,9 @@
      <div class="card-body">
        <h4 class="card-title"><%= event.title %></h4>
        <p class="card-text"><%= truncate(event.description, length: 100) %></p>
+       
+        <%= image_tag(event.url_image, class: "card-img-top", alt: "Imagem do evento") if event.url_image.present? %>
+        <p class="card-text mt-3"><%= truncate(event.description, length: 100) %></p>
 
        <div class="d-flex justify-content-between align-items-center">
          <small class="text-muted">

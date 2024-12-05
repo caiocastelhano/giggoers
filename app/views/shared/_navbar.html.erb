@@ -22,13 +22,13 @@
           <%= link_to destroy_user_session_path,
                         class: 'btn btn-logout rounded-pill px-4 py-2 d-flex align-items-center gap-2',
                         data: { turbo_confirm: 'Tem certeza que deseja sair?', turbo_method: :delete } do %>
-            <i class="bi bi-box-arrow-right"></i>
+            <i class="fas fa-door-open"></i>
           <% end %>
         <% else %>
           <!-- Link de login: visível apenas se o usuário NÃO estiver logado -->
           <%= link_to new_user_session_path,
                       class: 'btn btn-login rounded-pill px-4 py-2 d-flex align-items-center gap-2' do %>
-            <i class="bi bi-box-arrow-in-right"></i>
+            <i class="fas fa-user"></i>
           <% end %>
         <% end %>
       </div>
@@ -41,10 +41,9 @@
         <%= form_tag events_path, method: :get, class: "d-flex" do %>
           <div class="input-group">
             <!-- Campo de entrada para busca -->
-            <input type="text" name="query"
-                   class="form-control rounded-pill me-2"
-                   placeholder="Qual o seu plano?"
-                   value="<%= params[:query] %>"/>
+            <input type="text" name="query" class="form-control rounded-pill me-2" placeholder="<%= user_signed_in? ? "Olá #{current_user.name}, qual o seu plano?" : 'Qual o seu plano?' %>"
+       value="<%= params[:query] %>"/>
+
             <!-- Botão de busca com ícone -->
             <%= link_to events_path(query: params[:query]),
                         class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y me-2',

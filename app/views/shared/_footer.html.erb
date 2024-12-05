@@ -1,4 +1,4 @@
-<footer class="fixed-bottom bg-light py-3">
+<footer class="fixed-bottom" style="border-top: 4px solid #ED4E4E; z-index: 9999;">
   <div class="container">
     <div class="d-flex justify-content-between align-items-center">
       <!-- Button 1: Link para a Home -->
@@ -8,7 +8,7 @@
       <% end %>
 
       <!-- Button 2: Link para a página de Favoritos -->
-      <%= link_to "#", class: "btn btn-primary w-50 py-3 border-0 text-center d-flex justify-content-center align-items-center" do %>
+      <%= link_to "/favorites", class: "btn btn-primary w-50 py-3 border-0 text-center d-flex justify-content-center align-items-center" do %>
         <i class="bi bi-heart-fill me-2"></i> <!-- Ícone de Favoritos -->
         Agenda
       <% end %>

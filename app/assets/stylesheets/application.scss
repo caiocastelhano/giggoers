@@ -13,25 +13,11 @@
 @import "pages/index";
 @import "pages/show";
 @import 'components/button';
-
+@import 'components/map';
 
 body {
   background-color: $primary;
-  padding-bottom: 50px;
+  margin-bottom: 80px;
 }
 
 /* Adicione estes estilos ao seu arquivo CSS */
-.map-container {
-  width: 100%;
-  height: 400px;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-.mapboxgl-popup {
-  max-width: 300px;
-}
-
-.mapboxgl-popup-content {
-  padding: 15px;
-}

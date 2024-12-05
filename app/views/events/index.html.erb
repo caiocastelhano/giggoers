@@ -1,13 +1,13 @@
 <div class="container mt-4">
   <%# Container Bootstrap com margem superior %>
 
-<%# View principal que renderiza o mapa %>
-  <div class="map-container"
-     data-controller="map"
-     data-map-markers-value="<%= @markers.to_json %>"
-     data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  <%# View principal que renderiza o mapa %>
+  <div class="map-container mb-4"
+       data-controller="map"
+       data-map-markers-value="<%= @markers.to_json %>"
+       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
-
+  
   <%= turbo_frame_tag "events_results" do %>
     <%# Frame Turbo para atualizações parciais %>
 

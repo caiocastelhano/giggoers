@@ -50,8 +50,15 @@
       <% end %>
 
       <div class="card-body">
-        <h4 class="card-title"><%= event.title %></h4>
-        <p class="card-text"><%= truncate(event.description, length: 100) %></p>
+        <h4 class="card-title mb-3"><%= event.title %></h4>
+
+        <%# Adicionando a imagem do evento %>
+        <%= image_tag(event.url_image, class: "card-img-top", alt: "Imagem do evento") if event.url_image.present? %>
+        <%# A imagem será exibida se a URL da imagem estiver presente no evento %>
+        <%# "card-img-top" é uma classe do Bootstrap que formata imagens para cards %>
+
+        <p class="card-text mt-3"><%= truncate(event.description, length: 100) %></p>
+
 
         <div class="d-flex justify-content-between align-items-center">
           <small class="text-muted">

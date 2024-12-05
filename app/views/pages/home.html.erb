@@ -8,11 +8,14 @@
   <div class="carousel-inner">
     <% @carousel_events.each_with_index do |event, index| %>
       <div class="carousel-item <%= 'active' if index == 0 %>">
-        <!-- Imagem do evento -->
-        <% if event.url_image.present? && event.url_image != "" %>
-          <img src="<%= event.url_image %>" class="d-block w-100" alt="<%= event.title %>">
-        <% else %>
-          <img src="default-image.jpg" class="d-block w-100" alt="Imagem do evento">
+        <!-- Link para a página do evento -->
+        <%= link_to event_path(event) do %>
+          <!-- Imagem do evento -->
+          <% if event.url_image.present? && event.url_image != "" %>
+            <img src="<%= event.url_image %>" class="d-block w-100" alt="<%= event.title %>">
+          <% else %>
+            <img src="default-image.jpg" class="d-block w-100" alt="Imagem do evento">
+          <% end %>
         <% end %>
 
         <!-- Barra com o título do evento -->
@@ -22,6 +25,8 @@
       </div>
     <% end %>
   </div>
+</div>
+
 
   <!-- Botões de navegação do carrossel -->
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">

@@ -10,8 +10,9 @@
         <p><strong>Start Date:</strong> <%= favorite.event.start_date %></p>
         <p><strong>End Date:</strong> <%= favorite.event.end_date %></p>
         <p><strong>Start Time:</strong> <%= favorite.event.start_time%></p>
+        <p><strong>Venue:</strong> <%= favorite.event.venue.name%></p>
         <p><strong>Address:</strong> <%= favorite.event.venue.address%></p>
-       <p> <%= link_to 'Remove from Favorites', favorite_path(favorite), class: 'text-white', data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to remove this event from your list of favorites'}%></p>
+        <p><%= link_to 'Remove from Favorites', favorite_path(favorite), class: 'text-white', data: { turbo_method: :delete, turbo_confirm: 'Are you sure you want to remove this event from your list of favorites'}%></p>
       </li>
     <% end %>
   </ul>

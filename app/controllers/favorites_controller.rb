@@ -21,7 +21,12 @@ class FavoritesController < ApplicationController
   # DELETE /users/:user_id/favorites/:id
   def destroy
     @favorite.destroy
-    redirect_to favorites_path, notice: 'Favorite was successfully removed.'
+      if @favorite.destroy
+        flash[:notice] = "Favorite successfully removed"
+        else
+        flash[:alert] = "There was an issue removing the favorite"
+    end
+    redirect_to favorites_path
   end
 
   private

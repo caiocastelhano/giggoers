@@ -5,6 +5,12 @@
   text-align: center;
   justify-content: flex-start;
 
+  .navbar-giggoers .form-control::placeholder {
+    color: #6c757d; /* Placeholder cinza visível */
+    opacity: 1; /* Garante visibilidade */
+    font-style: italic; /* Opcional */
+  }
+
   .logo {
     max-width: 100px;
     height: auto;
@@ -30,6 +36,7 @@
     border-radius: 20px;
     padding: 10px 15px;
     margin-right: 5px;
+    color: #2f1965;
   }
 
   .input-group {
@@ -39,9 +46,9 @@
       border-radius: 15px;
       position: absolute;
       margin: 0;
-      width: auto;
+      width: 100%;
       right: 10px;
-      z-index: 10;
+      z-index: 1;
     }
 
     .input-group-text {
@@ -53,6 +60,7 @@
 
     .form-control {
       padding-right: 40px;
+      color: #2f1965;
     }
   }
 

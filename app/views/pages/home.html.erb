@@ -1,83 +1,54 @@
-<!-- Título "DESTAQUES", centralizado e em negrito -->
-<div style="text-align: center; font-weight: bold;">
- <h1>DESTAQUES</h1>
-</div>
-
-<!-- Carrossel de Eventos -->
-<div id="carouselExample" class="carousel slide">
- <div class="carousel-inner">
-   <% @carousel_events.each_with_index do |event, index| %>
-     <div class="carousel-item <%= 'active' if index == 0 %>">
-       <% if event.url_image.present? && event.url_image != "" %>
-         <img src="<%= event.url_image %>" class="d-block w-100" alt="<%= event.title %>">
-       <% else %>
-         <img src="default-image.jpg" class="d-block w-100" alt="Imagem do evento">
-       <% end %>
-       <div class="carousel-caption d-none d-md-block">
-         <h5><%= event.title %></h5>
-       </div>
-     </div>
-   <% end %>
- </div>
-
- <!-- Botões de navegação do carrossel -->
- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-   <span class="visually-hidden">Previous</span>
- </button>
-
- <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-   <span class="carousel-control-next-icon" aria-hidden="true"></span>
-   <span class="visually-hidden">Next</span>
- </button>
-</div>
-
-<!-- Cards dos Eventos, agora um embaixo do outro -->
 <div class="container" style="padding: 1rem;">
- <% @card_events.each do |event| %>
-   <div class="card mb-3 position-relative">
-     <!-- Botão de coração -->
-     <% if user_signed_in? %>
-       <!-- Para usuários logados, não faz nada aqui ainda -->
-       <a href="#" class="position-absolute top-0 end-0 m-2" style="z-index: 1; color: black; font-size: 1.5rem;">
-         <i class="fas fa-heart"></i>
-       </a>
-     <% else %>
-       <!-- Para usuários não logados, redireciona para a página de login -->
-       <a href="<%= new_user_session_path %>" class="position-absolute top-0 end-0 m-2" style="z-index: 1; color: black; font-size: 1.5rem;">
-         <i class="fas fa-heart"></i>
-       </a>
-     <% end %>
+  <% @card_events.each do |event| %>
+    <div class="card mb-3 position-relative">
 
-     <div class="card-body">
-       <h4 class="card-title"><%= event.title %></h4>
-       <p class="card-text"><%= truncate(event.description, length: 100) %></p>
-       
-        <%= image_tag(event.url_image, class: "card-img-top", alt: "Imagem do evento") if event.url_image.present? %>
+      <!-- Adicionando a imagem do evento no topo do card -->
+      <%= image_tag(event.url_image, class: "card-img-top rounded-corner", alt: "Imagem do evento") if event.url_image.present? %>
+
+      <!-- Botão de coração -->
+      <% if user_signed_in? %>
+        <a href="#" class="position-absolute top-0 end-0 m-2" style="z-index: 1; color: black; font-size: 1.5rem;">
+          <i class="fas fa-heart"></i>
+        </a>
+      <% else %>
+        <a href="<%= new_user_session_path %>" class="position-absolute top-0 end-0 m-2" style="z-index: 1; color: black; font-size: 1.5rem;">
+          <i class="fas fa-heart"></i>
+        </a>
+      <% end %>
+
+      <!-- Corpo do card -->
+      <div class="card-body">
+        <!-- Título do evento -->
+        <h4 class="card-title mb-3"><%= event.title %></h4>
+
+        <!-- Descrição do evento -->
         <p class="card-text mt-3"><%= truncate(event.description, length: 100) %></p>
 
-       <div class="d-flex justify-content-between align-items-center">
-         <small class="text-muted">
-           <%= event.start_date.strftime("%d/%m/%Y") %>
-           <%= event.start_time.strftime("%H:%M") if event.start_time %>
-         </small>
+        <!-- Informações do evento -->
+        <div class="d-flex justify-content-between align-items-center">
+          <small class="text-muted">
+            <%= event.start_date.strftime("%d/%m/%Y") %>
+            <%= event.start_time.strftime("%H:%M") if event.start_time %>
+          </small>
 
-         <span class="badge bg-primary">
-           R$ <%= number_with_precision(event.price, precision: 2) %>
-         </span>
-       </div>
+          <span class="badge bg-primary">
+            R$ <%= number_with_precision(event.price, precision: 2) %>
+          </span>
+        </div>
 
-       <div class="mt-2">
-         <% event.genres.each do |genre| %>
-           <span class="badge bg-secondary"><%= genre.name %></span>
-         <% end %>
-       </div>
-     </div>
+        <!-- Gêneros do evento -->
+        <div class="mt-2">
+          <% event.genres.each do |genre| %>
+            <span class="badge bg-secondary"><%= genre.name %></span>
+          <% end %>
+        </div>
+      </div>
 
-     <div class="card-footer text-center">
-       <%= link_to "Ver Detalhes", event_path(event.id), class: "btn btn-primary btn-sm" %>
-     </div>
-   </div>
- <% end %>
- <%= render "shared/footer" %>
+      <!-- Rodapé do card -->
+      <div class="card-footer text-center">
+        <%= link_to "Ver Detalhes", event_path(event.id), class: "btn btn-primary btn-sm" %>
+      </div>
+    </div>
+  <% end %>
+  <%= render "shared/footer" %>
 </div>

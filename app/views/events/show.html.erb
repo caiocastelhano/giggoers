@@ -4,7 +4,7 @@
   <div class="event-details-container">
     <div class="card">
       <% if @event.url_image.present? && @event.url_image != "" %>
-        <%= image_tag @event.url_image, class: "card-img-top event-image", alt: @event.title %>
+        <%= image_tag @event.url_image, class: "card-img-top event-image rounded-corner", alt: @event.title %>
       <% else %>
         <%= image_tag "default-event-image.jpg", class: "card-img-top event-image", alt: "Imagem padrão do evento" %>
       <% end %>

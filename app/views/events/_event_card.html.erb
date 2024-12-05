@@ -2,7 +2,7 @@
   <%# Adicionado "position-relative" para posicionar o botão de coração %>
 
   <!-- Adicionando a imagem do evento no topo do card -->
-  <%= image_tag(event.url_image, alt: "Imagem do evento") if event.url_image.present? %>
+  <%= image_tag(event.url_image, class: "card-img-top rounded-corner", alt: "Imagem do evento") if event.url_image.present? %>
 
   <!-- Botão de coração -->
   <a href="#" class="position-absolute top-0 end-0 m-2" style="z-index: 1; color: black; font-size: 1.5rem;">
@@ -11,9 +11,9 @@
 
   <%# Corpo do card %>
   <div class="card-body">
+
     <%# Título do evento em heading 4 %>
     <h4 class="card-title mb-3"><%= event.title %></h4>
-
     <%# Descrição do evento limitada a 100 caracteres %>
     <p class="card-text mt-3"><%= truncate(event.description, length: 100) %></p>
 

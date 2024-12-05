@@ -10,3 +10,10 @@
   border-bottom-left-radius: 0; /* Mantém o canto inferior esquerdo reto */
   border-bottom-right-radius: 0; /* Mantém o canto inferior direito reto */
 }
+
+.rounded-corner {
+  border-top-left-radius: 15px; /* Arredonda o canto superior esquerdo */
+  border-top-right-radius: 15px; /* Arredonda o canto superior direito */
+  border-bottom-left-radius: 0; /* Mantém o canto inferior esquerdo reto */
+  border-bottom-right-radius: 0; /* Mantém o canto inferior direito reto */
+}

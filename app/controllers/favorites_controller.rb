@@ -21,12 +21,12 @@ class FavoritesController < ApplicationController
   # DELETE /users/:user_id/favorites/:id
   def destroy
     @favorite.destroy
-      if @favorite.destroy
-        flash[:notice] = "Favorite successfully removed"
-        else
-        flash[:alert] = "There was an issue removing the favorite"
-    end
-    redirect_to favorites_path
+     # if @favorite.destroy!
+       # flash[:notice] = "Favorite successfully removed"
+       # else
+       # flash[:alert] = "There was an issue removing the favorite"
+    #end
+    redirect_to favorites_path, notice: "Favorite successfully removed"
   end
 
   private
@@ -39,7 +39,7 @@ class FavoritesController < ApplicationController
 
   def set_favorite
     @favorite = current_user.favorites.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    redirect_to user_favorites_path(current_user), alert: 'Favorite not found.'
+    rescue ActiveRecord::RecordNotFound
+    redirect_to favorites_path, alert: 'Favorite not found.'
   end
 end

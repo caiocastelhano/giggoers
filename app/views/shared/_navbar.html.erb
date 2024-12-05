@@ -44,8 +44,7 @@
             <input type="text" name="query"
                    class="form-control rounded-pill me-2"
                    placeholder="Qual o seu plano?"
-                   value="<%= params[:query] %>" <!-- Campo de busca mantém o texto digitado -->
-                   style="width: 95%;" />
+                   value="<%= params[:query] %>"/>
             <!-- Botão de busca com ícone -->
             <%= link_to events_path(query: params[:query]),
                         class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y me-2',

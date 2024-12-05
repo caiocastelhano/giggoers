@@ -45,55 +45,54 @@ venues = [
 # 4. Create Events with url_image
 puts "Creating events..."
 events = [
-  Event.create!(title: 'Beethoven Symphony Night', description: 'A night of classical music featuring Beethoven\'s best works.', venue: venues[0], price: 200.0, start_date: '2024-12-15', start_time: '19:00', end_date: '2024-12-15', end_time: '22:00', url_image: 'https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
-  Event.create!(title: 'Jazz Evenings with John Doe Quartet', description: 'Experience the smooth sounds of jazz in an intimate setting.', venue: venues[1], price: 150.0, start_date: '2024-12-20', start_time: '20:00', end_date: '2024-12-20', end_time: '23:00', url_image: 'https://images.pexels.com/photos/733767/pexels-photo-733767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
-  Event.create!(title: 'Opera Night: Carmen', description: 'Experience Bizet\'s masterpiece in a stunning production.', venue: venues[2], price: 350.0, start_date: '2024-12-18', start_time: '20:00', end_date: '2024-12-18', end_time: '23:30', url_image: 'https://images.pexels.com/photos/36474/dresden-semper-opera-house-historically-at-night.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
-  Event.create!(title: 'Electronic Music Festival', description: 'A night of electronic music featuring top DJs.', venue: venues[3], price: 180.0, start_date: '2024-12-22', start_time: '22:00', end_date: '2024-12-23', end_time: '06:00', url_image: 'https://images.pexels.com/photos/3253686/pexels-photo-3253686.jpeg?auto=compress&cs=tinysrgb&w=600'),
-  Event.create!(title: 'MPB Live Show', description: 'The best of Brazilian Popular Music live.', venue: venues[4], price: 120.0, start_date: '2024-12-25', start_time: '21:00', end_date: '2024-12-26', end_time: '01:00', url_image: 'https://images.pexels.com/photos/2118045/pexels-photo-2118045.jpeg?auto=compress&cs=tinysrgb&w=600'),
-  Event.create!(title: 'Chamber Orchestra Concert', description: 'An intimate evening of chamber music.', venue: venues[5], price: 150.0, start_date: '2024-12-28', start_time: '20:00', end_date: '2024-12-28', end_time: '22:30', url_image: 'https://images.pexels.com/photos/4028878/pexels-photo-4028878.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
-  Event.create!(title: 'Rock in SP', description: 'A festival of rock bands from São Paulo.', venue: venues[6], price: 90.0, start_date: '2024-12-30', start_time: '18:00', end_date: '2024-12-31', end_time: '02:00', url_image: 'https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=600'),
-  Event.create!(title: 'Samba Night', description: 'Traditional samba night with live band.', venue: venues[7], price: 80.0, start_date: '2025-01-05', start_time: '21:00', end_date: '2025-01-06', end_time: '04:00', url_image: 'https://images.pexels.com/photos/3801118/pexels-photo-3801118.jpeg?auto=compress&cs=tinysrgb&w=600'),
-  Event.create!(title: 'Piano Masters', description: 'Classical piano recital by renowned pianists.', venue: venues[8], price: 200.0, start_date: '2025-01-10', start_time: '20:00', end_date: '2025-01-10', end_time: '22:30', url_image: 'https://images.pexels.com/photos/586415/pexels-photo-586415.jpeg?auto=compress&cs=tinysrgb&w=600'),
-  Event.create!(title: 'World Music Festival', description: 'Celebrating diverse musical traditions.', venue: venues[9], price: 70.0, start_date: '2025-01-15', start_time: '16:00', end_date: '2025-01-15', end_time: '22:00', url_image: 'https://images.pexels.com/photos/1537637/pexels-photo-1537637.jpeg?auto=compress&cs=tinysrgb&w=600'),
-  Event.create!(title: 'Alternative Rock Night', description: 'An evening of alternative rock music.', venue: venues[10], price: 100.0, start_date: '2025-01-20', start_time: '19:00', end_date: '2025-01-20', end_time: '23:00', url_image: 'https://images.pexels.com/photos/1647166/pexels-photo-1647166.jpeg?auto=compress&cs=tinysrgb&w=600')
+  Event.create!(title: 'Noite da Sinfonia de Beethoven', description: 'Uma noite de música clássica com as melhores obras de Beethoven.', venue: venues[0], price: 200.0, start_date: '2024-12-15', start_time: '19:00', end_date: '2024-12-15', end_time: '22:00', url_image: 'https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
+  Event.create!(title: 'Noites de Jazz com John Doe Quartet', description: 'Experimente o som suave do jazz em um ambiente íntimo.', venue: venues[1], price: 150.0, start_date: '2024-12-20', start_time: '20:00', end_date: '2024-12-20', end_time: '23:00', url_image: 'https://images.pexels.com/photos/733767/pexels-photo-733767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
+  Event.create!(title: 'Noite de Ópera: Carmen', description: 'Experimente a obra-prima de Bizet em uma produção deslumbrante.', venue: venues[2], price: 350.0, start_date: '2024-12-18', start_time: '20:00', end_date: '2024-12-18', end_time: '23:30', url_image: 'https://images.pexels.com/photos/36474/dresden-semper-opera-house-historically-at-night.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
+  Event.create!(title: 'Festival de Música Eletrônica', description: 'Uma noite de música eletrônica com os melhores DJs.', venue: venues[3], price: 180.0, start_date: '2024-12-22', start_time: '22:00', end_date: '2024-12-23', end_time: '06:00', url_image: 'https://images.pexels.com/photos/3253686/pexels-photo-3253686.jpeg?auto=compress&cs=tinysrgb&w=600'),
+  Event.create!(title: 'Show Ao Vivo de MPB', description: 'O melhor da Música Popular Brasileira ao vivo.', venue: venues[4], price: 120.0, start_date: '2024-12-25', start_time: '21:00', end_date: '2024-12-26', end_time: '01:00', url_image: 'https://images.pexels.com/photos/2118045/pexels-photo-2118045.jpeg?auto=compress&cs=tinysrgb&w=600'),
+  Event.create!(title: 'Concerto de Orquestra de Câmara', description: 'Uma noite intimista de música de câmara.', venue: venues[5], price: 150.0, start_date: '2024-12-28', start_time: '20:00', end_date: '2024-12-28', end_time: '22:30', url_image: 'https://images.pexels.com/photos/4028878/pexels-photo-4028878.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'),
+  Event.create!(title: 'Rock em SP', description: 'Um festival de bandas de rock de São Paulo.', venue: venues[6], price: 90.0, start_date: '2024-12-30', start_time: '18:00', end_date: '2024-12-31', end_time: '02:00', url_image: 'https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg?auto=compress&cs=tinysrgb&w=600'),
+  Event.create!(title: 'Noite de Samba', description: 'Noite tradicional de samba com banda ao vivo.', venue: venues[7], price: 80.0, start_date: '2025-01-05', start_time: '21:00', end_date: '2025-01-06', end_time: '04:00', url_image: 'https://images.pexels.com/photos/3801118/pexels-photo-3801118.jpeg?auto=compress&cs=tinysrgb&w=600'),
+  Event.create!(title: 'Mestres do Piano', description: 'Recital de piano clássico com pianistas renomados.', venue: venues[8], price: 200.0, start_date: '2025-01-10', start_time: '20:00', end_date: '2025-01-10', end_time: '22:30', url_image: 'https://images.pexels.com/photos/586415/pexels-photo-586415.jpeg?auto=compress&cs=tinysrgb&w=600'),
+  Event.create!(title: 'Festival de Música do Mundo', description: 'Celebrando diversas tradições musicais.', venue: venues[9], price: 70.0, start_date: '2025-01-15', start_time: '16:00', end_date: '2025-01-15', end_time: '22:00', url_image: 'https://images.pexels.com/photos/1537637/pexels-photo-1537637.jpeg?auto=compress&cs=tinysrgb&w=600'),
+  Event.create!(title: 'Noite de Rock Alternativo', description: 'Uma noite de música rock alternativo.', venue: venues[10], price: 100.0, start_date: '2025-01-20', start_time: '19:00', end_date: '2025-01-20', end_time: '23:00', url_image: 'https://images.pexels.com/photos/1647166/pexels-photo-1647166.jpeg?auto=compress&cs=tinysrgb&w=600')
 ]
 
 # 5. Create Genres
 puts "Creating genres..."
 genres = Genre.create!([
   { name: 'Rock' },
-  { name: 'Classical' },
+  { name: 'Clássica' },
   { name: 'Blues' },
   { name: 'Jazz' },
-  { name: 'Electronic' },
+  { name: 'Eletrônica' },
   { name: 'MPB' },
   { name: 'Samba' },
-  { name: 'Alternative' },
-  { name: 'World Music' },
-  { name: 'Opera' },
-  { name: 'Chamber Music' },
+  { name: 'Alternativa' },
+  { name: 'Música do Mundo' },
+  { name: 'Ópera' },
+  { name: 'Música de Câmara' },
   { name: 'Piano' },
   { name: 'DJ' },
   { name: 'Festival' }
 ])
 
 # 6. Associate Events with Genres
-puts "Associating events with genres..."
+puts "Associando eventos com gêneros..."
 
 # Hash com eventos e gêneros
 event_genre_map = {
-  'Beethoven Symphony Night' => ['Classical'],
-  'Jazz Evenings with John Doe Quartet' => ['Jazz'],
-  'Opera Night: Carmen' => ['Opera', 'Classical'],
-  'Electronic Music Festival' => ['Electronic', 'Festival', 'DJ'],
-  'MPB Live Show' => ['MPB'],
-  'Chamber Orchestra Concert' => ['Classical', 'Chamber Music'],
-  'Rock in SP' => ['Rock', 'Festival'],
-  'Samba Night' => ['Samba'],
-  'Piano Masters' => ['Classical', 'Piano'],
-  'World Music Festival' => ['World Music', 'Festival'],
-  'Alternative Rock Night' => ['Rock', 'Alternative'],
-  'Electronic Dance Party' => ['Electronic', 'DJ']
+  'Noite da Sinfonia de Beethoven' => ['Clássica'],
+  'Noites de Jazz com John Doe Quartet' => ['Jazz'],
+  'Noite de Ópera: Carmen' => ['Ópera', 'Clássica'],
+  'Festival de Música Eletrônica' => ['Eletrônica', 'Festival', 'DJ'],
+  'Show Ao Vivo de MPB' => ['MPB'],
+  'Concerto de Orquestra de Câmara' => ['Clássica', 'Música de Câmara'],
+  'Rock em SP' => ['Rock', 'Festival'],
+  'Noite de Samba' => ['Samba'],
+  'Mestres do Piano' => ['Clássica', 'Piano'],
+  'Festival de Música do Mundo' => ['Música do Mundo', 'Festival'],
+  'Noite de Rock Alternativo' => ['Rock', 'Alternativa'],
 }
 
 # Loop pelos eventos

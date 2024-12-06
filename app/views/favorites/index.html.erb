@@ -30,7 +30,7 @@
 
               <%# Corpo do Card %>
               <div class="card-body">
-                <h3 class="card-title text-truncate"><%= favorite.event.title %></h3>
+                <h3 class="card-title"><%= favorite.event.title %></h3>
                 <%# Título truncado para evitar overflow %>
                 <p class="card-text mt-2 text-muted"><%= truncate(favorite.event.description, length: 100) %></p>
 

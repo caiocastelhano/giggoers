@@ -41,13 +41,14 @@
         <%= form_tag events_path, method: :get, class: "d-flex" do %>
           <div class="input-group">
             <!-- Campo de entrada para busca -->
-            <input type="text" name="query" class="form-control rounded-pill me-2" placeholder="<%= user_signed_in? ? "Olá #{current_user.name}, qual o seu plano?" : 'Qual o seu plano?' %>"
-       value="<%= params[:query] %>"/>
+            <%= form_with url: events_path, method: :get, class: "d-flex" do %>
+              <%= text_field_tag :query, params[:query], id: "search-query", class: "rounded-pill me-2 flex-grow-1", placeholder: (user_signed_in? ? " Olá #{current_user.name}, qual o seu plano?" : ' Qual o seu plano?')%>
+              <% end %>
+
 
             <!-- Botão de busca com ícone -->
             <%= link_to events_path(query: params[:query]),
-                        class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y me-2',
-                        style: 'z-index: 10;' do %>
+                        class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y' do %>
               <i class="bi bi-search"></i> <!-- Ícone de lupa do Bootstrap Icons -->
             <% end %>
           </div>

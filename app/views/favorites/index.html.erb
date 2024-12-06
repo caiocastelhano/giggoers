@@ -17,11 +17,11 @@
         <% favorites.each do |favorite| %>
           <div class="col-12 col-md-6 col-lg-4 mb-4">
             <%# Coluna responsiva com margem inferior %>
-            <div class="card position-relative shadow-sm">
+            <div class="card position-relative shadow-sm rounded-15">
               <%# Card com sombra leve %>
 
               <%# Imagem do evento %>
-              <%= image_tag(favorite.event.url_image, class: "card-img-top rounded-top", alt: "Imagem do evento") if favorite.event.url_image.present? %>
+              <%= image_tag(favorite.event.url_image, class: "card-img-top rounded-corner", alt: "Imagem do evento") if favorite.event.url_image.present? %>
 
               <%# Botão de coração totalmente vermelho %>
               <a href="#" class="position-absolute top-0 end-0 m-2" style="z-index: 1; font-size: 1.5rem;">

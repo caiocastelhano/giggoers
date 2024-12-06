@@ -23,11 +23,10 @@
               <%# Imagem do evento %>
               <%= image_tag(favorite.event.url_image, class: "card-img-top rounded-top", alt: "Imagem do evento") if favorite.event.url_image.present? %>
 
-              <%# Botão de coração com contorno no formato do coração %>
+              <%# Botão de coração totalmente vermelho %>
               <a href="#" class="position-absolute top-0 end-0 m-2" style="z-index: 1; font-size: 1.5rem;">
-                <i class="fas fa-heart" style="color: black; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;"></i>
+                <i class="fas fa-heart" style="color: red;"></i>
               </a>
-
 
 
               <%# Corpo do Card %>

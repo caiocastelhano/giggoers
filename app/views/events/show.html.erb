@@ -12,10 +12,17 @@
         <% end %>
       </div>
 
-      <%# Botão de coração com contorno no formato do coração %>
-      <a href="#" class="position-absolute top-0 end-0 m-2" style="z-index: 1; font-size: 1.5rem;">
-        <i class="fas fa-heart" style="color: black; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;"></i>
-      </a>
+      <!-- Botão de coração -->
+      <% if user_signed_in? %>
+        <a href="#" class="position-absolute top-0 end-0 m-2" style="z-index: 1; font-size: 1.5rem;">
+          <i class="fas fa-heart" style="color: <%= @favorites.include?(@event.id) ? 'red' : 'black' %>; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;"></i>
+        </a>
+      <% else %>
+        <a href="<%= new_user_session_path %>" class="position-absolute top-0 end-0 m-2" style="color: black; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;">
+          <i class="fas fa-heart"></i>
+        </a>
+      <% end %>
+
 
       <!-- Corpo do card -->
       <div class="card-body">

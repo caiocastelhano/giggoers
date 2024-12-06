@@ -11,7 +11,8 @@ User.destroy_all
 puts "Creating users..."
 users = User.create!([
   { name: 'Admin', email: 'admin@admin.com', password: 'admin123' },
-  { name: 'Caio', email: 'caio@gmail.com', password: 'caio1234' }
+  { name: 'Caio', email: 'caio@gmail.com', password: 'caio1234' },
+  { name: 'Virginie', email: 'virginie@gmail.com', password: 'virginie123' }
 ])
 
 # 3. Create Venues
@@ -114,16 +115,29 @@ puts "Finished associating events with genres."
 # 7. Add Favorites for Each User
 puts "Adding consistent favorites for each user..."
 
-# Define os favoritos fixos para cada usuário
-users.each_with_index do |user, user_index|
-  # Seleciona os primeiros 5 eventos para cada usuário
-  fixed_favorites = Event.order(:id).offset(user_index * 5).limit(5)
+# Define o evento "Caetano & Bethânia"
+caetano_event = Event.find_by(title: 'Caetano & Bethânia')
 
-  fixed_favorites.each_with_index do |event, index|
-    # Define uma data fixa para o favorito (exemplo: 3 meses atrás, 2 meses atrás, etc.)
+# Adiciona os favoritos para cada usuário
+users.each do |user|
+  # Adiciona o evento fixo "Caetano & Bethânia" como favorito
+  if caetano_event
+    Favorite.find_or_create_by!(
+      user: user,
+      event: caetano_event,
+      created_at: Date.today,
+      updated_at: Date.today
+    )
+  else
+    puts "Warning: Evento 'Caetano & Bethânia' não encontrado. Favorito não adicionado."
+  end
+
+  # Seleciona mais 4 eventos diferentes para completar os favoritos
+  other_events = Event.where.not(id: caetano_event&.id).order(:id).limit(4)
+
+  other_events.each_with_index do |event, index|
     favorite_date = Date.today - (index + 1).months
 
-    # Cria o favorito somente se ele ainda não existir para evitar duplicações
     Favorite.find_or_create_by!(
       user: user,
       event: event,

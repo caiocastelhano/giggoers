@@ -2,19 +2,23 @@
   <h2 class="text-center">Meus Favoritos</h2>
 
   <% if @favorites.present? %>
-    <div class="row">
-      <% @favorites.each do |favorite| %>
-        <% event = favorite.event %>
-        <% next if event.nil? %> <!-- Ignorar favoritos sem evento associado -->
+    <%# Ordenar favoritos por data de início e agrupá-los por mês %>
+    <% sorted_favorites = @favorites.sort_by { |favorite| favorite.event.start_date } %>
+    <% grouped_by_month = sorted_favorites.group_by { |favorite| favorite.event.start_date.beginning_of_month } %>
 
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
-          <div class="card position-relative shadow-sm">
-            <!-- Imagem do evento -->
-            <% if event.url_image.present? %>
-              <%= image_tag(event.url_image, class: "card-img-top", alt: event.title) %>
-            <% else %>
-              <%= image_tag("default-image.jpg", class: "card-img-top", alt: "Imagem padrão do evento") %>
-            <% end %>
+    <% grouped_by_month.each do |month, favorites| %>
+      <h3 class="text-secondary mt-4"><%= month.strftime("%B %Y") %></h3>
+      <%# Subtítulo com o mês formatado e estilo cinza %>
+
+      <div class="row">
+        <% favorites.each do |favorite| %>
+          <div class="col-12 col-md-6 col-lg-4 mb-4">
+            <%# Coluna responsiva com margem inferior %>
+            <div class="card position-relative shadow-sm rounded-15">
+              <%# Card com sombra leve %>
+
+              <%# Imagem do evento %>
+              <%= image_tag(favorite.event.url_image, class: "card-img-top rounded-corner", alt: "Imagem do evento") if favorite.event.url_image.present? %>
 
             <!-- Botão de coração -->
             <% if user_signed_in? %>

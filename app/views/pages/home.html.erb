@@ -1,6 +1,6 @@
 <!-- Título "DESTAQUES", centralizado e em negrito -->
-<div class="pt-3" style="text-align: center; font-weight: bold;">
- <h2>Destaques</h2>
+<div class="pt-3 text-center font-weight-bold">
+  <h2>Destaques</h2>
 </div>
 
 <!-- Carrossel de Eventos -->
@@ -25,8 +25,6 @@
       </div>
     <% end %>
   </div>
-</div>
-
 
   <!-- Botões de navegação do carrossel -->
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -39,21 +37,23 @@
   </button>
 </div>
 
-<!-- Cards dos Eventos, agora um embaixo do outro -->
-<div class="container" style="padding: 1rem;">
+<!-- Cards dos Eventos -->
+<div class="container py-4">
   <% @card_events.each do |event| %>
     <div class="card mb-3 position-relative">
 
-      <!-- Adicionando a imagem do evento no topo do card -->
-      <%= image_tag(event.url_image, class: "card-img-top rounded-corner", alt: "Imagem do evento") if event.url_image.present? %>
+      <!-- Imagem do evento -->
+      <% if event.url_image.present? %>
+        <%= image_tag(event.url_image, class: "card-img-top rounded-corner", alt: "Imagem do evento") %>
+      <% end %>
 
       <!-- Botão de coração -->
       <% if user_signed_in? %>
-        <a href="#" class="position-absolute top-0 end-0 m-2" style="color: black; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;">
+        <a href="#" class="position-absolute top-0 end-0 m-2" style="color: <%= @favorites.include?(event.id) ? 'red' : 'black' %>; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;">
           <i class="fas fa-heart"></i>
         </a>
       <% else %>
-        <a href="<%= new_user_session_path %>" class="position-absolute top-0 end-0 m-2" style="color: black; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;"">
+        <a href="<%= new_user_session_path %>" class="position-absolute top-0 end-0 m-2" style="color: black; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;">
           <i class="fas fa-heart"></i>
         </a>
       <% end %>
@@ -92,5 +92,6 @@
       </div>
     </div>
   <% end %>
-  <%= render "shared/footer" %>
 </div>
+
+<%= render "shared/footer" %>

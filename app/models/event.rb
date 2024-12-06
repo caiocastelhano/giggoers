@@ -11,5 +11,4 @@ class Event < ApplicationRecord
   # Atributos opcionais
   validates :price, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :url_image, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), allow_blank: true }
-  validates :purchase_link, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), allow_blank: true }
 end

@@ -1,16 +1,12 @@
-<nav class="navbar navbar-expand-lg navbar-light navbar-giggoers">
- <!-- Container principal para o layout do navbar -->
- <div class="container">
-   <!-- Primeira linha do navbar: Logo, Título e Botão Login/Logout -->
-   <div class="row align-items-center">
+<nav class="navbar navbar-expand-lg navbar-light navbar-giggoers w-100">
+ <div class="container px-4">
+   <div class="row w-100 m-0 align-items-center">
      <div class="col-3">
-       <!-- Link para a home com a logo -->
        <%= link_to "/", class: "navbar-brand" do %>
-         <%= image_tag "logo.png", class: 'logo' %> <!-- Logo da aplicação -->
+         <%= image_tag "logo.png", class: 'logo' %>
        <% end %>
      </div>
-     <div class="col-6 text-left">
-       <!-- Título e subtítulo do app -->
+     <div class="col-6 text-center">
        <%= link_to "/", class: "text-decoration-none text-dark" do %>
          <h1 class="app-title">GigGoers</h1>
          <p class="app-subtitle">Você no lugar quando a música começar!</p>
@@ -18,14 +14,12 @@
      </div>
      <div class="col-3 d-flex justify-content-end">
        <% if current_user %>
-         <!-- Botão de logout: visível apenas se o usuário estiver logado -->
          <%= link_to destroy_user_session_path,
                        class: 'btn btn-logout rounded-pill px-4 py-2 d-flex align-items-center gap-2',
                        data: { turbo_confirm: 'Tem certeza que deseja sair?', turbo_method: :delete } do %>
            <i class="fas fa-door-open"></i>
          <% end %>
        <% else %>
-         <!-- Link de login: visível apenas se o usuário NÃO estiver logado -->
          <%= link_to new_user_session_path,
                      class: 'btn btn-login rounded-pill px-4 py-2 d-flex align-items-center gap-2' do %>
            <i class="fas fa-user"></i>
@@ -34,8 +28,7 @@
      </div>
    </div>
 
-   <!-- Segunda linha do navbar: Campo de busca -->
-   <div class="row w-100">
+   <div class="row w-100 m-0">
      <div class="col-12 position-relative">
        <%= form_with url: events_path, method: :get, class: "d-flex" do |form| %>
          <div class="input-group">

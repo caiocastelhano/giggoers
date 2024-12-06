@@ -8,46 +8,61 @@
 
     <% grouped_by_month.each do |month, favorites| %>
       <h3 class="text-secondary mt-4"><%= month.strftime("%B %Y") %></h3>
-      <%# Subtítulo com o mês formatado e estilo cinza %>
 
       <div class="row">
         <% favorites.each do |favorite| %>
+          <% event = favorite.event %>
+          <% next if event.nil? %> <%# Ignorar favoritos sem evento associado %>
+
           <div class="col-12 col-md-6 col-lg-4 mb-4">
-            <%# Coluna responsiva com margem inferior %>
             <div class="card position-relative shadow-sm rounded-15">
-              <%# Card com sombra leve %>
-
               <%# Imagem do evento %>
-              <%= image_tag(favorite.event.url_image, class: "card-img-top rounded-corner", alt: "Imagem do evento") if favorite.event.url_image.present? %>
+              <% if event.url_image.present? %>
+                <%= image_tag(event.url_image, class: "card-img-top rounded-corner", alt: "Imagem do evento") %>
+              <% else %>
+                <%= image_tag("default-image.jpg", class: "card-img-top rounded-corner", alt: "Imagem padrão do evento") %>
+              <% end %>
 
-            <!-- Botão de coração -->
-            <% if user_signed_in? %>
-              <a href="#" class="position-absolute top-0 end-0 m-2" style="color: <%= @favorite_event_ids.include?(event.id) ? 'red' : 'black' %>; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;">
-                <i class="fas fa-heart"></i>
-              </a>
-            <% else %>
-              <a href="<%= new_user_session_path %>" class="position-absolute top-0 end-0 m-2" style="color: black; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;">
-                <i class="fas fa-heart"></i>
-              </a>
-            <% end %>
+              <!-- Botão de coração -->
+              <% if user_signed_in? %>
+                <a href="#" class="position-absolute top-0 end-0 m-2" style="color: <%= @favorite_event_ids.include?(event.id) ? 'red' : 'black' %>; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;">
+                  <i class="fas fa-heart"></i>
+                </a>
+              <% else %>
+                <a href="<%= new_user_session_path %>" class="position-absolute top-0 end-0 m-2" style="color: black; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;">
+                  <i class="fas fa-heart"></i>
+                </a>
+              <% end %>
 
-            <!-- Corpo do card -->
-            <div class="card-body">
-              <h3 class="card-title"><%= event.title %></h3>
-              <p class="card-text"><%= truncate(event.description, length: 100) %></p>
+              <!-- Corpo do card -->
+              <div class="card-body">
+                <h3 class="card-title"><%= event.title %></h3>
+                <p class="card-text"><%= truncate(event.description, length: 100) %></p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-muted">
+                    <%= event.start_date.strftime("%d/%m/%Y") %>
+                    <%= event.start_time.strftime("%H:%M") if event.start_time %>
+                  </small>
+                  <span class="badge bg-primary">R$ <%= number_with_precision(event.price, precision: 2) %></span>
+                </div>
+              </div>
 
-              <div class="d-flex justify-content-between align-items-center">
-                <small class="text-muted">
-                  <%= event.start_date.strftime("%d/%m/%Y") %>
-                  <%= event.start_time.strftime("%H:%M") if event.start_time %>
-                </small>
-                <span class="badge bg-primary">R$ <%= number_with_precision(event.price, precision: 2) %></span>
+              <!-- Botões de Ação -->
+              <div class="card-footer d-flex justify-content-between">
+                <!-- Botão de Ver Detalhes -->
+                <%= link_to 'Ver Detalhes', event_path(event),
+                  class: 'btn btn-sm btn-primary' %>
+
+                <!-- Botão de Remover Favorito -->
+                <%= link_to 'Remover', favorite_path(favorite),
+                  class: 'btn btn-sm btn-danger',
+                  data: { turbo_method: :delete, turbo_confirm: 'Tem certeza que deseja remover este evento dos seus favoritos?' } %>
               </div>
             </div>
           </div>
-        </div>
-      <% end %>
-    </div>
+        <% end %>
+      </div>
+    <% end %>
   <% else %>
     <p class="text-center text-muted">Você ainda não tem eventos favoritos.</p>
   <% end %>

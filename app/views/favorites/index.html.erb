@@ -23,14 +23,16 @@
               <%# Imagem do evento %>
               <%= image_tag(favorite.event.url_image, class: "card-img-top rounded-top", alt: "Imagem do evento") if favorite.event.url_image.present? %>
 
-              <%# Botão de coração %>
-              <a href="#" class="position-absolute top-0 end-0 m-2 text-dark" style="z-index: 1; font-size: 1.5rem;">
-                <i class="fas fa-heart"></i>
+              <%# Botão de coração com contorno no formato do coração %>
+              <a href="#" class="position-absolute top-0 end-0 m-2" style="z-index: 1; font-size: 1.5rem;">
+                <i class="fas fa-heart" style="color: black; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;"></i>
               </a>
+
+
 
               <%# Corpo do Card %>
               <div class="card-body">
-                <h3 class="card-title text-truncate"><%= favorite.event.title %></h3>
+                <h3 class="card-title"><%= favorite.event.title %></h3>
                 <%# Título truncado para evitar overflow %>
                 <p class="card-text mt-2 text-muted"><%= truncate(favorite.event.description, length: 100) %></p>
 

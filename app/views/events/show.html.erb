@@ -1,7 +1,5 @@
 <div class="container mt-4">
-  <h1 class="text-center text-white my-4">Saiba Mais</h1>
-
-  <div class="event-details-container">
+    <div class="event-details-container">
     <!-- Card principal -->
     <div class="card shadow-sm border-0 rounded-3">
       
@@ -14,12 +12,21 @@
         <% end %>
       </div>
 
+      <%# Botão de coração com contorno no formato do coração %>
+      <a href="#" class="position-absolute top-0 end-0 m-2" style="z-index: 1; font-size: 1.5rem;">
+        <i class="fas fa-heart" style="color: black; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;"></i>
+      </a>
+
       <!-- Corpo do card -->
       <div class="card-body">
-        <h2 class="card-title event-title text-center text-primary mb-3"><%= @event.title %></h2>
+        <!-- Título do evento -->
+        <h2 class="card-title event-title text-left mb-3" style="color: #DDDDDD;">
+          <%= @event.title %>
+        </h2>
+        <%# Cor do título definida como #DDDDDD %>
 
-        <!-- Data e Local com texto branco -->
-        <div class="event-details mb-3 text-white">
+        <!-- Data e Local -->
+        <div class="event-details mb-3" style="color: #DDDDDD;">
           <p>
             <strong>Data:</strong>
             <%= @event.start_date.strftime("%d/%m/%Y") %>
@@ -30,11 +37,13 @@
             <%= @event.venue.name %>, <%= @event.venue.address %>
           </p>
         </div>
+        <%# Cor de data e local definida como #DDDDDD %>
 
-        <!-- Descrição com texto branco -->
-        <div class="event-description mb-3 text-white">
+        <!-- Descrição do evento -->
+        <div class="event-description mb-3" style="color: #DDDDDD;">
           <p><%= @event.description %></p>
         </div>
+        <%# Cor da descrição definida como #DDDDDD %>
 
         <!-- Flex container para gêneros e valor do evento na mesma linha -->
         <div class="d-flex justify-content-between align-items-center mb-3">

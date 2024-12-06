@@ -1,12 +1,12 @@
 <div class="container mt-4">
     <div class="event-details-container">
     <!-- Card principal -->
-    <div class="card shadow-sm border-0 rounded-3">
-      
+    <div class="card shadow-sm rounded-15">
+
       <!-- Imagem do evento no topo -->
       <div class="card-img-top-container">
         <% if @event.url_image.present? && @event.url_image != "" %>
-          <%= image_tag @event.url_image, class: "card-img-top w-100", alt: @event.title %>
+          <%= image_tag @event.url_image, class: "card-img-top w-100 rounded-corner", alt: @event.title %>
         <% else %>
           <%= image_tag "default-event-image.jpg", class: "card-img-top w-100", alt: "Imagem padrão do evento" %>
         <% end %>

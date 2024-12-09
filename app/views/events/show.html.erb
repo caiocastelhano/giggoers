@@ -84,12 +84,30 @@
       </a>
 
       <!-- Botão para ingressos -->
-      <%= link_to "Acesse para comprar", @event.purchase_link,
-        class: "btn btn-info rounded-15 py-3 mx-auto d-block mb-4",
-        style: "width: 80%;",
-        target: "_blank",
-        rel: "noopener noreferrer" %>
+            <!-- Botão para abrir o modal (Aviso de Redirecionamento) -->
+        <%= link_to "Acesse para comprar", "#",
+          class: "btn btn-info rounded-15 py-3 mx-auto d-block mb-4",
+          data: { bs_toggle: "modal", bs_target: "#redirectModal" } %>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- Modal de aviso de redirecionamento -->
+<div class="modal fade" id="redirectModal" tabindex="-1" aria-labelledby="redirectModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="redirectModalLabel">Aviso de Redirecionamento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Você está prestes a ser redirecionado para o site de compra de ingressos. Clique em "Continuar" para prosseguir.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <%= link_to "Continuar", @event.purchase_link, class: "btn btn-primary", target: "_blank", rel: "noopener noreferrer" %>
+      </div>
     </div>
   </div>
 </div>

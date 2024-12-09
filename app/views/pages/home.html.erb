@@ -46,17 +46,9 @@
       <% if event.url_image.present? %>
         <%= image_tag(event.url_image, class: "card-img-top rounded-corner", alt: "Imagem do evento") %>
       <% end %>
-
+      
       <!-- Botão de coração -->
-      <% if user_signed_in? %>
-        <a href="#" class="position-absolute top-0 end-0 m-2" style="color: <%= @favorites.include?(event.id) ? 'red' : 'black' %>; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;">
-          <i class="fas fa-heart"></i>
-        </a>
-      <% else %>
-        <a href="<%= new_user_session_path %>" class="position-absolute top-0 end-0 m-2" style="color: black; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;">
-          <i class="fas fa-heart"></i>
-        </a>
-      <% end %>
+      <%= render 'favorites/btn', event: %>
 
       <!-- Corpo do card -->
       <div class="card-body">

@@ -1,7 +1,5 @@
 class FavoritesController < ApplicationController
   before_action :authenticate_user! # Garante que o usuário esteja logado
-  before_action :set_event, only: [:create]
-  before_action :set_favorite, only: [:destroy]
 
   # GET /favorites
   def index
@@ -11,37 +9,21 @@ class FavoritesController < ApplicationController
 
   # POST /favorites
   def create
-    @favorite = current_user.favorites.build(event: @event)
+    event = Event.find(params[:event_id]) # Associa ao evento via `params[:event_id]`
+    current_user.favorites.create!(event: event)
 
-    if @favorite.save
-      redirect_to favorites_path, notice: 'Event was successfully added to favorites. Here is your list of favorites.'
-    else
-      redirect_to events_path, alert: 'Unable to add event to favorites.'
-    end
+    render turbo_stream: turbo_stream.replace(event, partial: "favorites/btn",
+      locals: { event: event })
+
   end
 
   # DELETE /favorites/:id
   def destroy
-    if @favorite.destroy
-      redirect_to favorites_path, notice: 'Favorite successfully removed.'
-    else
-      redirect_to favorites_path, alert: 'There was an issue removing the favorite.'
-    end
-  end
+    favorite = current_user.favorites.find(params[:id]) # Busca favorito pelo ID
+    event = favorite.event
+    favorite.destroy
 
-  private
-
-  # Define o evento com base no `event_id` fornecido
-  def set_event
-    @event = Event.find(params[:event_id])
-  rescue ActiveRecord::RecordNotFound
-    redirect_to events_path, alert: 'Event not found.'
-  end
-
-  # Define o favorito com base no `id` fornecido e verifica se pertence ao usuário atual
-  def set_favorite
-    @favorite = current_user.favorites.find(params[:id])
-  rescue ActiveRecord::RecordNotFound
-    redirect_to favorites_path, alert: 'Favorite not found.'
+    render turbo_stream: turbo_stream.replace(event, partial: "favorites/btn",
+      locals: { event: event })
   end
 end

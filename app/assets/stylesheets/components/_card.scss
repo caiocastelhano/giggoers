@@ -4,6 +4,13 @@
   border-radius: 15px;
 }
 
+btn-sm {
+  padding-top: 0.25rem; /* Ajusta o padding superior */
+  padding-bottom: 0.25rem; /* Ajusta o padding inferior */
+  padding-left: 0.5rem; /* Largura opcional */
+  padding-right: 0.5rem; /* Largura opcional */
+}
+
 #login-header{
   border-top-left-radius: 15px; /* Arredonda o canto superior esquerdo */
   border-top-right-radius: 15px; /* Arredonda o canto superior direito */

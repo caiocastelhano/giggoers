@@ -1,10 +1,10 @@
 class EventsController < ApplicationController
   def index
-    if params[:query].present?
-      @events = Event.where("title ILIKE ?", "%#{params[:query]}%")
-    else
-      @events = Event.all
-    end
+    @events = if params[:query].present?
+                Event.search(params[:query])
+              else
+                Event.all
+              end
 
     # Adicionando paginação
     @events = @events.page(params[:page]).per(12)

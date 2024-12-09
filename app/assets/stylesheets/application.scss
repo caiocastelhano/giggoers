@@ -24,3 +24,11 @@ h2, h3 {
   font-weight: bold; /* Letras em negrito */
 }
 /* Adicione estes estilos ao seu arquivo CSS */
+
+.modal-title {
+  color: $primary;
+}
+
+.modal-body {
+  color: $info;
+}

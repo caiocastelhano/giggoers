@@ -53,6 +53,7 @@ gem "sassc-rails"
 gem 'kaminari'
 gem 'geocoder'
 gem 'ostruct'
+gem "cloudinary"
 
 group :development, :test do
   gem "dotenv-rails"

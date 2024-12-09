@@ -43,11 +43,11 @@
               <div class="card-footer d-flex justify-content-between">
                 <!-- Botão de Ver Detalhes -->
                 <%= link_to 'Ver Detalhes', event_path(event),
-                  class: 'btn btn-sm btn-primary' %>
+                  class: 'btn btn-sm btn-primary corner-rounded' %>
 
                 <!-- Botão de Remover Favorito -->
                 <%= link_to 'Remover', favorite_path(favorite),
-                  class: 'btn btn-sm btn-danger',
+                  class: 'btn btn-sm btn-danger corner-rounded',
                   data: { turbo_method: :delete, turbo_confirm: 'Tem certeza que deseja remover este evento dos seus favoritos?' } %>
               </div>
             </div>

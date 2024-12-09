@@ -13,8 +13,9 @@ Rails.application.routes.draw do
   # criando rota de eventos pra lidar com a busca
   resources :events, only: [:index, :show] do
     get 'search', on: :collection
-    resources :favorites, only: [:create]
+    resources :favorites, only: [:create] # POST para criar favorito
+
   end
 
-   resources :favorites, only: [:index, :destroy]
+  resources :favorites, only: [:index, :destroy] # GET para listar e DELETE para remover
 end

@@ -1,0 +1,12 @@
+<%= turbo_frame_tag event do %>
+  <% favorite = current_user.favorites.find_by(event: event) %>
+  <% if favorite.present? %>
+    <%= link_to favorite_path(favorite), data: {turbo_method: :delete}, class: "favorite-toggle position-absolute top-0 end-0 m-2" do %>
+      <i class="fa-solid fa-heart red-heart fa-lg"></i>
+    <% end %>
+  <% else %>
+    <%= link_to event_favorites_path(event), data: {turbo_method: :post}, class: "favorite-toggle position-absolute top-0 end-0 m-2" do %>
+      <i class="fa-regular fa-heart outline-heart fa-lg"></i>
+    <% end %>
+  <% end %>
+<% end %>

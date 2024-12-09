@@ -27,3 +27,11 @@
   background-color: #c93c3c;
   color: #FFFFFF;
 }
+
+.red-heart {
+  color: red;
+}
+.outline-heart{
+-webkit-text-stroke: 1px #ED4E4E; /* Contorno nítido */
+// text-shadow: 0 0 2px white, 0 0 5px white; /* Adicional para suavizar */
+}

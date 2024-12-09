@@ -34,20 +34,20 @@
     </div>
   </div>
 
-  <div class="card-footer d-flex justify-content-between">
-    <div class="card-footer text-center">
-      <%= link_to "Ver Detalhes", event_path(event), class: "btn btn-primary btn-sm", data: { turbo: "false" } %>
-    </div>
-    <!-- Ícone de compartilhamento -->
+    <div class="card-footer d-flex justify-content-between">
+      <div class="card-footer text-center">
+        <%= link_to "Ver Detalhes", event_path(event),
+          class: "btn btn-primary btn-sm", data: { turbo: "false" } %>
+      </div>
+     <!-- Ícone de compartilhamento -->
     <a href="https://wa.me/?text=Confira%20esse%20evento:%20#{event_url(@event)}"
         target="_blank"
         rel="noopener"
         class="body-color mb-3"
         style="font-size: 2rem;">
         <i class="fas fa-share-alt"></i>
-    </a>
-  </div>
-
+      </a>
 
   </div>
 </div>
+

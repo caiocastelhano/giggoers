@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   def index
     @events = if params[:query].present?
-                Event.search(params[:query])
+                Event.search(params[:query], params[:sort_by])
               else
                 Event.all
               end

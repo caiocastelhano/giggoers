@@ -100,11 +100,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Você está prestes a ser redirecionado para o site de compra de ingressos. Clique em "Continuar" para prosseguir.
+        Você está prestes a ser redirecionado para o site de compra de ingressos deste evento. Clique em "Continuar" para prosseguir.
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-        <%= link_to "Continuar", @event.purchase_link, class: "btn btn-primary", target: "_blank", rel: "noopener noreferrer" %>
+        <button type="button" class="btn btn-secondary corner-rounded" data-bs-dismiss="modal">Fechar</button>
+        <%= link_to "Continuar", @event.purchase_link, class: "btn btn-primary corner-rounded", target: "_blank", rel: "noopener noreferrer" %>
       </div>
     </div>
   </div>

@@ -6,5 +6,5 @@
   <% if event.price.present? %>
     <p class="mb-2"><strong>R$ <%= number_with_precision(event.price, precision: 2) %></strong></p>
   <% end %>
-  <%= link_to "Ver detalhes", event_path(event), class: "btn btn-primary btn-sm" %>
+  <%= link_to "Ver detalhes", event_path(event), class: "btn btn-primary btn-sm corner-rounded" %>
 </div>

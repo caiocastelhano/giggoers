@@ -13,7 +13,13 @@
       </div>
 
       <!-- Botão de coração -->
-      <%= render 'favorites/btn', event: %>
+      <% if current_user.present? %>
+        <%= render 'favorites/btn', event: @event %>
+      <% else %>
+        <%= link_to new_user_session_path, data: {turbo_method: :post}, class: "favorite-toggle position-absolute top-0 end-0 m-2" do %>
+       <i class="fa-regular fa-heart outline-heart fa-lg"></i>
+      <% end %>
+    <% end %>
 
 
       <!-- Corpo do card -->
@@ -78,7 +84,7 @@
       <!-- Botão para ingressos -->
             <!-- Botão para abrir o modal (Aviso de Redirecionamento) -->
         <%= link_to "Acesse para comprar", "#",
-          class: "btn btn-info rounded-15 py-3 mx-auto d-block mb-4",
+          class: "btn btn-info corner-rounded py-3 mx-auto d-block mb-4",
           data: { bs_toggle: "modal", bs_target: "#redirectModal" } %>
       </div>
     </div>

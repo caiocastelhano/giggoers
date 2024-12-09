@@ -46,9 +46,15 @@
       <% if event.url_image.present? %>
         <%= image_tag(event.url_image, class: "card-img-top rounded-corner", alt: "Imagem do evento") %>
       <% end %>
-      
+
       <!-- Botão de coração -->
-      <%= render 'favorites/btn', event: %>
+      <% if current_user.present? %>
+        <%= render 'favorites/btn', event:%>
+      <% else %>
+        <%= link_to new_user_session_path, data: {turbo_method: :post}, class: "favorite-toggle position-absolute top-0 end-0 m-2" do %>
+       <i class="fa-regular fa-heart outline-heart fa-lg"></i>
+      <% end %>
+    <% end %>
 
       <!-- Corpo do card -->
       <div class="card-body">
@@ -80,7 +86,7 @@
 
       <!-- Rodapé do card -->
       <div class="card-footer text-center">
-        <%= link_to "Ver Detalhes", event_path(event.id), class: "btn btn-primary btn-sm" %>
+        <%= link_to "Ver Detalhes", event_path(event.id), class: "btn btn-primary btn-sm corner-rounded" %>
       </div>
     </div>
   <% end %>

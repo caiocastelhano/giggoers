@@ -13,15 +13,13 @@
       </div>
 
       <!-- Botão de coração -->
-      <% if user_signed_in? %>
-        <a href="#" class="position-absolute top-0 end-0 m-2" style="z-index: 1; font-size: 1.5rem;">
-          <i class="fas fa-heart" style="color: <%= @favorites.include?(@event.id) ? 'red' : 'black' %>; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;"></i>
-        </a>
+      <% if current_user.present? %>
+        <%= render 'favorites/btn', event: @event %>
       <% else %>
-        <a href="<%= new_user_session_path %>" class="position-absolute top-0 end-0 m-2" style="color: black; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;">
-          <i class="fas fa-heart"></i>
-        </a>
+        <%= link_to new_user_session_path, data: {turbo_method: :post}, class: "favorite-toggle position-absolute top-0 end-0 m-2" do %>
+       <i class="fa-regular fa-heart outline-heart fa-lg"></i>
       <% end %>
+    <% end %>
 
 
       <!-- Corpo do card -->
@@ -84,12 +82,30 @@
       </a>
 
       <!-- Botão para ingressos -->
-      <%= link_to "Acesse para comprar", @event.purchase_link,
-        class: "btn btn-info rounded-15 py-3 mx-auto d-block mb-4",
-        style: "width: 80%;",
-        target: "_blank",
-        rel: "noopener noreferrer" %>
+            <!-- Botão para abrir o modal (Aviso de Redirecionamento) -->
+        <%= link_to "Acesse para comprar", "#",
+          class: "btn btn-info corner-rounded py-3 mx-auto d-block mb-4",
+          data: { bs_toggle: "modal", bs_target: "#redirectModal" } %>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- Modal de aviso de redirecionamento -->
+<div class="modal fade" id="redirectModal" tabindex="-1" aria-labelledby="redirectModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="redirectModalLabel">Aviso de Redirecionamento</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Você está prestes a ser redirecionado para o site de compra de ingressos deste evento. Clique em "Continuar" para prosseguir.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary corner-rounded" data-bs-dismiss="modal">Fechar</button>
+        <%= link_to "Continuar", @event.purchase_link, class: "btn btn-primary corner-rounded", target: "_blank", rel: "noopener noreferrer" %>
+      </div>
     </div>
   </div>
 </div>

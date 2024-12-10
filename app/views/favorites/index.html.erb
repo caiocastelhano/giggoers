@@ -26,17 +26,6 @@
                 <%= image_tag("default-image.jpg", class: "card-img-top rounded-corner", alt: "Imagem padrão do evento") %>
               <% end %>
 
-              <!-- Botão de coração -->
-              <% if user_signed_in? %>
-                <a href="#" class="position-absolute top-0 end-0 m-2" style="color: <%= @favorite_event_ids.include?(event.id) ? 'red' : 'black' %>; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;">
-                  <i class="fas fa-heart"></i>
-                </a>
-              <% else %>
-                <a href="<%= new_user_session_path %>" class="position-absolute top-0 end-0 m-2" style="color: black; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;">
-                  <i class="fas fa-heart"></i>
-                </a>
-              <% end %>
-
               <!-- Corpo do card -->
               <div class="card-body">
                 <h3 class="card-title"><%= event.title %></h3>
@@ -54,11 +43,11 @@
               <div class="card-footer d-flex justify-content-between">
                 <!-- Botão de Ver Detalhes -->
                 <%= link_to 'Ver Detalhes', event_path(event),
-                  class: 'btn btn-sm btn-primary' %>
+                  class: 'btn btn-sm btn-primary corner-rounded' %>
 
                 <!-- Botão de Remover Favorito -->
                 <%= link_to 'Remover', favorite_path(favorite),
-                  class: 'btn btn-sm btn-danger',
+                  class: 'btn btn-sm btn-danger corner-rounded',
                   data: { turbo_method: :delete, turbo_confirm: 'Tem certeza que deseja remover este evento dos seus favoritos?' } %>
               </div>
             </div>

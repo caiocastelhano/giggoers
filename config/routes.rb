@@ -20,5 +20,5 @@ Rails.application.routes.draw do
     end
   end
 
-   resources :favorites, only: [:index, :destroy]
+  resources :favorites, only: [:index, :destroy] # GET para listar e DELETE para remover
 end

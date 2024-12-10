@@ -36,7 +36,7 @@
                value: params[:query],
                id: "search-query",
                class: "rounded-pill me-2 flex-grow-1 py-2",
-               placeholder: (user_signed_in? ? " Olá #{current_user.name}, qual o seu plano?" : ' Qual o seu plano?') %>
+               placeholder: (user_signed_in? ? "   Olá #{current_user.name}, qual o seu plano?" : '   Qual o seu plano?') %>
 
            <%= form.button type: 'submit',
                class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y',

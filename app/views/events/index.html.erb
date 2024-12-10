@@ -12,17 +12,44 @@
   <p class="text-danger"><%= flash[:alert] %></p>
 <% end %>
 
-  <div data-controller="geolocation">
-    <button data-action='click->geolocation#geolocate'>Onde estou</button>
-    <a data-geolocation-target='link'></a>
+    <%# Geolocation section %>
+  <div class="geolocation-container mb-4" data-controller="geolocation">
+    <button class="btn btn-primary" data-action="click->geolocation#geolocate">
+      Minha localização
+    </button>
+    <a data-geolocation-target="link"></a>
   </div>
 
   <%= turbo_frame_tag "events_results" do %>
     <%# Frame Turbo para atualizações parciais %>
 
+  <div class="d-flex justify-content-between mb-4">
+  <%# Dropdown de ordenação %>
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownOrdenacao" data-bs-toggle="dropdown" aria-expanded="false">
+      Ordenar por
+    </button>
+    <ul class="dropdown-menu bg-primary text-body-color" aria-labelledby="dropdownOrdenacao">
+      <%= content_tag :li do %>
+        <%= link_to 'Data', events_path(query: params[:query], sort_by: 'data'), class: 'dropdown-item' %>
+      <% end %>
+      <%= content_tag :li do %>
+        <%= link_to 'Preço', events_path(query: params[:query], sort_by: 'preco'), class: 'dropdown-item' %>
+      <% end %>
+      <%= content_tag :li do %>
+        <%= link_to 'Tipo', events_path(query: params[:query], sort_by: 'tipo'), class: 'dropdown-item' %>
+      <% end %>
+    </ul>
+  </div>
+
+  <%# Exibe a quantidade de eventos encontrados %>
+  <div>
+    <span><%= @events.total_count %> eventos encontrados</span>
+  </div>
+</div>
+
     <div class="row">
       <%# Grid sistema do Bootstrap %>
-
       <% @events.each do |event| %>
         <%# Loop pelos eventos %>
         <div class="col-12 col-md-6 col-lg-3 mb-4">

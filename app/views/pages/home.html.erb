@@ -48,15 +48,13 @@
       <% end %>
 
       <!-- Botão de coração -->
-      <% if user_signed_in? %>
-        <a href="#" class="position-absolute top-0 end-0 m-2" style="color: <%= @favorites.include?(event.id) ? 'red' : 'black' %>; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;">
-          <i class="fas fa-heart"></i>
-        </a>
+      <% if current_user.present? %>
+        <%= render 'favorites/btn', event:%>
       <% else %>
-        <a href="<%= new_user_session_path %>" class="position-absolute top-0 end-0 m-2" style="color: black; -webkit-text-stroke: 2px #DDDDDD; text-stroke: 2px #DDDDDD;">
-          <i class="fas fa-heart"></i>
-        </a>
+        <%= link_to new_user_session_path, data: {turbo_method: :post}, class: "favorite-toggle position-absolute top-0 end-0 m-2" do %>
+       <i class="fa-regular fa-heart outline-heart fa-lg"></i>
       <% end %>
+    <% end %>
 
       <!-- Corpo do card -->
       <div class="card-body">
@@ -88,7 +86,7 @@
 
       <!-- Rodapé do card -->
       <div class="card-footer text-center">
-        <%= link_to "Ver Detalhes", event_path(event.id), class: "btn btn-primary btn-sm" %>
+        <%= link_to "Ver Detalhes", event_path(event.id), class: "btn btn-primary btn-sm corner-rounded" %>
       </div>
     </div>
   <% end %>

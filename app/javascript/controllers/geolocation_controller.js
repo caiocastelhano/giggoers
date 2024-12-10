@@ -7,7 +7,7 @@ export default class extends Controller {
   }
   geolocate(){
     if (!navigator.geolocation) {
-      this.linkTarget.textContent = 'geolocalizacao nao suportada'
+      this.linkTarget.textContent = 'Geolocalização não suportada'
     } else {
       navigator.geolocation.getCurrentPosition(this.success.bind(this), this.error.bind(this));
     }
@@ -18,13 +18,13 @@ export default class extends Controller {
       'latitude': position.coords.latitude,
       'longitude': position.coords.longitude,
     }
-    this.linkTarget.textContent = 'Procurando eventos perto de voce';
+    this.linkTarget.textContent = 'Procurando eventos perto de você';
 
     this.search(geolocation)
   }
 
   error(){
-    this.linkTarget.textContent = 'Nao foi possivel pegar a localizacao';
+    this.linkTarget.textContent = 'Não foi possível identificar sua localização';
   }
 
   search(geolocation){

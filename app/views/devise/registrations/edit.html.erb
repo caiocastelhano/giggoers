@@ -1,75 +1,56 @@
-<div class="container mt-5">
+<div class="container mt-3">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card">
         <div class="card-header text-center bg-light" id="edit-header">
+          <!-- Título com cor escura -->
           <h2 class="text-dark">Editar Conta</h2>
         </div>
-              <div class="text-center mb-4">
-        <% if resource.avatar.attached? %>
-          <%= image_tag resource.avatar.variant(resize_to_fill: [150, 150]),
-                        class: "img-thumbnail rounded-circle mb-3",
-                        alt: "Foto de Perfil" %>
-        <% else %>
-          <i class="fas fa-user-circle" style="font-size: 150px; color: white;"></i>
-        <% end %>
-      </div>
+        <div class="card-body">
 
-          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "needs-validation", multipart: true }) do |f| %>
+          <%= simple_form_for(@user, url: user_registration_path, method: :put, html: { multipart: true }) do |f| %>
             <%= f.error_notification %>
+
+            <!-- Exibição do Avatar -->
+            <div class="text-center">
+              <% if @user.avatar.attached? %>
+                <%= image_tag @user.avatar.variant(resize_to_fill: [150, 150]), class: "img-thumbnail rounded-circle mb-3", alt: "Foto de Perfil" %>
+              <% else %>
+                <i class="fas fa-user-circle" style="font-size: 150px; color: white;"></i>
+              <% end %>
+            </div>
 
             <div class="form-inputs">
               <!-- Campo Nome -->
               <div class="mb-3">
-                <%= f.input :name,
-                            required: true,
-                            label: "Nome",
-                            input_html: { autocomplete: "name", class: "form-control text-dark" },
-                            label_html: { class: "form-label" } %>
+                <%= f.input :name, required: true, label: "Nome", input_html: { autocomplete: "name", class: "form-control text-dark" }, label_html: { class: "form-label" } %>
               </div>
 
               <!-- Campo Email -->
               <div class="mb-3">
-                <%= f.input :email,
-                            required: true,
-                            label: "E-mail",
-                            input_html: { autocomplete: "email", class: "form-control text-dark" },
-                            label_html: { class: "form-label" } %>
+                <%= f.input :email, required: true, label: "E-mail", input_html: { autocomplete: "email", class: "form-control text-dark" }, label_html: { class: "form-label" } %>
               </div>
-
 
               <!-- Campo Foto -->
               <div class="mb-3">
-                <div class="custom-file">
-                  <%= f.input :avatar,
-                              as: :file,
-                              label: "Alterar Foto de Perfil",
-                              input_html: { class: "custom-file-input", id: "customFile" },
-                              label_html: { class: "custom-file-label text-dark-gray", for: "customFile" } %>
-                  <small class="form-text text-muted">
-                    Arquivo atual: <%= resource.avatar.filename if resource.avatar.attached? %>
-                  </small>
-                </div>
+                <%= f.input :avatar, as: :file, label: "Alterar Foto de Perfil" %>
               </div>
-            </div>
 
               <!-- Campo Senha Atual -->
               <div class="mb-3">
-                <%= f.input :current_password,
-                            required: true,
-                            label: "Senha Atual",
-                            hint: "Necessária para confirmar as alterações",
-                            input_html: { autocomplete: "current-password", class: "form-control text-dark" },
-                            label_html: { class: "form-label" } %>
+                <%= f.input :current_password, required: true, label: "Senha", hint: "Necessária para confirmar as alterações", input_html: { autocomplete: "current-password", class: "form-control text-dark" }, label_html: { class: "form-label" } %>
               </div>
+            </div>
 
             <div class="form-actions text-center">
               <div class="d-flex justify-content-between">
+                <!-- Botão Atualizar -->
                 <%= f.button :submit, "Atualizar", class: "btn btn-primary corner-rounded w-45" %>
+                <!-- Botão Cancelar -->
                 <%= link_to "Cancelar", root_path, class: "btn btn-secondary corner-rounded w-45" %>
               </div>
             </div>
-          <% end %>
+          <% end %> <!-- Fim do simple_form_for -->
         </div>
       </div>
     </div>

@@ -1,4 +1,8 @@
 class PagesController < ApplicationController
+  
+    # Permite acesso à home sem autenticação
+    skip_before_action :authenticate_user!, only: [:home]
+
   def home
     # Carrega os eventos destacados
     @carousel_events = Event.limit(2) # Exemplos de eventos para o carrossel

@@ -11,10 +11,12 @@ class User < ApplicationRecord
   # Relacionamento: Um usuário pode ter muitos favoritos.
   has_many :favorites
 
+  has_one_attached :avatar
   # Relacionamento: Usuário tem acesso a eventos por meio dos favoritos.
   has_many :events, through: :favorites
 
   # Validações
   # Valida que o campo `name` está presente e possui no máximo 50 caracteres.
   validates :name, presence: true, length: { maximum: 50 }
+  validates :email, presence: true
 end

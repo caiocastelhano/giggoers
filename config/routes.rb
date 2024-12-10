@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  devise_scope :user do
+    get 'profile', to: 'users#show', as: :user_profile
+  end
+
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -13,12 +17,13 @@ Rails.application.routes.draw do
   # criando rota de eventos pra lidar com a busca
   resources :events, only: [:index, :show] do
     get 'search', on: :collection
+
     resources :favorites, only: [:create]
 
     collection do
       post :user_geolocation
     end
-  end
 
+  end
   resources :favorites, only: [:index, :destroy] # GET para listar e DELETE para remover
 end

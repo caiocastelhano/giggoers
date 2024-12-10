@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: { registrations: 'registrations' }
+  devise_for :users, controllers: { registrations: 'users/registrations' }
 
   devise_scope :user do
     get 'profile', to: 'users#show', as: :user_profile
     delete 'cancel_account', to: 'users#destroy', as: :cancel_account # Add route for account cancellation
   end
+
 
   root to: "pages#home"
 

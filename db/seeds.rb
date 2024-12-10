@@ -77,13 +77,28 @@ genres = Genre.create!([
   { name: 'MPB' },
   { name: 'Samba' },
   { name: 'Alternativa' },
-  { name: 'Música do Mundo' },
   { name: 'Ópera' },
   { name: 'Música de Câmara' },
   { name: 'Piano' },
   { name: 'DJ' },
   { name: 'Festival' },
-  { name: 'Estádio' }
+  { name: 'Estádio' },
+  { name: 'Pop' },
+  { name: 'Reggae' },
+  { name: 'Rap' },
+  { name: 'Hip-Hop' },
+  { name: 'Funk' },
+  { name: 'Forró' },
+  { name: 'Pagode' },
+  { name: 'Axé' },
+  { name: 'Heavy Metal' },
+  { name: 'Hard Rock' },
+  { name: 'Soul' },
+  { name: 'R&B' },
+  { name: 'Gospel' },
+  { name: 'Trap' },
+  { name: 'Sertanejo' },
+  { name: 'Country' }
 ])
 
 # 6. Associate Events with Genres

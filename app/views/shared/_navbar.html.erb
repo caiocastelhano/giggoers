@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container mt-2">
   <nav class="navbar navbar-expand-lg navbar-light navbar-giggoers w-100">
     <div class="container px-4">
       <div class="row w-100 m-0 align-items-center">
@@ -18,22 +18,40 @@
         </div>
 
         <!-- Ícone do Usuário -->
-<div class="col-3 d-flex justify-content-end align-items-center pe-0">
-  <% if user_signed_in? %>
-    <%= link_to user_profile_path, class: "d-flex align-items-center text-decoration-none" do %>
-      <% if current_user.avatar.attached? %>
-        <%= image_tag current_user.avatar.variant(resize_to_fill: [40, 40]), class: "rounded-circle border border-primary", alt: "Perfil" %>
-      <% else %>
-        <i class="fas fa-user-circle" style="font-size: 40px; color: #ED4E4E;"></i>
-      <% end %>
-    <% end %>
-  <% else %>
-    <%= link_to new_user_session_path, class: "btn btn-login rounded-pill px-4 py-2 d-flex align-items-center gap-2" do %>
-      <i class="fas fa-user" style="font-size: 50px; color: #ED4E4E;"></i>
+        <div class="col-3 d-flex justify-content-end align-items-center pe-0">
+          <% if user_signed_in? %>
+            <%= link_to user_profile_path, class: "d-flex align-items-center text-decoration-none" do %>
+              <% if current_user.avatar.attached? %>
+                <%= image_tag current_user.avatar.variant(resize_to_fill: [40, 40]), class: "rounded-circle border border-primary", alt: "Perfil" %>
+              <% else %>
+                <i class="fas fa-user-circle" style="font-size: 40px; color: #ED4E4E;"></i>
+              <% end %>
+            <% end %>
+          <% else %>
+            <%= link_to new_user_session_path, class: "btn btn-login rounded-pill px-4 py-2 d-flex align-items-center gap-2" do %>
+              <i class="fas fa-user" style="font-size: 50px; color: #ED4E4E;"></i>
+            <% end %>
+          <% end %>
+        </div>
 
-    <% end %>
-  <% end %>
-</div>
+        <div class="row w-100 m-0">
+     <div class="col-12 position-relative">
+       <%= form_with url: events_path, method: :get, class: "d-flex" do |form| %>
+         <div class="input-group">
+           <%= form.text_field :query,
+               value: params[:query],
+               id: "search-query",
+               class: "rounded-pill me-2 flex-grow-1 py-2",
+               placeholder: (user_signed_in? ? "   Olá #{current_user.name}, qual o seu plano?" : '   Qual o seu plano?') %>
+               <%= form.button type: 'submit',
+               class: 'btn btn-warning rounded-circle position-absolute end-0 top-50 translate-middle-y',
+               name: nil do %>
+             <i class="bi bi-search"></i>
+           <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </nav>

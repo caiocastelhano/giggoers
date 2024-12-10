@@ -55,6 +55,7 @@ gem 'geocoder'
 gem 'ostruct'
 gem "cloudinary"
 gem 'letter_opener', group: :development
+gem 'image_processing', '~> 1.2'
 
 group :development, :test do
   gem "dotenv-rails"

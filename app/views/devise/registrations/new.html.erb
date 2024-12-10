@@ -1,12 +1,23 @@
-<div class="container mt-5">
+<div class="container mt-2">
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card">
         <div class="card-header text-center bg-light" id="login-header">
+
           <!-- Título com cor escura -->
           <h2 class="text-dark">Nova conta</h2>
         </div>
         <div class="card-body">
+
+        <!-- Exibição do Avatar -->
+        <div class="text-center">
+          <% if @user.avatar.attached? %>
+            <%= image_tag url_for(@user.avatar), class: "img-thumbnail rounded-circle mb-3", alt: "Foto de Perfil" %>
+          <% else %>
+            <i class="fas fa-user-circle" style="font-size: 150px; color: white;"></i>
+          <% end %>
+        </div>
+
           <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "needs-validation" }) do |f| %>
             <%= f.error_notification %>
 
@@ -28,6 +39,17 @@
                             input_html: { autocomplete: "email", class: "form-control text-dark" },
                             label_html: { class: "form-label" } %>
               </div>
+              <!-- Campo Foto -->
+              <div class="mb-3">
+                <div class="custom-file">
+                  <%= f.input :avatar,
+                              as: :file,
+                              label: "Alterar Foto de Perfil",
+                              input_html: { class: "custom-file-input", id: "customFile" },
+                              label_html: { class: "custom-file-label text-dark-grey", for: "customFile" } %>
+                </div>
+              </div>
+            </div>
 
               <!-- Campo Senha -->
               <div class="mb-3">
@@ -50,7 +72,7 @@
             </div>
 
             <div class="form-actions text-center">
-              <%= f.button :submit, "Criar", class: "btn btn-primary corner-rounded w-50" %>
+              <%= f.button :submit, "Criar", class: "btn btn-primary corner-rounded w-50 mb-2" %>
             </div>
           <% end %>
         </div>

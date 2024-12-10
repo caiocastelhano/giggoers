@@ -87,6 +87,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_12_10_134956) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
+    t.boolean "admin", default: false
     t.float "latitude"
     t.float "longitude"
     t.index ["email"], name: "index_users_on_email", unique: true

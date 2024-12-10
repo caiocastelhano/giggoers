@@ -1,16 +1,21 @@
 <footer class="fixed-bottom" style="border-top: 4px solid #ED4E4E; z-index: 9999">
-  <div class="container bottom">
+  <div class="container bottom" style="background-color: #2f1965">
     <div class="d-flex justify-content-between align-items-center">
-      <!-- Button 1: Link para a Home -->
-      <%= link_to "/", class: "btn btn-primary w-50 py-3 border-0 text-center d-flex justify-content-center align-items-center" do %>
-        <i class="bi bi-house-door-fill me-2"></i> <!-- Ícone de Home -->
-        Home
-      <% end %>
+      <%= link_to "/", class: "btn btn-primary w-50 py-3 btn-right-border text-center d-flex justify-content-center align-items-center" do %>
+  <i class="bi bi-house-door-fill me-2"></i> <!-- Ícone de Home -->
+  Home
+<% end %>
 
       <!-- Button 2: Link para a página de Favoritos -->
       <%= link_to "/favorites", class: "btn btn-primary w-50 py-3 border-0 text-center d-flex justify-content-center align-items-center" do %>
         <i class="bi bi-heart-fill me-2"></i> <!-- Ícone de Favoritos -->
         Agenda
+      <% end %>
+
+      <!-- Button 2: Link para a página do Perfil -->
+      <%= link_to "/profile", class: "btn btn-primary w-50 py-3 btn-left-border  text-center d-flex justify-content-center align-items-center" do %>
+        <i class="fas fa-user-circle me-2"></i> <!-- Ícone de Favoritos -->
+        Perfil
       <% end %>
     </div>
   </div>

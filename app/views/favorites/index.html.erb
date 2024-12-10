@@ -1,44 +1,43 @@
-<div class="container mt-4">
+<div class="container mt-2">
 
-  <div class="text-white pt-3" style="text-align: center; font-weight: bold;">
+  <div class="text-white pt-1 pb-1" style="text-align: center; font-weight: bold;">
       <h2>Minha agenda</h2>
   </div>
 
   <% if @favorites.present? %>
 
   <!-- Filtros e Ordenação -->
-    <div class="row mb-4">
-      <!-- Filtro por gênero -->
-      <div class="col-md-6">
-        <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center" do %>
-          <div class="form-group me-2">
-            <%= label_tag :genre, "Filtrar por gênero:", class: "form-label bg-primary text-warning" %>
-            <%= select_tag :genre,
-                  options_for_select(@favorites.map { |f| f.event.genres.map(&:name) }.flatten.uniq.sort.unshift("Todos")),
-                  class: "form-select bg-body-color text-primary",
-                  include_blank: false %>
-          </div>
-          <%= submit_tag "Filtrar", class: "btn btn-warning mt-4 text-primary btn-sm" %>
-        <% end %>
+<div class="row mb-4">
+  <!-- Filtro por gênero -->
+  <div class="col-md-6">
+    <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center mb-2" do %>
+      <div class="form-group me-2 d-flex w-100">
+        <%= label_tag :genre, "Filtrar por gênero:", class: "form-label bg-primary text-warning me-2" %>
+        <%= select_tag :genre,
+              options_for_select(@favorites.map { |f| f.event.genres.map(&:name) }.flatten.uniq.sort.unshift("Todos")),
+              class: "form-select bg-body-color text-primary rounded-start" %>
+        <%= submit_tag "Filtrar", class: "btn btn-warning text-primary btn-sm rounded-end" %>
       </div>
+    <% end %>
+  </div>
 
-      <!-- Ordenar por -->
-      <div class="col-md-6">
-        <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center" do %>
-          <div class="form-group me-2">
-            <%= label_tag :sort, "Ordenar por:", class: "form-label bg-primary text-warning" %>
-            <%= select_tag :sort,
-                  options_for_select([["Data (ascendente)", "date_asc"],
-                                      ["Data (descendente)", "date_desc"],
-                                      ["Preço (menor para maior)", "price_asc"],
-                                      ["Preço (maior para menor)", "price_desc"]]),
-                  class: "form-select bg-body-color text-primary",
-                  include_blank: false %>
-          </div>
-          <%= submit_tag "Ordenar", class: "btn btn-warning mt-4 text-primary btn-sm" %>
-        <% end %>
+  <!-- Ordenar por -->
+  <div class="col-md-6 mt-2">
+    <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center" do %>
+      <div class="form-group me-2 d-flex w-100">
+        <%= label_tag :sort, "Ordenar por:", class: "form-label bg-primary text-warning me-2" %>
+        <%= select_tag :sort,
+              options_for_select([["Data (ascendente)", "date_asc"],
+                                  ["Data (descendente)", "date_desc"],
+                                  ["Preço (menor para maior)", "price_asc"],
+                                  ["Preço (maior para menor)", "price_desc"]]),
+              class: "form-select bg-body-color text-primary rounded-start" %>
+        <%= submit_tag "Ordenar", class: "btn btn-warning text-primary btn-sm rounded-end" %>
       </div>
-    </div>
+    <% end %>
+  </div>
+</div>
+
 
     <%# Ordenar favoritos por data de início e agrupá-los por mês %>
     <% sorted_favorites = @favorites.sort_by { |favorite| favorite.event.start_date } %>

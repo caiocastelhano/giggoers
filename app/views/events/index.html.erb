@@ -23,24 +23,37 @@
   <%= turbo_frame_tag "events_results" do %>
     <%# Frame Turbo para atualizações parciais %>
 
-  <div class="d-flex justify-content-between mb-4">
-  <%# Dropdown de ordenação %>
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownOrdenacao" data-bs-toggle="dropdown" aria-expanded="false">
-      Ordenar por
-    </button>
-    <ul class="dropdown-menu bg-primary text-body-color" aria-labelledby="dropdownOrdenacao">
-      <%= content_tag :li do %>
-        <%= link_to 'Data', events_path(query: params[:query], sort_by: 'data'), class: 'dropdown-item' %>
-      <% end %>
-      <%= content_tag :li do %>
-        <%= link_to 'Preço', events_path(query: params[:query], sort_by: 'preco'), class: 'dropdown-item' %>
-      <% end %>
-      <%= content_tag :li do %>
-        <%= link_to 'Tipo', events_path(query: params[:query], sort_by: 'tipo'), class: 'dropdown-item' %>
-      <% end %>
-    </ul>
+<!-- Filtro por Gênero (Eventos) -->
+  <div class="col-md-6">
+    <%= form_with url: events_path, method: :get, local: true, class: "d-flex align-items-center" do %>
+      <div class="form-group me-2 d-flex w-100">
+        <%= label_tag :genre, "Filtrar por gênero:", class: "form-label bg-primary text-warning me-2" %>
+        <%= select_tag :genre,
+              options_for_select(@events.map { |e| e.genres.map(&:name) }.flatten.uniq.sort.unshift("Todos")),
+              class: "form-select bg-body-color text-primary rounded-start" %>
+        <%= submit_tag "Filtrar", class: "btn btn-warning text-primary btn-sm rounded-end" %>
+      </div>
+    <% end %>
   </div>
+
+
+  <div class="d-flex justify-content-between mb-4">
+<!-- Ordenar por -->
+  <div class="col-md-6 mt-2">
+    <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center" do %>
+      <div class="form-group me-2 d-flex w-100">
+        <%= label_tag :sort, "Ordenar por:", class: "form-label bg-primary text-warning me-2" %>
+        <%= select_tag :sort,
+              options_for_select([["Data (ascendente)", "date_asc"],
+                                  ["Data (descendente)", "date_desc"],
+                                  ["Preço (menor para maior)", "price_asc"],
+                                  ["Preço (maior para menor)", "price_desc"]]),
+              class: "form-select bg-body-color text-primary rounded-start" %>
+        <%= submit_tag "Ordenar", class: "btn btn-warning text-primary btn-sm rounded-end" %>
+      </div>
+    <% end %>
+  </div>
+</div>
 
   <%# Exibe a quantidade de eventos encontrados %>
   <div>

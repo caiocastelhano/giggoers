@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  attr_accessor :change_password
   # Inclui os módulos padrão do Devise.
   # - :database_authenticatable - Para autenticação básica com email e senha.
   # - :registerable - Permite o cadastro de novos usuários.

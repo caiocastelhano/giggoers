@@ -1,4 +1,19 @@
 pt-BR:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            current_password:
+              blank: "Senha atual não pode ficar em branco"
+  errors:
+    messages:
+      blank: "não pode ficar em branco"
+      confirmation: "não está igual à confirmação"
+      invalid: "é inválido"
+      too_short: "é muito curto (mínimo de %{count} caracteres)"
+      too_long: "é muito longo (máximo de %{count} caracteres)"
+      not_a_number: "não é um número"
   date:
     formats:
       default: "%d/%m/%Y"

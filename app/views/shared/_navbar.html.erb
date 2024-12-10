@@ -22,7 +22,7 @@
           <% if user_signed_in? %>
             <%= link_to user_profile_path, class: "d-flex align-items-center text-decoration-none" do %>
               <% if current_user && current_user.avatar.attached? %>
-                <%= image_tag current_user.avatar.variant(resize_to_fill: [60, 60]).processed,
+                <%#= image_tag current_user.avatar.variant(resize_to_fill: [60, 60]).processed,
                               class: "rounded-circle border border-primary",
                               alt: "Perfil" %>
               <% else %>

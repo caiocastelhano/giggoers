@@ -54,11 +54,13 @@ gem 'kaminari'
 gem 'geocoder'
 gem 'ostruct'
 gem "cloudinary"
+gem 'letter_opener', group: :development
 
 group :development, :test do
   gem "dotenv-rails"
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
+  gem "launchy"
 end
 
 group :development do

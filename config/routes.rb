@@ -1,21 +1,17 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations' }
 
-
   devise_scope :user do
     get 'profile', to: 'users#show', as: :user_profile
+    delete 'cancel_account', to: 'users#destroy', as: :cancel_account # Add route for account cancellation
   end
 
   root to: "pages#home"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # Health check route
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Defines the root path route ("/")
-  # root "posts#index"
-  # criando rota de eventos pra lidar com a busca
+  # Events and Favorites Routes
   resources :events, only: [:index, :show] do
     get 'search', on: :collection
 
@@ -24,7 +20,7 @@ Rails.application.routes.draw do
     collection do
       post :user_geolocation
     end
-
   end
-  resources :favorites, only: [:index, :destroy] # GET para listar e DELETE para remover
+
+  resources :favorites, only: [:index, :destroy] # GET for listing and DELETE for removing
 end

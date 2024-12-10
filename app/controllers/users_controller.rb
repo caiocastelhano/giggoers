@@ -17,9 +17,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    @user = current_user
+    if @user.destroy
+      redirect_to root_path, notice: 'Sua conta foi cancelada com sucesso.'
+    else
+      redirect_to user_profile_path, alert: 'Erro ao cancelar a conta. Tente novamente mais tarde.'
+    end
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation, :avatar)
   end
 end
+  

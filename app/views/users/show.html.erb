@@ -10,9 +10,9 @@
           <!-- Exibir Avatar -->
           <div class="text-center mb-4">
             <% if resource.avatar.attached? %>
-             <%= image_tag resource.avatar.variant(resize_to_fill: [150, 150]),
-                  class: "img-thumbnail rounded-circle mb-3",
-                  alt: "Foto de Perfil" %>
+              <%= image_tag resource.avatar.variant(resize_to_fill: [150, 150]),
+                    class: "img-thumbnail rounded-circle mb-3",
+                    alt: "Foto de Perfil" %>
             <% else %>
               <i class="fas fa-user-circle m" style="font-size: 150px; color: white;"></i>
             <% end %>
@@ -30,6 +30,15 @@
             <%= form_with url: destroy_user_session_path, method: :delete do %>
               <%= submit_tag 'Sair', class: "btn btn-danger corner-rounded" %>
             <% end %>
+          </div>
+
+          <!-- Botão para Cancelar Conta -->
+          <div class="mt-4">
+            <%= button_to 'Cancelar minha conta',
+                          cancel_account_path,
+                          method: :delete,
+                          data: { confirm: 'Tem certeza de que deseja cancelar sua conta? Esta ação não pode ser desfeita.' },
+                          class: "btn btn-outline-danger corner-rounded" %>
           </div>
 
         </div>

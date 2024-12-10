@@ -4,7 +4,7 @@
       <div class="card">
         <div class="card-header text-center bg-light" id="login-header">
           <!-- Título com cor escura -->
-          <h2 class="text-dark">Mudar senha</h2>
+          <h2 class="text-dark">Alterar senha</h2>
         </div>
         <div class="card-body">
           <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "needs-validation" }) do |f| %>
@@ -35,7 +35,7 @@
             </div>
 
             <div class="form-actions text-center">
-              <%= f.button :submit, "Confirmar mudança", class: "btn btn-primary w-100" %>
+              <%= f.button :submit, "Confirmar", class: "btn btn-primary w-50 corner-rounded" %>
             </div>
           <% end %>
         </div>

@@ -14,6 +14,10 @@ Rails.application.routes.draw do
   resources :events, only: [:index, :show] do
     get 'search', on: :collection
     resources :favorites, only: [:create]
+
+    collection do
+      post :user_geolocation
+    end
   end
 
    resources :favorites, only: [:index, :destroy]

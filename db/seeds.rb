@@ -18,18 +18,36 @@ users = User.create!([
 # 3. Create Venues
 #puts "Creating venues..."
 venues = [
-  Venue.create!(name: 'Sala São Paulo', address: 'Praça Júlio Prestes, 16, São Paulo, SP, Brasil', latitude: -23.5341, longitude: -46.6392, capacity: 1498),
-  Venue.create!(name: 'Blue Bird', address: 'R. Baluarte, 269, São Paulo, SP, Brasil', latitude: -23.5933, longitude: -46.6840, capacity: 500),
-  Venue.create!(name: 'Teatro Municipal', address: 'Praça Ramos de Azevedo, São Paulo, SP, Brasil', latitude: -23.5454, longitude: -46.6388, capacity: 1523),
-  Venue.create!(name: 'Audio Club', address: 'Av. Francisco Matarazzo, 694, São Paulo, SP, Brasil', latitude: -23.5278, longitude: -46.6693, capacity: 3000),
-  Venue.create!(name: 'Teatro Bradesco', address: 'Rua Palestra Itália, 500, São Paulo, SP, Brasil', latitude: -23.5267, longitude: -46.6792, capacity: 1457),
-  Venue.create!(name: 'Theatro São Pedro', address: 'Rua Albuquerque Lins, 207, São Paulo, SP, Brasil', latitude: -23.5332, longitude: -46.6576, capacity: 636),
-  Venue.create!(name: 'Casa de Shows Santana', address: 'Rua Voluntários da Pátria, 2368, São Paulo, SP, Brasil', latitude: -23.5025, longitude: -46.6269, capacity: 800),
-  Venue.create!(name: 'Tom Brasil', address: 'Rua Bragança Paulista, 1281, São Paulo, SP, Brasil', latitude: -23.6314, longitude: -46.7016, capacity: 1800),
-  Venue.create!(name: 'Cultura Artística', address: 'Rua Nestor Pestana, 196, São Paulo, SP, Brasil', latitude: -23.5429, longitude: -46.6464, capacity: 1156),
-  Venue.create!(name: 'Centro Cultural São Paulo', address: 'Rua Vergueiro, 1000, São Paulo, SP, Brasil', latitude: -23.5714, longitude: -46.6398, capacity: 321),
-  Venue.create!(name: 'Cine Joia', address: 'Praça Carlos Gomes, 82, São Paulo, SP, Brasil', latitude: -23.5504, longitude: -46.6392, capacity: 600),
-  Venue.create!(name: 'Lions Nightclub', address: 'Av. Brigadeiro Luís Antônio, 277, São Paulo, SP, Brasil', latitude: -23.5495, longitude: -46.6384, capacity: 1000)
+  Venue.create!(name: 'Auditório Ibirapuera', address: 'Av. Pedro Álvares Cabral, 0, Parque Ibirapuera, São Paulo, SP, Brasil', latitude: -23.6015, longitude: -46.6571, capacity: 800),
+  Venue.create!(name: 'Espaço das Américas', address: 'Rua Tagipuru, 795, Barra Funda, São Paulo, SP, Brasil', latitude: -23.5275, longitude: -46.6646, capacity: 8000),
+  Venue.create!(name: 'Allianz Parque', address: 'Av. Francisco Matarazzo, 1705, Água Branca, São Paulo, SP, Brasil', latitude: -23.5272, longitude: -46.6782, capacity: 55000),
+  Venue.create!(name: 'Cine Joia', address: 'Praça Carlos Gomes, 82, Liberdade, São Paulo, SP, Brasil', latitude: -23.5541, longitude: -46.6354, capacity: 992),
+  Venue.create!(name: 'Blue Note São Paulo', address: 'Av. Paulista, 2073, Bela Vista, São Paulo, SP, Brasil', latitude: -23.5614, longitude: -46.6560, capacity: 300),
+  Venue.create!(name: 'Audio', address: 'Av. Francisco Matarazzo, 694, Água Branca, São Paulo, SP, Brasil', latitude: -23.5270, longitude: -46.6778, capacity: 3200),
+  Venue.create!(name: 'SESC Pompeia', address: 'Rua Clélia, 93, Pompeia, São Paulo, SP, Brasil', latitude: -23.5265, longitude: -46.6872, capacity: 800),
+  Venue.create!(name: 'Casa de Francisca', address: 'Rua Quintino Bocaiúva, 22, Sé, São Paulo, SP, Brasil', latitude: -23.5499, longitude: -46.6342, capacity: 150),
+  Venue.create!(name: 'Teatro Bradesco', address: 'Rua Palestra Itália, 500, Perdizes, São Paulo, SP, Brasil', latitude: -23.5278, longitude: -46.6789, capacity: 1457),
+  Venue.create!(name: 'Credicard Hall', address: 'Av. das Nações Unidas, 17955, Santo Amaro, São Paulo, SP, Brasil', latitude: -23.6515, longitude: -46.7042, capacity: 7000),
+  Venue.create!(name: 'Carioca Club', address: 'Rua Cardeal Arcoverde, 2899, Pinheiros, São Paulo, SP, Brasil', latitude: -23.5619, longitude: -46.6944, capacity: 1000),
+  Venue.create!(name: 'Tokio Marine Hall', address: 'Rua Bragança Paulista, 1281, Chácara Santo Antônio, São Paulo, SP, Brasil', latitude: -23.6466, longitude: -46.7100, capacity: 4000),
+  Venue.create!(name: 'The Week', address: 'Rua Guaicurus, 324, Lapa, São Paulo, SP, Brasil', latitude: -23.5208, longitude: -46.6813, capacity: 2000),
+  Venue.create!(name: 'Manifesto Bar', address: 'Rua Iguatemi, 36, Itaim Bibi, São Paulo, SP, Brasil', latitude: -23.5813, longitude: -46.6768, capacity: 300),
+  Venue.create!(name: 'Bar Opinião', address: 'Rua Augusta, 2203, Consolação, São Paulo, SP, Brasil', latitude: -23.5537, longitude: -46.6564, capacity: 400),
+  Venue.create!(name: 'Teatro Renault', address: 'Av. Brigadeiro Luís Antônio, 411, Bela Vista, São Paulo, SP, Brasil', latitude: -23.5534, longitude: -46.6438, capacity: 1500),
+  Venue.create!(name: 'Bourbon Street Music Club', address: 'Rua dos Chanés, 127, Moema, São Paulo, SP, Brasil', latitude: -23.6095, longitude: -46.6604, capacity: 500),
+  Venue.create!(name: 'Fabrique Club', address: 'Rua Barra Funda, 1071, Barra Funda, São Paulo, SP, Brasil', latitude: -23.5270, longitude: -46.6619, capacity: 800),
+  Venue.create!(name: 'Clash Club', address: 'Rua Barra Funda, 969, Barra Funda, São Paulo, SP, Brasil', latitude: -23.5271, longitude: -46.6616, capacity: 500),
+  Venue.create!(name: 'Bar Brahma', address: 'Av. São João, 677, Centro Histórico, São Paulo, SP, Brasil', latitude: -23.5429, longitude: -46.6395, capacity: 200),
+  Venue.create!(name: 'Casa Natura Musical', address: 'Rua Artur de Azevedo, 2134, Pinheiros, São Paulo, SP, Brasil', latitude: -23.5618, longitude: -46.6838, capacity: 710),
+  Venue.create!(name: 'SESC Vila Mariana', address: 'Rua Pelotas, 141, Vila Mariana, São Paulo, SP, Brasil', latitude: -23.5908, longitude: -46.6362, capacity: 609),
+  Venue.create!(name: 'Estádio MorumBis', address: 'Praça Roberto Gomes Pedrosa, 1, Morumbi, São Paulo, SP, Brasil', latitude: -23.5981, longitude: -46.7187, capacity: 72000),
+  Venue.create!(name: 'Eazy Club', address: 'Av. Marquês de São Vicente, 1767, Barra Funda, São Paulo, SP, Brasil', latitude: -23.5182, longitude: -46.6736, capacity: 2500),
+  Venue.create!(name: 'Arena Anhembi', address: 'Av. Olavo Fontoura, 1209, Santana, São Paulo, SP, Brasil', latitude: -23.5083, longitude: -46.6308, capacity: 30000),
+  Venue.create!(name: 'Centro Cultural São Paulo', address: 'Rua Vergueiro, 1000, Paraíso, São Paulo, SP, Brasil', latitude: -23.5700, longitude: -46.6383, capacity: 622),
+  Venue.create!(name: 'Teatro Gazeta', address: 'Av. Paulista, 900, Bela Vista, São Paulo, SP, Brasil', latitude: -23.5631, longitude: -46.6541, capacity: 700),
+  Venue.create!(name: 'Via Matarazzo', address: 'Av. Francisco Matarazzo, 764, Água Branca, São Paulo, SP, Brasil', latitude: -23.5270, longitude: -46.6778, capacity: 2000),
+  Venue.create!(name: 'Rosas de Ouro', address: 'Rua Cel. Euclides Machado, 1066, Limão, São Paulo, SP, Brasil', latitude: -23.5035, longitude: -46.6749, capacity: 1000),
+  Venue.create!(name: 'Tokyo São Paulo', address: 'Rua Major Sertório, 110, República, São Paulo, SP, Brasil', latitude: -23.5475, longitude: -46.6464, capacity: 400)
 ]
 
 # 4. Create Events with url_image

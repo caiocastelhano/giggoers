@@ -1,35 +1,77 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center bg-light" id="edit-header">
+          <h2 class="text-dark">Editar Conta</h2>
+        </div>
+              <div class="text-center mb-4">
+        <% if resource.avatar.attached? %>
+          <%= image_tag resource.avatar.variant(resize_to_fill: [150, 150]),
+                        class: "img-thumbnail rounded-circle mb-3",
+                        alt: "Foto de Perfil" %>
+        <% else %>
+          <i class="fas fa-user-circle" style="font-size: 150px; color: white;"></i>
+        <% end %>
+      </div>
 
-<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+          <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "needs-validation", multipart: true }) do |f| %>
+            <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
+            <div class="form-inputs">
+              <!-- Campo Nome -->
+              <div class="mb-3">
+                <%= f.input :name,
+                            required: true,
+                            label: "Nome",
+                            input_html: { autocomplete: "name", class: "form-control text-dark" },
+                            label_html: { class: "form-label" } %>
+              </div>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
-    <% end %>
+              <!-- Campo Email -->
+              <div class="mb-3">
+                <%= f.input :email,
+                            required: true,
+                            label: "E-mail",
+                            input_html: { autocomplete: "email", class: "form-control text-dark" },
+                            label_html: { class: "form-label" } %>
+              </div>
 
-    <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :password_confirmation,
-                required: false,
-                input_html: { autocomplete: "new-password" } %>
-    <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
-                required: true,
-                input_html: { autocomplete: "current-password" } %>
+
+              <!-- Campo Foto -->
+              <div class="mb-3">
+                <div class="custom-file">
+                  <%= f.input :avatar,
+                              as: :file,
+                              label: "Alterar Foto de Perfil",
+                              input_html: { class: "custom-file-input", id: "customFile" },
+                              label_html: { class: "custom-file-label text-dark-gray", for: "customFile" } %>
+                  <small class="form-text text-muted">
+                    Arquivo atual: <%= resource.avatar.filename if resource.avatar.attached? %>
+                  </small>
+                </div>
+              </div>
+            </div>
+
+              <!-- Campo Senha Atual -->
+              <div class="mb-3">
+                <%= f.input :current_password,
+                            required: true,
+                            label: "Senha Atual",
+                            hint: "Necessária para confirmar as alterações",
+                            input_html: { autocomplete: "current-password", class: "form-control text-dark" },
+                            label_html: { class: "form-label" } %>
+              </div>
+
+            <div class="form-actions text-center">
+              <div class="d-flex justify-content-between">
+                <%= f.button :submit, "Atualizar", class: "btn btn-primary corner-rounded w-45" %>
+                <%= link_to "Cancelar", root_path, class: "btn btn-secondary corner-rounded w-45" %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="form-actions">
-    <%= f.button :submit, "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>

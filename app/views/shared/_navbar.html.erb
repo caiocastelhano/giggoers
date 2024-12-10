@@ -1,9 +1,9 @@
-<div class="container mt-2">
+<div class="container">
   <nav class="navbar navbar-expand-lg navbar-light navbar-giggoers w-100">
-    <div class="container px-4">
-      <div class="row w-100 m-0 align-items-center">
+    <div class="container">
+      <div class="row m-0 align-items-center">
         <!-- Logo -->
-        <div class="col-3 d-flex align-items-center ps-3">
+        <div class="col-3 d-flex align-items-center justify-content-start">
           <%= link_to "/", class: "navbar-brand d-flex align-items-center" do %>
             <%= image_tag "logo.png", class: 'logo' %>
           <% end %>
@@ -31,7 +31,7 @@
             <% end %>
           <% else %>
             <%= link_to new_user_session_path, class: "btn btn-login rounded-pill px-4 py-2 d-flex align-items-center gap-2" do %>
-              <i class="fas fa-user" style="font-size: 50px; color: #ED4E4E;"></i>
+              <i class="fas fa-user-circle" style="font-size: 50px; color: #ED4E4E;"></i>
             <% end %>
           <% end %>
         </div>

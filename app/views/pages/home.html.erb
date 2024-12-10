@@ -1,5 +1,5 @@
 <!-- Título "DESTAQUES", centralizado e em negrito -->
-<div class="text-white pt-3" style="text-align: center; font-weight: bold;">
+<div class="text-white pt-1 pb-1" style="text-align: center; font-weight: bold;">
  <h2>Destaques</h2>
 </div>
 
@@ -85,6 +85,9 @@
       </div>
 
       <!-- Rodapé do card -->
+      <div class="card-footer text-center">
+        <%= link_to "Ver Detalhes", event_path(event.id), class: "btn btn-primary btn-sm corner-rounded" %>
+      </div>
 
     </div>
   <% end %>

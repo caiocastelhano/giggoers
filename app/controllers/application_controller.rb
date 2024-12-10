@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   # Redireciona para a tela de login após o logout
   def after_sign_out_path_for(resource_or_scope)
-    new_user_session_path # Página de login
+    root_path # Redireciona para a página inicial
   end
 
   protected
@@ -24,3 +24,4 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
 end
+

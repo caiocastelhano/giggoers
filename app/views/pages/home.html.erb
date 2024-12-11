@@ -51,7 +51,7 @@
       <% if current_user.present? %>
         <%= render 'favorites/btn', event:%>
       <% else %>
-        <%= link_to new_user_session_path, data: {turbo_method: :post}, class: "favorite-toggle position-absolute top-0 end-0 m-2" do %>
+        <%= link_to new_user_session_path, data: {turbo_method: :post}, class: "favorite-toggle position-absolute top-0 end-0 m-2 p-2" do %>
        <i class="fa-regular fa-heart outline-heart fa-lg"></i>
       <% end %>
     <% end %>

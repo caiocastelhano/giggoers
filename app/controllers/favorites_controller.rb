@@ -32,13 +32,13 @@ class FavoritesController < ApplicationController
     event = Event.find(params[:event_id])
     current_user.favorites.create!(event: event)
 
-    render turbo_stream: turbo_stream.replace(event, partial: "favorites/btn",
-                                              locals: { event: event })
+    render turbo_stream: turbo_stream.replace(event, partial: "favorites/btn", locals: { event: event })
   end
 
   # DELETE /favorites/:id
   def destroy
     favorite = current_user.favorites.find(params[:id])
+    event = favorite.event
     favorite.destroy
 
     respond_to do |format|
@@ -46,11 +46,13 @@ class FavoritesController < ApplicationController
         if current_user.favorites.exists?
           render turbo_stream: turbo_stream.remove("favorite_#{favorite.id}")
         else
-          render turbo_stream: turbo_stream.replace("favorites_list", partial: "favorites/empty")
+          render turbo_stream: [
+            turbo_stream.replace("favorites_list", partial: "favorites/empty"),
+            turbo_stream.update(event, partial: "favorites/btn", locals: { event: event })
+          ]
         end
       end
       format.html { redirect_to favorites_path, notice: "Favorito removido com sucesso." }
     end
   end
-
 end

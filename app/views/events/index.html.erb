@@ -24,35 +24,43 @@
     <%# Frame Turbo para atualizações parciais %>
 
 <!-- Filtro por Gênero (Eventos) -->
-  <div class="col-md-6">
-    <%= form_with url: events_path, method: :get, local: true, class: "d-flex align-items-center" do %>
-      <div class="form-group me-2 d-flex w-100">
-        <%= label_tag :genre, "Filtrar por gênero:", class: "form-label bg-primary text-warning me-2" %>
-        <%= select_tag :genre,
-              options_for_select(@events.map { |e| e.genres.map(&:name) }.flatten.uniq.sort.unshift("Todos")),
-              class: "form-select bg-body-color text-primary rounded-start" %>
-        <%= submit_tag "Filtrar", class: "btn btn-warning text-primary btn-sm rounded-end" %>
-      </div>
-    <% end %>
-  </div>
+<div class="col-md-6">
+  <%= form_with url: events_path, method: :get, data: {turbo: false}, class: "d-flex align-items-center" do %>
+    <div class="form-group me-2 d-flex w-100">
+      <%= label_tag :genre, "Filtrar por gênero:", class: "form-label bg-primary text-warning me-2" %>
+      <%= select_tag :genre,
+            options_for_select(
+              Event.joins(:genres)
+                   .distinct
+                   .pluck('genres.name')
+                   .sort
+                   .unshift("Todos"),
+              params[:genre]
+            ),
+            class: "form-select bg-body-color text-primary" %>
+      <%= submit_tag "Filtrar", class: "btn btn-warning text-primary btn-sm rounded-3" %>
+    </div>
+  <% end %>
+</div>
 
-
-  <div class="d-flex justify-content-between mb-4">
 <!-- Ordenar por -->
-  <div class="col-md-6 mt-2">
-    <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center" do %>
-      <div class="form-group me-2 d-flex w-100">
-        <%= label_tag :sort, "Ordenar por:", class: "form-label bg-primary text-warning me-2" %>
-        <%= select_tag :sort,
-              options_for_select([["Data (ascendente)", "date_asc"],
-                                  ["Data (descendente)", "date_desc"],
-                                  ["Preço (menor para maior)", "price_asc"],
-                                  ["Preço (maior para menor)", "price_desc"]]),
-              class: "form-select bg-body-color text-primary rounded-start" %>
-        <%= submit_tag "Ordenar", class: "btn btn-warning text-primary btn-sm rounded-end" %>
-      </div>
-    <% end %>
-  </div>
+<div class="col-md-6 mt-2">
+  <%= form_with url: events_path, method: :get, data: {turbo: false}, class: "d-flex align-items-center" do %>
+    <div class="form-group me-2 d-flex w-100">
+      <%= label_tag :sort, "Ordenar por:", class: "form-label bg-primary text-warning me-2" %>
+      <%= select_tag :sort,
+            options_for_select([
+              ["Data (ascendente)", "date_asc"],
+              ["Data (descendente)", "date_desc"],
+              ["Preço (menor para maior)", "price_asc"],
+              ["Preço (maior para menor)", "price_desc"]
+            ], params[:sort]),
+            class: "form-select bg-body-color text-primary" %>
+      <%= submit_tag "Ordenar", class: "btn btn-warning text-primary btn-sm rounded-3" %>
+    </div>
+  <% end %>
+</div>
+
 </div>
 
   <%# Exibe a quantidade de eventos encontrados %>

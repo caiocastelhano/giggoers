@@ -1,16 +1,44 @@
 class EventsController < ApplicationController
   def index
-    Rails.logger.info "\n\n\n\n User ID: #{current_user.id} \n\n\n"
+    # Garanta que @events sempre seja uma coleção, mesmo que vazia
+    @events = Event.all
 
-    # Busca eventos com paginação
-    @events = if params[:query].present?
-                Event.search(params[:query], params[:sort_by])
-              else
-                Event.all
-              end.page(params[:page]).per(12)
+    # Busca por query
+    if params[:query].present?
+      @events = @events.joins(:genres, :venue)
+        .where(
+          "events.title ILIKE :query OR
+           events.description ILIKE :query OR
+           venues.name ILIKE :query OR
+           genres.name ILIKE :query",
+          query: "%#{params[:query]}%"
+        )
+        .distinct
+    end
 
-    # Gera os marcadores para o mapa
-    @markers = @events.map do |event|
+    # Filtro por gênero
+    if params[:genre].present? && params[:genre] != "Todos"
+      @events = @events.joins(:genres).where(genres: { name: params[:genre] })
+    end
+
+    # Ordenação
+    case params[:sort]
+    when 'date_asc'
+      @events = @events.order(start_date: :asc)
+    when 'date_desc'
+      @events = @events.order(start_date: :desc)
+    when 'price_asc'
+      @events = @events.order(price: :asc)
+    when 'price_desc'
+      @events = @events.order(price: :desc)
+    end
+
+    # Paginação
+    @events = @events.page(params[:page]).per(12)
+
+    # Adicione um tratamento para o caso de não haver eventos
+    # Prepare markers for events
+    @markers = @events.any? ? @events.map do |event|
       venue = event.venue
       {
         lat: venue.latitude,
@@ -19,9 +47,9 @@ class EventsController < ApplicationController
           partial: "events/info_window",
           locals: { event: event, venue: venue }
         ),
-        marker_type: "event" # Tipo de marcador
+        marker_type: "event"
       }
-    end
+    end : []
 
     # Adiciona localização do usuário
     if (user_location = fetch_user_location)

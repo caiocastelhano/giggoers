@@ -19,7 +19,7 @@ users = User.create!([
 #puts "Creating venues..."
 venues = [
   Venue.create!(name: 'Auditório Ibirapuera', address: 'Av. Pedro Álvares Cabral, 0, Parque Ibirapuera, São Paulo, SP, Brasil', latitude: -23.6015, longitude: -46.6571, capacity: 800),
-  Venue.create!(name: 'Espaço das Américas', address: 'Rua Tagipuru, 795, Barra Funda, São Paulo, SP, Brasil', latitude: -23.5275, longitude: -46.6646, capacity: 8000),
+  Venue.create!(name: 'Espaço Unimed', address: 'Rua Tagipuru, 795, Barra Funda, São Paulo, SP, Brasil', latitude: -23.5275, longitude: -46.6646, capacity: 8000),
   Venue.create!(name: 'Allianz Parque', address: 'Av. Francisco Matarazzo, 1705, Água Branca, São Paulo, SP, Brasil', latitude: -23.5272, longitude: -46.6782, capacity: 55000),
   Venue.create!(name: 'Cine Joia', address: 'Praça Carlos Gomes, 82, Liberdade, São Paulo, SP, Brasil', latitude: -23.5541, longitude: -46.6354, capacity: 992),
   Venue.create!(name: 'Blue Note São Paulo', address: 'Av. Paulista, 2073, Bela Vista, São Paulo, SP, Brasil', latitude: -23.5614, longitude: -46.6560, capacity: 300),
@@ -53,17 +53,36 @@ venues = [
 # 4. Create Events with url_image
 puts "Creating events..."
 events = [
-  Event.create!(title: 'Noite da Sinfonia de Beethoven', description: 'Uma noite de música clássica com as melhores obras de Beethoven.', venue: venues[0], price: 200.0, start_date: '15-12-2024', start_time: '19:00', end_date: '15-12-2024', end_time: '22:00', url_image: 'https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', purchase_link:'#'),
-  Event.create!(title: 'Noites de Jazz com John Doe Quartet', description: 'Experimente o som suave do jazz em um ambiente íntimo.', venue: venues[1], price: 150.0, start_date: '20-12-2024', start_time: '20:00', end_date: '20-12-2024', end_time: '23:00', url_image: 'https://images.pexels.com/photos/733767/pexels-photo-733767.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', purchase_link:'#'),
-  Event.create!(title: 'Noite de Ópera: Carmen', description: 'Experimente a obra-prima de Bizet em uma produção deslumbrante.', venue: venues[2], price: 350.0, start_date: '18-12-2024', start_time: '20:00', end_date: '18-12-2024', end_time: '23:30', url_image: 'https://images.pexels.com/photos/36474/dresden-semper-opera-house-historically-at-night.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', purchase_link:'#'),
-  Event.create!(title: 'Festival de Música Eletrônica', description: 'Uma noite de música eletrônica com os melhores DJs.', venue: venues[3], price: 180.0, start_date: '01-07-2025', start_time: '22:00', end_date: '02-07-2025', end_time: '06:00', url_image: 'https://images.pexels.com/photos/3253686/pexels-photo-3253686.jpeg?auto=compress&cs=tinysrgb&w=600'),
-  Event.create!(title: 'Show Ao Vivo de MPB', description: 'O melhor da Música Popular Brasileira ao vivo.', venue: venues[4], price: 120.0, start_date: '25-02-2024', start_time: '21:00', end_date: '26-02-2025', end_time: '01:00', url_image: 'https://images.pexels.com/photos/2118045/pexels-photo-2118045.jpeg?auto=compress&cs=tinysrgb&w=600', purchase_link:'#'),
-  Event.create!(title: 'Concerto de Orquestra de Câmara', description: 'Uma noite intimista de música de câmara.', venue: venues[5], price: 150.0, start_date: '28-12-2024', start_time: '20:00', end_date: '28-12-2024', end_time: '22:30', url_image: 'https://images.pexels.com/photos/4028878/pexels-photo-4028878.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', purchase_link:'#'),
-  Event.create!(title: 'Caetano & Bethânia', description: 'Últimos shows desta turnê histórica.', venue: venues[6], price: 90.0, start_date: '14-12-2024', start_time: '20:30', end_date: '14-12-204', end_time: '23:00', url_image: 'https://veja.abril.com.br/wp-content/uploads/2024/03/GJI-NTPXwAAG0Sp.jpg?quality=70&strip=info&w=900&h=600&crop=1', purchase_link: 'https://www.ticketmaster.com.br/event/caetanoebethania'),
-  Event.create!(title: 'Noite de Samba', description: 'Noite tradicional de samba com banda ao vivo.', venue: venues[7], price: 80.0, start_date: '05-01-2025', start_time: '21:00', end_date: '06-01-2025', end_time: '04:00', url_image: 'https://images.pexels.com/photos/3801118/pexels-photo-3801118.jpeg?auto=compress&cs=tinysrgb&w=600', purchase_link:'#'),
-  Event.create!(title: 'Mestres do Piano', description: 'Recital de piano clássico com pianistas renomados.', venue: venues[8], price: 200.0, start_date: '10-01-2025', start_time: '20:00', end_date: '10-01-2025', end_time: '22:30', url_image: 'https://images.pexels.com/photos/586415/pexels-photo-586415.jpeg?auto=compress&cs=tinysrgb&w=600', purchase_link:'#'),
-  Event.create!(title: 'Festival de Música do Mundo', description: 'Celebrando diversas tradições musicais.', venue: venues[9], price: 70.0, start_date: '15-03-2025', start_time: '16:00', end_date: '15-03-2025', end_time: '22:00', url_image: 'https://images.pexels.com/photos/1537637/pexels-photo-1537637.jpeg?auto=compress&cs=tinysrgb&w=600', purchase_link:'#'),
-  Event.create!(title: 'Noite de Rock Alternativo', description: 'Uma noite de música rock alternativo.', venue: venues[10], price: 100.0, start_date: '20-02-2025', start_time: '19:00', end_date: '20-02-2025', end_time: '23:00', url_image: 'https://images.pexels.com/photos/1647166/pexels-photo-1647166.jpeg?auto=compress&cs=tinysrgb&w=600', purchase_link:'#')
+Event.create!(title: 'C6 Fest', description: 'Amaro Freitas Septeto, Arooj Aftab, Mulatu Astatke, Brian Blade & The Fellowship Band, Kassa Overall e Meshell Ndegeocello.', venue: venues[0], price: 448.00, start_date: '22-05-2025', start_time: '19:00', end_date: '23-05-2025', end_time: '23:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934427/c6-fest-festival-2025-data-foto-divulgacao_widelg_n3ghas.jpg', purchase_link:'https://c6fest.byinti.com/#/event/c6fest-2025-auditorio-64-469'),
+Event.create!(title: 'Ney Matogrosso', description: 'Show da turnê Bloco na Rua.', venue: venues[1], price: 260.00, start_date: '07-02-2025', start_time: '20:00', end_date: '07-02-2025', end_time: '22:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934436/ney_qt0c9h.jpg', purchase_link:'https://www.ticket360.com.br/evento/29723/ingressos-para-ney-matogrosso-bloco-na-rua'),
+Event.create!(title: 'Oswaldo Montenegro', description: 'Celebrando 50 anos de estrada!', venue: venues[1], price: 320.00, start_date: '25-01-2025', start_time: '19:00', end_date: '25-01-2025', end_time: '23:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934437/oswaldo_lqmvy0.png', purchase_link:'https://www.ticket360.com.br/evento/29777/ingressos-para-oswaldo-montenegro-celebrando-50-anos-de-estrada'),
+Event.create!(title: 'Ana Castela', description: 'Uma noite com a nova estrela da música sertaneja.', venue: venues[1], price: 200.00, start_date: '21-12-2024', start_time: '22:00', end_date: '21-12-2024', end_time: '23:30', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934428/castela_uuq5cb.webp', purchase_link:'https://www.ticket360.com.br/evento/29594/ingressos-para-ana-castela'),
+Event.create!(title: 'Alcione', description: 'Show de 50 anos de carreira.', venue: venues[1], price: 210.00, start_date: '22-03-2025', start_time: '19:00', end_date: '22-03-2025', end_time: '22:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934421/alcione_wpswpv.png', purchase_link:'https://www.ticket360.com.br/evento/29836/ingressos-para-alcione'),
+Event.create!(title: 'Chris Brown', description: 'Após passar com a tour 11:11 pelos Estados Unidos, pelo Canadá e pela Europa, cantor chega ao Brasil com uma performance diferente do que vinha apresentando.', venue: venues[2], price: 480.00, start_date: '22-12-2024', start_time: '20:30', end_date: '22-12-2024', end_time: '23:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934429/chris_brown_vna5aa.webp', purchase_link:'https://www.ticketmaster.com.br/event/chris-brown-extra'),
+Event.create!(title: 'Caetano & Bethânia', description: 'O repertório passa por diferentes momentos da trajetória de cada um, mas também inclui canções dos Doces Bárbaros.', venue: venues[2], price: 230.00, start_date: '18-12-2024', start_time: '20:30', end_date: '18-12-2024', end_time: '22:30', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934429/caetano_taixal.jpg', purchase_link:'https://www.ticketmaster.com.br/event/caetano-e-bethania-venda-geral-sao-paulo-dia-3'),
+Event.create!(title: 'Amyl & The Sniffers', description: 'A banda é conhecida por sua energia no palco e som punk explosivo.', venue: venues[3], price: 290.00, start_date: '06-03-2025', start_time: '19:00', end_date: '06-03-2025', end_time: '23:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934423/amyl_d7b0hs.jpg', purchase_link:'https://www.eventim.com.br/artist/amyl-and-the-sniffers'),
+Event.create!(title: 'Francisco, El Hombre', description: 'Banda anuncia um hiato, ou “siesta criativa”, após a última turnê e o álbum “HASTA EL FINAL“, um “até logo” aos fãs.', venue: venues[3], price: 120.00, start_date: '05-04-2025', start_time: '22:00', end_date: '05-04-2025', end_time: '23:30', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934430/feh_wkzfvv.jpg', purchase_link:'https://cinejoia.byinti.com/#/event/feh'),
+Event.create!(title: 'Vapors of Morphine', description: 'O legado do Morphine continua vivo com a banda Vapors of Morphine, liderada pelo fundador Dana Colley.', venue: venues[3], price: 200.0, start_date: '14-02-2025', start_time: '21:00', end_date: '14-02-2025', end_time: '23:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934436/morphine_veotls.webp', purchase_link:'https://fastix.com.br/events/vapors-of-morphine'),
+Event.create!(title: 'Mudhoney', description: 'Uma das maiores bandas ao vivo das últimas quatro décadas, mesclando punk e rock de garagem em show intenso e empolgante.', venue: venues[3], price: 400.00, start_date: '21-03-2025', start_time: '20:00', end_date: '21-03-2025', end_time: '23:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934436/mud4_kbw0h5.jpg', purchase_link:'https://fastix.com.br/events/mudhoney'),
+Event.create!(title: 'Tributo a Elton John', description: 'Com Mark Lambert.', venue: venues[4], price: 140.00, start_date: '16-01-2025', start_time: '20:00', end_date: '16-01-2025', end_time: '22:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934430/eltonjohn_dbak0v.jpg', purchase_link:'https://www.eventim.com.br/artist/blue-note-sp/tributo-a-elton-john-com-mark-lambert-3785016/'),
+Event.create!(title: 'Lobão', description: 'Luau Indoor.', venue: venues[4], price: 190.00, start_date: '18-01-2025', start_time: '20:00', end_date: '18-01-2025', end_time: '22:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934434/Lobao-anuncia-sua-nova-turne_-50-Anos-de-Vi_ooau8d.jpg', purchase_link:'https://www.eventim.com.br/event/lobao-luau-indoor-blue-note-sao-paulo-19530372/'),
+Event.create!(title: 'Ensaio Monobloco', description: 'Esquenta para o Carnaval 2025.', venue: venues[5], price: 70.00, start_date: '25-01-2025', start_time: '21:00', end_date: '25-01-2025', end_time: '23:30', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934435/monobloco_zbtetc.webp', purchase_link:'https://www.ticket360.com.br/ingressos/29980/ingressos-para-ensaio-monobloco'),
+Event.create!(title: 'MartNália', description: 'Lançamento do álbum Pagode da MartNália.', venue: venues[5], price: 80.00, start_date: '01-02-2025', start_time: '21:00', end_date: '01-02-2025', end_time: '23:30', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934435/martnalia_wdgycq.webp', purchase_link:'https://www.ticket360.com.br/evento/30147/ingressos-para-martnalia-lancamento-do-album-pagode-da-martnalia'),
+Event.create!(title: 'Duda Beat', description: 'Tara & Tour.', venue: venues[5], price: 70.00, start_date: '15-03-2025', start_time: '21:00', end_date: '15-03-2025', end_time: '23:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934429/duda_ke0m5t.webp', purchase_link:'https://www.ticket360.com.br/evento/30118/ingressos-para-duda-beat-tara-e-tour'),
+Event.create!(title: 'Falamansa', description: 'Show de lançamento do álbum Universos.', venue: venues[5], price: 200.0, start_date: '14-03-2025', start_time: '21:00', end_date: '14-03-2025', end_time: '23:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934430/falmansa_cwycd6.webp', purchase_link:'https://www.ticket360.com.br/evento/30098/ingressos-para-falamansa-show-de-lancamento'),
+Event.create!(title: 'Hermeto Pascoal e Big Band', description: 'Natureza Universal.', venue: venues[6], price: 70.00, start_date: '15-12-2024', start_time: '18:00', end_date: '15-12-2024', end_time: '20:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934431/hermeto_ho6x9c.png', purchase_link:'https://www.sescsp.org.br/programacao/hermeto-pascoal-e-big-ban/'),
+Event.create!(title: 'Romulo Fróes canta Transa', description: 'Guilherme Held na guitarra, Marcelo Cabral no baixo, Décio 7 na bateria e percussão e Rodrigo Campos no cavaquinho.', venue: venues[7], price: 200.0, start_date: '19-12-2024', start_time: '20:30', end_date: '19-12-2024', end_time: '23:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934437/romulo_qemuwh.jpg', purchase_link:'https://pixelticket.com.br/eventos/24382/romulo-froes-transa-porao-qui-19-12-abertura-porao-20h'),
+Event.create!(title: 'Concerto de Natal por João Carlos Martins', description: 'Espetáculo natalino especialmente criado para a ocasião.', venue: venues[8], price: 17.50, start_date: '18-12-2024', start_time: '20:00', end_date: '18-12-2024', end_time: '22:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934435/maestro_bbvdz5.jpg', purchase_link:'https://uhuu.com/comprar-ingressos/sp/sao-paulo/concerto-de-natal-por-joao-carlos-martins-13697#/'),
+Event.create!(title: 'Lacuna Coil', description: 'Turnê do álbum Sleepless Empire.', venue: venues[10], price: 230.00, start_date: '15-03-2025', start_time: '19:00', end_date: '15-03-2025', end_time: '23:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934433/lacuna-coil-banda_f3kicz.webp', purchase_link:'https://www.clubedoingresso.com/evento/lacunacoil-saopaulo'),
+Event.create!(title: 'Gessinger', description: 'Acústico: Engenheiros do Hawaii.', venue: venues[11], price: 280.00, start_date: '02-01-2025', start_time: '20:00', end_date: '02-01-2025', end_time: '22:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934433/Humberto-Gessinger-768x432_szd3iw.jpg', purchase_link:'https://www.tokiomarinehall.com.br/compre-seu-ingresso/?esid=3696704'),
+Event.create!(title: 'Tarja e Marko Hietala', description: 'Living The Dream Together Tour 2025.', venue: venues[11], price: 300.00, start_date: '24-05-2025', start_time: '19:00', end_date: '24-05-2025', end_time: '23:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934437/Tarja-e-Marko-750x450_bx0pjl.jpg', purchase_link:'https://www.eventim.com.br/artist/tarja/'),
+Event.create!(title: 'Jorge Vercillo', description: 'Show de comemoração de 30 anos de carreira.', venue: venues[11], price: 320.00, start_date: '25-04-2025', start_time: '19:00', end_date: '25-04-2025', end_time: '22:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934438/vercilo_uwkkrv.jpg', purchase_link:'https://www.ticketmaster.com.br/event/jorge-vercillo-tokio-marine-hall'),
+Event.create!(title: 'Jorge Aragão', description: 'Dono de clássicos como "Eu e Você Sempre", “Lucidez”, “Moleque Atrevido”, “Deus Manda” e “De Sampa a São Luiz”, o artista é um dos pilares do samba brasileiro.', venue: venues[20], price: 280.00, start_date: '25-01-2025', start_time: '21:00', end_date: '25-01-2025', end_time: '23:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934433/jorge_oup3oz.webp', purchase_link:'https://bileto.sympla.com.br/event/100923/d/289780'),
+Event.create!(title: 'Fat Family canta Tim Maia', description: 'Como parte da comemoração de retorno aos palcos, o trio homenageia Tim Maia em um show especial, cantando hits como “Gostava Tanto de Você”.', venue: venues[20], price: 200.00, start_date: '27-02-2025', start_time: '21:00', end_date: '27-02-2025', end_time: '23:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934431/fat_bogzsb.jpg', purchase_link:'https://bileto.sympla.com.br/event/101048/d/290252'),
+Event.create!(title: 'Baile do Baleiro', description: 'Cantor vai rebobinar clássicos de nomes como Moraes Moreira, Originais do Samba, Tim Maia, Marina Lima, Belchior, Cassiano, Novos Baianos e Simonal.', venue: venues[20], price: 220.00, start_date: '07-03-2025', start_time: '20:00', end_date: '07-03-2025', end_time: '23:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934425/baleiro_kqnf4o.jpg', purchase_link:'https://bileto.sympla.com.br/event/101542/d/293486'),
+Event.create!(title: 'Febem', description: 'Rapper apresenta o show do seu último álbum, “Abaixo do Radar”.', venue: venues[20], price: 190.00, start_date: '09-02-2025', start_time: '19:00', end_date: '09-02-2025', end_time: '22:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934430/febem_ilsa5i.webp', purchase_link:'https://bileto.sympla.com.br/event/101195/d/291312'),
+Event.create!(title: 'Betina Astral', description: 'Show do álbum Rasante.', venue: venues[21], price: 0.00, start_date: '14-12-2024', start_time: '19:30', end_date: '14-12-2024', end_time: '20:30', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934426/betina_rzdy7f.png', purchase_link:'https://www.sescsp.org.br/programacao/betina-astral/'),
+Event.create!(title: 'Oasis Live 25', description: 'O retorno dos irmãos Gallagher.', venue: venues[22], price: 240.00, start_date: '22-11-2025', start_time: '19:00', end_date: '22-11-2025', end_time: '23:00', url_image: 'https://res.cloudinary.com/dq3bwy9sm/image/upload/v1733934436/oasis_rj6hpm.jpg', purchase_link:'https://www.ticketmaster.com.br/event/oasis-venda-geral-22')
 ]
 
 # 5. Create Genres
@@ -95,10 +114,10 @@ genres = Genre.create!([
   { name: 'Hard Rock' },
   { name: 'Soul' },
   { name: 'R&B' },
-  { name: 'Gospel' },
+  { name: 'Acústico' },
   { name: 'Trap' },
   { name: 'Sertanejo' },
-  { name: 'Country' }
+  { name: 'Carnaval' }
 ])
 
 # 6. Associate Events with Genres
@@ -106,17 +125,36 @@ puts "Associando eventos com gêneros..."
 
 # Hash com eventos e gêneros
 event_genre_map = {
-  'Noite da Sinfonia de Beethoven' => ['Clássica'],
-  'Noites de Jazz com John Doe Quartet' => ['Jazz'],
-  'Noite de Ópera: Carmen' => ['Ópera', 'Clássica'],
-  'Festival de Música Eletrônica' => ['Eletrônica', 'Festival', 'DJ'],
-  'Show Ao Vivo de MPB' => ['MPB'],
-  'Concerto de Orquestra de Câmara' => ['Clássica', 'Música de Câmara'],
+  'C6 Fest' => ['Festival', 'Jazz', 'Piano', 'Soul', 'Blues'],
+  'Ney Matogrosso' => ['MPB'],
+  'Oswaldo Montenegro' => ['MPB'],
+  'Ana Castela' => ['Sertanejo', 'Pop'],
+  'Alcione' => ['MPB', 'Samba'],
+  'Chris Brown' => ['Estádio', 'R&B', 'Hip-Hop'],
   'Caetano & Bethânia' => ['MPB', 'Estádio'],
-  'Noite de Samba' => ['Samba'],
-  'Mestres do Piano' => ['Clássica', 'Piano'],
-  'Festival de Música do Mundo' => ['Música do Mundo', 'Festival'],
-  'Noite de Rock Alternativo' => ['Alternativa'],
+  'Amyl & The Sniffers' => ['Rock', 'Alternativa'],
+  'Francisco, El Hombre' => ['Alternativa'],
+  'Vapors of Morphine' => ['Rock', 'Alternativa'],
+  'Mudhoney' => ['Rock', 'Alternativa'],
+  'Tributo a Elton John' => ['Pop', 'Piano'],
+  'Lobão' => ['Rock', 'Acústico'],
+  'Ensaio Monobloco' => ['Samba', 'Carnaval'],
+  'MartNália' => ['Samba', 'Pagode'],
+  'Duda Beat' => ['Alternativa', 'MPB', 'Pop'],
+  'Falamansa' => ['Forró'],
+  'Hermeto Pascoal e Big Band' => ['MPB', 'Alternativa', 'Jazz'],
+  'Romulo Fróes canta Transa' => ['MPB'],
+  'Concerto de Natal por João Carlos Martins' => ['Piano', 'Clássica'],
+  'Lacuna Coil' => ['Heavy Metal'],
+  'Gessinger' => ['Rock', 'Acústico'],
+  'Tarja e Marko Hietala' => ['Heavy Metal', 'Clássica'],
+  'Jorge Vercillo' => ['MPB'],
+  'Jorge Aragão' => ['Samba', 'Pagode'],
+  'Fat Family canta Tim Maia' => ['MPB'],
+  'Baile do Baleiro' => ['MPB'],
+  'Febem' => ['Rap', 'Trap'],
+  'Betina Astral' => ['MPB', 'Alternativa'],
+  'Oasis Live 25' => ['Rock', 'Estádio']
 }
 
 # Loop pelos eventos
@@ -144,42 +182,5 @@ event_genre_map.each do |event_title, genre_names|
 end
 
 puts "Finished associating events with genres."
-
-# 7. Add Favorites for Each User
-puts "Adding consistent favorites for each user..."
-
-# Define o evento "Caetano & Bethânia"
-caetano_event = Event.find_by(title: 'Caetano & Bethânia')
-
-# Adiciona os favoritos para cada usuário
-users.each do |user|
-  # Adiciona o evento fixo "Caetano & Bethânia" como favorito
-  if caetano_event
-    Favorite.find_or_create_by!(
-      user: user,
-      event: caetano_event,
-      created_at: Date.today,
-      updated_at: Date.today
-    )
-  else
-    puts "Warning: Evento 'Caetano & Bethânia' não encontrado. Favorito não adicionado."
-  end
-
-  # Seleciona mais 4 eventos diferentes para completar os favoritos
-  other_events = Event.where.not(id: caetano_event&.id).order(:id).limit(4)
-
-  other_events.each_with_index do |event, index|
-    favorite_date = Date.today - (index + 1).months
-
-    Favorite.find_or_create_by!(
-      user: user,
-      event: event,
-      created_at: favorite_date,
-      updated_at: favorite_date
-    )
-  end
-end
-
-puts "Favorites added consistently!"
 
 puts "Database seeding completed!"

@@ -51,48 +51,40 @@ class EventsController < ApplicationController
       }
     end : []
 
-    # Add user's geolocation as a marker
-    user_location = fetch_user_location
-    if user_location
+    # Adiciona localização do usuário
+    if (user_location = fetch_user_location)
       @markers << {
         lat: user_location[:latitude],
         lng: user_location[:longitude],
-        info_window_html: "Your Location",
+        info_window_html: "Sua localização",
         marker_type: "user"
       }
     end
 
-    # Add list of user's favorite events, if logged in
+    # Carrega eventos favoritos do usuário, se estiver logado
     @favorites = user_signed_in? ? current_user.favorites.pluck(:event_id) : []
   end
 
   def show
+    # Busca o evento específico com suas associações
     @event = Event.includes(:venue, :genres).find(params[:id])
 
-    # Load user's favorites, if logged in
-    @favorites = if user_signed_in?
-                   current_user.favorites.pluck(:event_id)
-                 else
-                   [] # Empty list for non-logged-in users
-                 end
+    # Carrega favoritos, se aplicável
+    @favorites = user_signed_in? ? current_user.favorites.pluck(:event_id) : []
   end
 
   def user_geolocation
     if current_user
-      current_user.latitude = params[:latitude]
-      current_user.longitude = params[:longitude]
-      current_user.save
+      current_user.update(latitude: params[:latitude], longitude: params[:longitude])
     end
   end
 
   private
 
-  # Method to fetch user's geolocation
+  # Recupera a localização do usuário
   def fetch_user_location
-    #ip = request.remote_ip
-    #location = Geocoder.search(ip).first
-    return unless current_user.latitude && current_user.longitude
-
-    { latitude: current_user.latitude, longitude: current_user.longitude }
+    if current_user&.latitude && current_user&.longitude
+      { latitude: current_user.latitude, longitude: current_user.longitude }
+    end
   end
 end

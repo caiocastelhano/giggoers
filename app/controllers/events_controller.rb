@@ -1,27 +1,25 @@
 class EventsController < ApplicationController
   def index
-    # Garanta que @events sempre seja uma coleção, mesmo que vazia
+    # Inicializa a coleção de eventos
     @events = Event.all
 
-    # Busca por query
+    # Aplica a busca (query)
     if params[:query].present?
       @events = @events.joins(:genres, :venue)
-        .where(
-          "events.title ILIKE :query OR
-           events.description ILIKE :query OR
-           venues.name ILIKE :query OR
-           genres.name ILIKE :query",
-          query: "%#{params[:query]}%"
-        )
-        .distinct
+                       .where(
+                         "events.title ILIKE :query OR
+                          events.description ILIKE :query OR
+                          venues.name ILIKE :query",
+                         query: "%#{params[:query]}%"
+                       ).distinct
     end
 
-    # Filtro por gênero
+    # Aplica o filtro por gênero
     if params[:genre].present? && params[:genre] != "Todos"
-      @events = @events.joins(:genres).where(genres: { name: params[:genre] })
+      @events = @events.joins(:genres).where(genres: { name: params[:genre] }).distinct
     end
 
-    # Ordenação
+    # Aplica a ordenação
     case params[:sort]
     when 'date_asc'
       @events = @events.order(start_date: :asc)
@@ -36,8 +34,7 @@ class EventsController < ApplicationController
     # Paginação
     @events = @events.page(params[:page]).per(12)
 
-    # Adicione um tratamento para o caso de não haver eventos
-    # Prepare markers for events
+    # Geração de marcadores para o mapa
     @markers = @events.any? ? @events.map do |event|
       venue = event.venue
       {
@@ -51,7 +48,7 @@ class EventsController < ApplicationController
       }
     end : []
 
-    # Adiciona localização do usuário
+    # Adiciona a localização do usuário
     if (user_location = fetch_user_location)
       @markers << {
         lat: user_location[:latitude],
@@ -63,20 +60,6 @@ class EventsController < ApplicationController
 
     # Carrega eventos favoritos do usuário, se estiver logado
     @favorites = user_signed_in? ? current_user.favorites.pluck(:event_id) : []
-  end
-
-  def show
-    # Busca o evento específico com suas associações
-    @event = Event.includes(:venue, :genres).find(params[:id])
-
-    # Carrega favoritos, se aplicável
-    @favorites = user_signed_in? ? current_user.favorites.pluck(:event_id) : []
-  end
-
-  def user_geolocation
-    if current_user
-      current_user.update(latitude: params[:latitude], longitude: params[:longitude])
-    end
   end
 
   private

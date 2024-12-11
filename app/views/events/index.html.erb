@@ -1,98 +1,92 @@
 <div class="container py-4">
-  <%# Container Bootstrap com margem superior %>
-
-  <%# View principal que renderiza o mapa com geolocalizacao do usuario %>
+  <%# Container do mapa %>
   <div class="map-container mb-4"
-     data-controller="map"
-     data-map-markers-value="<%= @markers.to_json %>"
-     data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
-</div>
-
-<% if flash[:alert] %>
-  <p class="text-danger"><%= flash[:alert] %></p>
-<% end %>
-
-
-
-  <%= turbo_frame_tag "events_results" do %>
-    <%# Frame Turbo para atualizações parciais %>
-
-<!-- Filtro por Gênero (Eventos) -->
-<div class="col-md-6">
-  <%= form_with url: events_path, method: :get, data: {turbo: false}, class: "d-flex align-items-center" do %>
-    <div class="form-group me-2 d-flex w-100">
-      <%= label_tag :genre, "Filtrar por gênero:", class: "form-label bg-primary text-warning me-2" %>
-      <%= select_tag :genre,
-            options_for_select(
-              Event.joins(:genres)
-                   .distinct
-                   .pluck('genres.name')
-                   .sort
-                   .unshift("Todos"),
-              params[:genre]
-            ),
-            class: "form-select bg-body-color text-primary" %>
-      <%= submit_tag "Filtrar", class: "btn btn-warning text-primary btn-sm rounded-3" %>
-    </div>
-  <% end %>
-</div>
-
-<!-- Ordenar por -->
-<div class="col-md-6 mt-2">
-  <%= form_with url: events_path, method: :get, data: {turbo: false}, class: "d-flex align-items-center" do %>
-    <div class="form-group me-2 d-flex w-100">
-      <%= label_tag :sort, "Ordenar por:", class: "form-label bg-primary text-warning me-2" %>
-      <%= select_tag :sort,
-            options_for_select([
-              ["Data (ascendente)", "date_asc"],
-              ["Data (descendente)", "date_desc"],
-              ["Preço (menor para maior)", "price_asc"],
-              ["Preço (maior para menor)", "price_desc"]
-            ], params[:sort]),
-            class: "form-select bg-body-color text-primary" %>
-      <%= submit_tag "Ordenar", class: "btn btn-warning text-primary btn-sm rounded-3" %>
-    </div>
-  <% end %>
-</div>
-
-</div>
-
-  <%# Exibe a quantidade de eventos encontrados %>
-  <div>
-    <span><%= @events.total_count %> eventos encontrados</span>
+       data-controller="map"
+       data-map-markers-value="<%= @markers.to_json %>"
+       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
-</div>
 
-    <div class="container py-2">
-      <%# Grid sistema do Bootstrap %>
-      <% @events.each do |event| %>
-        <%# Loop pelos eventos %>
-        <div class="col-12 col-md-6 col-lg-3 mb-4">
-          <%# Coluna responsiva: 12 (mobile), 6 (tablet), 3 (desktop) com margem inferior %>
-          <%= render partial: 'events/event_card', locals: { event: event } %>
-          <%# Renderiza o card do evento %>
+  <% if flash[:alert] %>
+    <p class="text-danger"><%= flash[:alert] %></p>
+  <% end %>
+
+  <%# Filtro e ordenação %>
+  <div class="row mb-3">
+    <%# Filtro por gênero %>
+    <div class="col-md-6">
+      <%= form_with url: events_path, method: :get, local: true, class: "d-flex align-items-center" do %>
+        <%# Preservação dos parâmetros de busca e ordenação %>
+        <%= hidden_field_tag :query, params[:query] %>
+        <%= hidden_field_tag :sort, params[:sort] %>
+        
+        <div class="form-group me-2 d-flex w-100">
+          <%= label_tag :genre, "Filtrar por gênero:", class: "form-label bg-primary text-warning me-2" %>
+          <%= select_tag :genre,
+                options_for_select(
+                  Event.joins(:genres)
+                       .distinct
+                       .pluck('genres.name')
+                       .sort
+                       .unshift("Todos"),
+                  params[:genre]
+                ),
+                class: "form-select bg-body-color text-primary" %>
+          <%= submit_tag "Filtrar", class: "btn btn-warning text-primary btn-sm rounded-3" %>
         </div>
       <% end %>
     </div>
 
-    <div class="d-flex justify-content-center gap-2 mb-4">
-      <%# Container flex centralizado com espaçamento entre botões %>
-
-      <% if @events.prev_page %>
-        <%# Exibe botão 'Anterior' se houver página anterior %>
-        <%= link_to_prev_page @events, 'Anterior',
-            class: 'btn btn-outline-primary',
-            data: { turbo_frame: "events_results" } %>
-            <%# Link para página anterior que atualiza apenas o frame %>
-      <% end %>
-
-      <% if @events.next_page %>
-        <%# Exibe botão 'Próxima' se houver próxima página %>
-        <%= link_to_next_page @events, 'Próxima',
-            class: 'btn btn-outline-primary',
-            data: { turbo_frame: "events_results" } %>
-            <%# Link para próxima página que atualiza apenas o frame %>
+    <%# Ordenar por %>
+    <div class="col-md-6">
+      <%= form_with url: events_path, method: :get, local: true, class: "d-flex align-items-center" do %>
+        <%# Preservação dos parâmetros de busca e filtro %>
+        <%= hidden_field_tag :query, params[:query] %>
+        <%= hidden_field_tag :genre, params[:genre] %>
+        
+        <div class="form-group me-2 d-flex w-100">
+          <%= label_tag :sort, "Ordenar por:", class: "form-label bg-primary text-warning me-2" %>
+          <%= select_tag :sort,
+                options_for_select([
+                  ["Data (ascendente)", "date_asc"],
+                  ["Data (descendente)", "date_desc"],
+                  ["Preço (menor para maior)", "price_asc"],
+                  ["Preço (maior para menor)", "price_desc"]
+                ], params[:sort]),
+                class: "form-select bg-body-color text-primary" %>
+          <%= submit_tag "Ordenar", class: "btn btn-warning text-primary btn-sm rounded-3" %>
+        </div>
       <% end %>
     </div>
-  <% end %>
+  </div>
+
+  <%# Resultados da busca %>
+  <div>
+    <span><%= @events.total_count %> eventos encontrados</span>
+  </div>
+
+  <%# Exibição dos eventos %>
+  <div class="container py-2">
+    <div class="row">
+      <% @events.each do |event| %>
+        <div class="col-12 col-md-6 col-lg-3 mb-4">
+          <%= render partial: 'events/event_card', locals: { event: event } %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <%# Paginação %>
+  <div class="d-flex justify-content-center gap-2 mb-4">
+    <% if @events.prev_page %>
+      <%= link_to_prev_page @events, 'Anterior',
+          class: 'btn btn-outline-primary',
+          data: { turbo_frame: "events_results" } %>
+    <% end %>
+
+    <% if @events.next_page %>
+      <%= link_to_next_page @events, 'Próxima',
+          class: 'btn btn-outline-primary',
+          data: { turbo_frame: "events_results" } %>
+    <% end %>
+  </div>
 </div>

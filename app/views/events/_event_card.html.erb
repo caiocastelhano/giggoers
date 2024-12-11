@@ -5,9 +5,13 @@
   <%= image_tag(event.url_image, class: "card-img-top rounded-corner", alt: "Imagem do evento") if event.url_image.present? %>
 
   <!-- Botão de coração -->
-  <a href="#" class="position-absolute top-0 end-0 m-2" style="z-index: 1; color: black; font-size: 1.5rem;">
-    <i class="fas fa-heart"></i> <%# Ícone do coração %>
-  </a>
+  <% if current_user.present? %>
+        <%= render 'favorites/btn', event:%>
+      <% else %>
+        <%= link_to new_user_session_path, data: {turbo_method: :post}, class: "favorite-toggle position-absolute top-0 end-0 m-2" do %>
+       <i class="fa-regular fa-heart outline-heart fa-lg"></i>
+      <% end %>
+    <% end %>
 
   <%# Corpo do card %>
   <div class="card-body">

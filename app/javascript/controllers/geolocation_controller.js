@@ -23,7 +23,7 @@ export default class extends Controller {
     this.search(geolocation)
   }
 
-  error(){
+  error() {
     this.linkTarget.textContent = 'Não foi possível identificar sua localização';
   }
 

@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
 
   helper_method :user_signed_in?, :current_user
 
-  before_action :authenticate_user! # Garante que o usuário esteja autenticado por padrão
+  # Exclui a autenticação global para a busca
+  before_action :authenticate_user!
 
   # Redireciona para a tela de login após o logout
   def after_sign_out_path_for(resource_or_scope)
@@ -24,4 +25,3 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
 end
-

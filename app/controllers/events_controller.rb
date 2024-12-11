@@ -1,4 +1,7 @@
 class EventsController < ApplicationController
+  # Exclui a autenticação para a ação de busca
+  before_action :authenticate_user!, except: [:index, :show] # Permite a busca sem login
+
   def index
     # Inicializa a coleção de eventos
     @events = Event.all
@@ -35,7 +38,7 @@ class EventsController < ApplicationController
     @events = @events.page(params[:page]).per(12)
 
     # Geração de marcadores para o mapa
-    @markers = @events.any? ? @events.map do |event|
+    @markers = @events.any? ? @events.map do |event| 
       venue = event.venue
       {
         lat: venue.latitude,
@@ -60,6 +63,11 @@ class EventsController < ApplicationController
 
     # Carrega eventos favoritos do usuário, se estiver logado
     @favorites = user_signed_in? ? current_user.favorites.pluck(:event_id) : []
+  end
+
+  def search
+    # Lógica de busca aqui
+    @events = Event.where("title ILIKE ?", "%#{params[:query]}%")
   end
 
   private

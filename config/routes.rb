@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     delete 'cancel_account', to: 'users#destroy', as: :cancel_account # Add route for account cancellation
   end
 
-
   root to: "pages#home"
 
   # Health check route
@@ -14,7 +13,10 @@ Rails.application.routes.draw do
 
   # Events and Favorites Routes
   resources :events, only: [:index, :show] do
-    get 'search', on: :collection
+    # Rota de busca
+    collection do
+      get 'search' # Define a rota de busca
+    end
 
     resources :favorites, only: [:create]
 

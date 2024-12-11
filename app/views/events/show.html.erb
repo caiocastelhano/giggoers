@@ -84,4 +84,23 @@
       </div>
     </div>
   </div>
+
+  <!-- Modal de aviso de redirecionamento -->
+  <div class="modal fade" id="redirectModal" tabindex="-1" aria-labelledby="redirectModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="redirectModalLabel">Aviso de Redirecionamento</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-primary">
+          Você está prestes a ser redirecionado para o site de compra de ingressos. Clique em "Continuar" para prosseguir.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Fechar</button>
+          <%= link_to "Continuar", @event.purchase_link, class: "btn btn-primary", target: "_blank", rel: "noopener noreferrer" %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

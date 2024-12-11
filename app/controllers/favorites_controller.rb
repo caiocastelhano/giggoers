@@ -42,16 +42,7 @@ class FavoritesController < ApplicationController
     favorite.destroy
 
     respond_to do |format|
-      format.turbo_stream do
-        if current_user.favorites.exists?
-          render turbo_stream: turbo_stream.remove("favorite_#{favorite.id}")
-        else
-          render turbo_stream: [
-            turbo_stream.replace("favorites_list", partial: "favorites/empty"),
-            turbo_stream.update(event, partial: "favorites/btn", locals: { event: event })
-          ]
-        end
-      end
+      format.turbo_stream {render turbo_stream: turbo_stream.replace(event, partial: "favorites/btn", locals: { event: event })}
       format.html { redirect_to favorites_path, notice: "Favorito removido com sucesso." }
     end
   end

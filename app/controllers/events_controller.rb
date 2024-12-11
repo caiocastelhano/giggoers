@@ -65,6 +65,10 @@ class EventsController < ApplicationController
     @favorites = user_signed_in? ? current_user.favorites.pluck(:event_id) : []
   end
 
+  def show
+    @event = Event.find(params[:id])
+  end
+  
   def search
     # Lógica de busca aqui
     @events = Event.where("title ILIKE ?", "%#{params[:query]}%")

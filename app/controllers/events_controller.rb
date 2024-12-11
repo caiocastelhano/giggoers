@@ -62,6 +62,11 @@ class EventsController < ApplicationController
     @favorites = user_signed_in? ? current_user.favorites.pluck(:event_id) : []
   end
 
+  def show
+    @event = Event.find(params[:id])
+  end
+
+
   private
 
   # Recupera a localização do usuário

@@ -81,10 +81,9 @@
                   class: 'btn btn-sm btn-primary corner-rounded' %>
 
                 <!-- Botão de Remover Favorito -->
-                <%= link_to 'Remover', favorite_path(favorite),
+                <%= link_to 'Remover', favorite_path(favorite, format: :html ),
                   class: 'btn btn-sm btn-danger corner-rounded',
-                  data: { turbo_method: :delete, turbo_confirm: 'Tem certeza que deseja remover este evento dos seus favoritos?' },
-                  remote: true %>
+                  data: { turbo_method: :delete, turbo_confirm: 'Tem certeza que deseja remover este evento dos seus favoritos?' }%>
               </div>
             </div>
           </div>

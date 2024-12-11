@@ -21,7 +21,7 @@ def self.search(query, sort_by = 'created_at')
       events.order(created_at: :desc)
     end
   end
-end
+
 class Event < ApplicationRecord
   belongs_to :venue
   has_many :favorites
@@ -35,3 +35,4 @@ class Event < ApplicationRecord
   # Atributos opcionais
   validates :price, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
   validates :url_image, format: { with: URI::DEFAULT_PARSER.make_regexp(%w[http https]), allow_blank: true }
+end

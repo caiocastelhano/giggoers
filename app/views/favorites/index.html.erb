@@ -4,40 +4,40 @@
       <h2>Minha agenda</h2>
   </div>
 
-  <% if @favorites.present? %>
+  <div id="favorites_list">
+    <% if @favorites.present? %>
 
-  <!-- Filtros e Ordenação -->
-<div class="row mb-4">
-  <!-- Filtro por gênero -->
-  <div class="col-md-6">
-    <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center mb-2" do %>
-      <div class="form-group me-2 d-flex w-100">
-        <%= label_tag :genre, "Filtrar por gênero:", class: "form-label bg-primary text-warning me-2" %>
-        <%= select_tag :genre,
-              options_for_select(@favorites.map { |f| f.event.genres.map(&:name) }.flatten.uniq.sort.unshift("Todos")),
-              class: "form-select bg-body-color text-primary rounded-start" %>
-        <%= submit_tag "Filtrar", class: "btn btn-warning text-primary btn-sm rounded-end" %>
+    <!-- Filtros e Ordenação -->
+    <div class="row mb-4">
+      <!-- Filtro por gênero -->
+      <div class="col-md-6">
+        <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center mb-2" do %>
+          <div class="form-group me-2 d-flex w-100">
+            <%= label_tag :genre, "Filtrar por gênero:", class: "form-label bg-primary text-warning me-2" %>
+            <%= select_tag :genre,
+                  options_for_select(@favorites.map { |f| f.event.genres.map(&:name) }.flatten.uniq.sort.unshift("Todos")),
+                  class: "form-select bg-body-color text-primary rounded-start" %>
+            <%= submit_tag "Filtrar", class: "btn btn-warning text-primary btn-sm rounded-end" %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
-  </div>
 
-  <!-- Ordenar por -->
-  <div class="col-md-6 mt-2">
-    <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center" do %>
-      <div class="form-group me-2 d-flex w-100">
-        <%= label_tag :sort, "Ordenar por:", class: "form-label bg-primary text-warning me-2" %>
-        <%= select_tag :sort,
-              options_for_select([["Data (ascendente)", "date_asc"],
-                                  ["Data (descendente)", "date_desc"],
-                                  ["Preço (menor para maior)", "price_asc"],
-                                  ["Preço (maior para menor)", "price_desc"]]),
-              class: "form-select bg-body-color text-primary rounded-start" %>
-        <%= submit_tag "Ordenar", class: "btn btn-warning text-primary btn-sm rounded-end" %>
+      <!-- Ordenar por -->
+      <div class="col-md-6 mt-2">
+        <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center" do %>
+          <div class="form-group me-2 d-flex w-100">
+            <%= label_tag :sort, "Ordenar por:", class: "form-label bg-primary text-warning me-2" %>
+            <%= select_tag :sort,
+                  options_for_select([["Data (ascendente)", "date_asc"],
+                                      ["Data (descendente)", "date_desc"],
+                                      ["Preço (menor para maior)", "price_asc"],
+                                      ["Preço (maior para menor)", "price_desc"]]),
+                  class: "form-select bg-body-color text-primary rounded-start" %>
+            <%= submit_tag "Ordenar", class: "btn btn-warning text-primary btn-sm rounded-end" %>
+          </div>
+        <% end %>
       </div>
-    <% end %>
-  </div>
-</div>
-
+    </div>
 
     <%# Ordenar favoritos por data de início e agrupá-los por mês %>
     <% sorted_favorites = @favorites.sort_by { |favorite| favorite.event.start_date } %>
@@ -51,8 +51,9 @@
           <% event = favorite.event %>
           <% next if event.nil? %> <%# Ignorar favoritos sem evento associado %>
 
-          <div class="col-12 col-md-6 col-lg-4 mb-4">
+          <div id="favorite_<%= favorite.id %>" class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="card position-relative shadow-sm rounded-15">
+
               <%# Imagem do evento %>
               <% if event.url_image.present? %>
                 <%= image_tag(event.url_image, class: "card-img-top rounded-corner", alt: "Imagem do evento") %>
@@ -82,14 +83,16 @@
                 <!-- Botão de Remover Favorito -->
                 <%= link_to 'Remover', favorite_path(favorite),
                   class: 'btn btn-sm btn-danger corner-rounded',
-                  data: { turbo_method: :delete, turbo_confirm: 'Tem certeza que deseja remover este evento dos seus favoritos?' } %>
+                  data: { turbo_method: :delete, turbo_confirm: 'Tem certeza que deseja remover este evento dos seus favoritos?' },
+                  remote: true %>
               </div>
             </div>
           </div>
         <% end %>
       </div>
     <% end %>
-  <% else %>
-    <p class="text-center text-muted">Você ainda não tem eventos favoritos.</p>
-  <% end %>
+    <% else %>
+      <%= render partial: "favorites/empty" %>
+    <% end %>
+  </div>
 </div>

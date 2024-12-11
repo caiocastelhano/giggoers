@@ -18,19 +18,20 @@
         </div>
 
         <!-- Ícone do Usuário -->
-        <div class="col-3 d-flex justify-content-end align-items-center pe-0">
+        <div class="col-3 d-flex justify-content-end align-items-start pe-0">
           <% if user_signed_in? %>
             <%= link_to user_profile_path, class: "d-flex align-items-center text-decoration-none" do %>
               <% if current_user && current_user.avatar.attached? %>
-                <%#= image_tag current_user.avatar.variant(resize_to_fill: [60, 60]).processed,
+                <%= image_tag current_user.avatar.variant(resize_to_fill: [60, 60]).processed,
                               class: "rounded-circle border border-primary",
                               alt: "Perfil" %>
               <% else %>
-                <i class="fas fa-user-circle" style="font-size: 40px; color: #ED4E4E;"></i>
+                <i class="fas fa-user-circle" style="font-size: 60px; color: #ED4E4E;"></i> <!-- Ajuste do tamanho do ícone -->
               <% end %>
+
             <% end %>
           <% else %>
-            <%= link_to new_user_session_path, class: "btn btn-login rounded-pill px-4 py-2 d-flex align-items-center gap-2" do %>
+            <%= link_to new_user_session_path, class: "btn btn-login rounded-pill" do %>
               <i class="fas fa-user-circle" style="font-size: 50px; color: #ED4E4E;"></i>
             <% end %>
           <% end %>

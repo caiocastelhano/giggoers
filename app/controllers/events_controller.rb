@@ -38,7 +38,7 @@ class EventsController < ApplicationController
     @events = @events.page(params[:page]).per(12)
 
     # Geração de marcadores para o mapa
-    @markers = @events.any? ? @events.map do |event| 
+    @markers = @events.any? ? @events.map do |event|
       venue = event.venue
       {
         lat: venue.latitude,
@@ -66,9 +66,14 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find(params[:id])
+    # Recupera os detalhes do evento pelo ID
+    @event = Event.includes(:venue, :genres).find(params[:id])
+
+    # Carrega favoritos do usuário, se logado
+    @favorites = user_signed_in? ? current_user.favorites.pluck(:event_id) : []
   end
-  
+
+
   def search
     # Lógica de busca aqui
     @events = Event.where("title ILIKE ?", "%#{params[:query]}%")

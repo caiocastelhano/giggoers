@@ -29,6 +29,11 @@ class Event < ApplicationRecord
   has_many :event_genres
   has_many :genres, through: :event_genres
 
+  scope :order_by_date_asc, -> { order(start_date: :asc) }
+  scope :order_by_date_desc, -> { order(start_date: :desc) }
+  scope :order_by_price_asc, -> { order(price: :asc) }
+  scope :order_by_price_desc, -> { order(price: :desc) }
+
   # Validações obrigatórias
   validates :title, :description, :start_date, :start_time, :venue_id, presence: true
 

@@ -1,16 +1,41 @@
 class EventsController < ApplicationController
   def index
-    Rails.logger.info "\n\n\n\n User ID: #{current_user.id} \n\n\n"
+    # Inicializa a coleção de eventos
+    @events = Event.all
 
-    # Busca eventos com paginação
-    @events = if params[:query].present?
-                Event.search(params[:query], params[:sort_by])
-              else
-                Event.all
-              end.page(params[:page]).per(12)
+    # Aplica a busca (query)
+    if params[:query].present?
+      @events = @events.joins(:genres, :venue)
+                       .where(
+                         "events.title ILIKE :query OR
+                          events.description ILIKE :query OR
+                          venues.name ILIKE :query",
+                         query: "%#{params[:query]}%"
+                       ).distinct
+    end
 
-    # Gera os marcadores para o mapa
-    @markers = @events.map do |event|
+    # Aplica o filtro por gênero
+    if params[:genre].present? && params[:genre] != "Todos"
+      @events = @events.joins(:genres).where(genres: { name: params[:genre] }).distinct
+    end
+
+    # Aplica a ordenação
+    case params[:sort]
+    when 'date_asc'
+      @events = @events.order(start_date: :asc)
+    when 'date_desc'
+      @events = @events.order(start_date: :desc)
+    when 'price_asc'
+      @events = @events.order(price: :asc)
+    when 'price_desc'
+      @events = @events.order(price: :desc)
+    end
+
+    # Paginação
+    @events = @events.page(params[:page]).per(12)
+
+    # Geração de marcadores para o mapa
+    @markers = @events.any? ? @events.map do |event|
       venue = event.venue
       {
         lat: venue.latitude,
@@ -19,11 +44,11 @@ class EventsController < ApplicationController
           partial: "events/info_window",
           locals: { event: event, venue: venue }
         ),
-        marker_type: "event" # Tipo de marcador
+        marker_type: "event"
       }
-    end
+    end : []
 
-    # Adiciona localização do usuário
+    # Adiciona a localização do usuário
     if (user_location = fetch_user_location)
       @markers << {
         lat: user_location[:latitude],
@@ -35,20 +60,6 @@ class EventsController < ApplicationController
 
     # Carrega eventos favoritos do usuário, se estiver logado
     @favorites = user_signed_in? ? current_user.favorites.pluck(:event_id) : []
-  end
-
-  def show
-    # Busca o evento específico com suas associações
-    @event = Event.includes(:venue, :genres).find(params[:id])
-
-    # Carrega favoritos, se aplicável
-    @favorites = user_signed_in? ? current_user.favorites.pluck(:event_id) : []
-  end
-
-  def user_geolocation
-    if current_user
-      current_user.update(latitude: params[:latitude], longitude: params[:longitude])
-    end
   end
 
   private

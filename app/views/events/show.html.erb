@@ -1,9 +1,26 @@
 <div class="container mt-4">
-    <div class="event-details-container">
+  <div class="event-details-container position-relative">
     <!-- Card principal -->
-    <div class="card shadow-sm rounded-15">
+    <div class="card shadow-sm rounded-15 ">
 
-      <!-- Imagem do evento no topo -->
+      <!-- Botões-->
+      <div class="position-absolute top-0 end-0 m-2 w-25">
+
+        <!-- Botão de Coração -->
+          <% if current_user.present? %>
+            <%= render 'favorites/btn', event: @event, style: "font-size: 2rem;" %>
+          <% else %>
+          <%= link_to new_user_session_path, data: { turbo_method: :post },
+            class: "favorite-toggle text-danger",
+            style: "font-size: 2rem;" do %>
+            <i class="fa-regular fa-heart outline-heart"></i>
+            <% end %>
+          <% end %>
+      </div>
+
+
+
+        <!-- Imagem do evento no topo -->
       <div class="card-img-top-container">
         <% if @event.url_image.present? && @event.url_image != "" %>
           <%= image_tag @event.url_image, class: "card-img-top w-100 rounded-corner", alt: @event.title %>
@@ -12,99 +29,58 @@
         <% end %>
       </div>
 
-      <!-- Botão de coração -->
-      <% if current_user.present? %>
-        <%= render 'favorites/btn', event: @event %>
-      <% else %>
-        <%= link_to new_user_session_path, data: {turbo_method: :post}, class: "favorite-toggle position-absolute top-0 end-0 m-2" do %>
-       <i class="fa-regular fa-heart outline-heart fa-lg"></i>
-      <% end %>
-    <% end %>
-
-
-      <!-- Corpo do card -->
+        <!-- Corpo do card -->
       <div class="card-body">
-        <!-- Título do evento -->
-        <h2 class="card-title event-title text-left mb-3" style="color: #DDDDDD;">
-          <%= @event.title %>
-        </h2>
-        <%# Cor do título definida como #DDDDDD %>
-
-        <!-- Data e Local -->
-        <div class="event-details mb-3" style="color: #DDDDDD;">
-          <p>
-            <strong>Data:</strong>
-            <%= @event.start_date.strftime("%d/%m/%Y") %>
-            às <%= @event.start_time.strftime("%H:%M") if @event.start_time %>
-          </p>
-          <p>
-            <strong>Local:</strong>
-            <%= @event.venue.name %>, <%= @event.venue.address %>
-          </p>
-        </div>
-        <%# Cor de data e local definida como #DDDDDD %>
-
-        <!-- Descrição do evento -->
-        <div class="event-description mb-3" style="color: #DDDDDD;">
-          <p><%= @event.description %></p>
-        </div>
-        <%# Cor da descrição definida como #DDDDDD %>
-
-        <!-- Flex container para gêneros e valor do evento na mesma linha -->
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <!-- Gêneros -->
+        <div class="d-flex">
           <div>
-            <div class="d-flex flex-wrap">
+            <!-- Conteúdo do card -->
+            <h2 class="card-title event-title text-left mb-3" style="color: #DDDDDD;">
+              <%= @event.title %>
+            </h2>
+          </div>
+
+          <!-- Botão de Compartilhar -->
+          <div>
+          <a href="https://wa.me/?text=Confira%20esse%20evento:%20#{event_url(@event)}"
+            target="_blank"
+            rel="noopener"
+            class="text-primary"
+            style="font-size: 2rem;"
+            aria-label="Compartilhar">
+            <i class="fas fa-share-alt"></i>
+          </a>
+          </div>
+        </div>
+        <div class="event-details mb-3" style="color: #DDDDDD;">
+            <p>
+              <strong>Data:</strong>
+              <%= @event.start_date.strftime("%d/%m/%Y") %>
+              às <%= @event.start_time.strftime("%H:%M") if @event.start_time %>
+            </p>
+            <p>
+              <strong>Local:</strong>
+              <%= @event.venue.name %>, <%= @event.venue.address %>
+            </p>
+        </div>
+        <div class="event-description mb-3" style="color: #DDDDDD;">
+            <p><%= @event.description %></p>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="d-flex flex-wrap">
               <% @event.genres.each do |genre| %>
                 <span class="badge bg-secondary me-2 mb-2"><%= genre.name %></span>
               <% end %>
-            </div>
           </div>
-
-          <!-- Preço -->
-          <div>
             <span class="badge bg-primary fs-5">
               R$ <%= number_with_precision(@event.price, precision: 2) %>
             </span>
-          </div>
         </div>
       </div>
 
-      <!-- Botões de Compartilhar e Comprar -->
-      <div class="d-flex flex-column align-items-center">
-        <!-- Ícone de compartilhamento -->
-      <a href="https://wa.me/?text=Confira%20esse%20evento:%20#{event_url(@event)}"
-        target="_blank"
-        rel="noopener"
-        class="body-color mb-3"
-        style="font-size: 2rem;">
-        <i class="fas fa-share-alt"></i>
-      </a>
-
-      <!-- Botão para ingressos -->
-            <!-- Botão para abrir o modal (Aviso de Redirecionamento) -->
+        <!-- Botão para ingressos -->
         <%= link_to "Acesse para comprar", "#",
           class: "btn btn-info corner-rounded py-3 mx-auto d-block mb-4",
           data: { bs_toggle: "modal", bs_target: "#redirectModal" } %>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Modal de aviso de redirecionamento -->
-<div class="modal fade" id="redirectModal" tabindex="-1" aria-labelledby="redirectModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="redirectModalLabel">Aviso de Redirecionamento</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Você está prestes a ser redirecionado para o site de compra de ingressos deste evento. Clique em "Continuar" para prosseguir.
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary corner-rounded" data-bs-dismiss="modal">Fechar</button>
-        <%= link_to "Continuar", @event.purchase_link, class: "btn btn-primary corner-rounded", target: "_blank", rel: "noopener noreferrer" %>
       </div>
     </div>
   </div>

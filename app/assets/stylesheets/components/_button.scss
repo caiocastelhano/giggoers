@@ -31,7 +31,8 @@
   color: red;
 }
 .outline-heart{
--webkit-text-stroke: 1px #ED4E4E; /* Contorno nítido */
+-webkit-text-stroke: 2px #ED4E4E;
+ /* Contorno nítido */
 // text-shadow: 0 0 2px white, 0 0 5px white; /* Adicional para suavizar */
 }
 
@@ -48,4 +49,9 @@
 
 .btn-left-border {
   border-left: 2px solid #ED4E4E; /* Borda à direita com a cor desejada */
+}
+
+.favorite-toggle i {
+  font-size: 2rem; /* Tamanho igual ao do botão de compartilhar */
+  color: red;      /* Cor do coração */
 }

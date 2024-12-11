@@ -116,7 +116,7 @@ event_genre_map = {
   'Noite de Samba' => ['Samba'],
   'Mestres do Piano' => ['Clássica', 'Piano'],
   'Festival de Música do Mundo' => ['Música do Mundo', 'Festival'],
-  'Noite de Rock Alternativo' => ['Rock', 'Alternativa'],
+  'Noite de Rock Alternativo' => ['Alternativa'],
 }
 
 # Loop pelos eventos

@@ -6,19 +6,17 @@
        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 
-  <% if flash[:alert] %>
-    <p class="text-danger"><%= flash[:alert] %></p>
-  <% end %>
+
 
   <%# Filtro e ordenação %>
-  <div class="row mb-3">
+  <div class="row mb-4">
     <%# Filtro por gênero %>
     <div class="col-md-6">
-      <%= form_with url: events_path, method: :get, local: true, class: "d-flex align-items-center" do %>
+      <%= form_with url: events_path, method: :get, local: true, class: "d-flex align-items-center mb-2" do %>
         <%# Preservação dos parâmetros de busca e ordenação %>
         <%= hidden_field_tag :query, params[:query] %>
         <%= hidden_field_tag :sort, params[:sort] %>
-        
+
         <div class="form-group me-2 d-flex w-100">
           <%= label_tag :genre, "Filtrar por gênero:", class: "form-label bg-primary text-warning me-2" %>
           <%= select_tag :genre,
@@ -42,7 +40,7 @@
         <%# Preservação dos parâmetros de busca e filtro %>
         <%= hidden_field_tag :query, params[:query] %>
         <%= hidden_field_tag :genre, params[:genre] %>
-        
+
         <div class="form-group me-2 d-flex w-100">
           <%= label_tag :sort, "Ordenar por:", class: "form-label bg-primary text-warning me-2" %>
           <%= select_tag :sort,
@@ -66,7 +64,7 @@
 
   <%# Exibição dos eventos %>
   <div class="container py-2">
-    <div class="row">
+
       <% @events.each do |event| %>
         <div class="col-12 col-md-6 col-lg-3 mb-4">
           <%= render partial: 'events/event_card', locals: { event: event } %>

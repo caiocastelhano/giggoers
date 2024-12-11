@@ -11,7 +11,7 @@
     <div class="row mb-4">
       <!-- Filtro por gênero -->
       <div class="col-md-6">
-        <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center mb-2" do %>
+        <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center mb-3" do %>
           <div class="form-group me-2 d-flex w-100">
             <%= label_tag :genre, "Filtrar por gênero:", class: "form-label bg-primary text-warning me-2" %>
             <%= select_tag :genre,
@@ -63,27 +63,43 @@
 
               <!-- Corpo do card -->
               <div class="card-body">
+              <!-- Título do evento -->
                 <h3 class="card-title"><%= event.title %></h3>
+
+                <!-- Descrição do evento -->
                 <p class="card-text"><%= truncate(event.description, length: 100) %></p>
+
+                <!-- Informações do evento -->
                 <div class="d-flex justify-content-between align-items-center">
                   <small class="text-muted">
                     <%= event.start_date.strftime("%d/%m/%Y") %>
                     <%= event.start_time.strftime("%H:%M") if event.start_time %>
                   </small>
+
                   <span class="badge bg-primary">R$ <%= number_with_precision(event.price, precision: 2) %></span>
                 </div>
-              </div>
 
-              <!-- Botões de Ação -->
-              <div class="card-footer d-flex justify-content-between text-center">
-                <!-- Botão de Ver Detalhes -->
-                <%= link_to 'Ver Detalhes', event_path(event),
+
+              <!-- Gêneros do evento -->
+              <div class="mt-2">
+                <% event.genres.each do |genre| %>
+                  <span class="badge bg-secondary"><%= genre.name %></span>
+                <% end %>
+              </div>
+            </div>
+
+                <!-- Rodapé do card -->
+                <div class="card-footer d-flex justify-content-between align-items-center">
+
+                  <!-- Botão de Ver Detalhes -->
+                  <%= link_to 'Ver Detalhes', event_path(event),
                   class: 'btn btn-sm btn-primary corner-rounded' %>
 
                 <!-- Botão de Remover Favorito -->
-                <%= link_to 'Remover', favorite_path(favorite, format: :html ),
+                  <%= link_to 'Remover', favorite_path(favorite, format: :html ),
                   class: 'btn btn-sm btn-danger corner-rounded',
                   data: { turbo_method: :delete, turbo_confirm: 'Tem certeza que deseja remover este evento dos seus favoritos?' }%>
+                </div>
               </div>
             </div>
           </div>

@@ -6,15 +6,13 @@
        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 
-  <% if flash[:alert] %>
-    <p class="text-danger"><%= flash[:alert] %></p>
-  <% end %>
+
 
   <%# Filtro e ordenação %>
-  <div class="row mb-3">
+  <div class="row mb-4">
     <%# Filtro por gênero %>
     <div class="col-md-6">
-      <%= form_with url: events_path, method: :get, local: true, class: "d-flex align-items-center" do %>
+      <%= form_with url: events_path, method: :get, local: true, class: "d-flex align-items-center mb-2" do %>
         <%# Preservação dos parâmetros de busca e ordenação %>
         <%= hidden_field_tag :query, params[:query] %>
         <%= hidden_field_tag :sort, params[:sort] %>

@@ -11,7 +11,7 @@
     <div class="row mb-4">
       <!-- Filtro por gênero -->
       <div class="col-md-6">
-        <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center mb-2" do %>
+        <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center mb-3" do %>
           <div class="form-group me-2 d-flex w-100">
             <%= label_tag :genre, "Filtrar por gênero:", class: "form-label bg-primary text-warning me-2" %>
             <%= select_tag :genre,

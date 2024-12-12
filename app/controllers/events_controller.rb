@@ -47,7 +47,8 @@ class EventsController < ApplicationController
           partial: "events/info_window",
           locals: { event: event, venue: venue }
         ),
-        marker_type: "event"
+        marker_type: "event",
+        marker_html: render_to_string(partial: "marker")
       }
     end : []
 

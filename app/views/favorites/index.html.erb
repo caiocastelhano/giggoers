@@ -91,7 +91,7 @@
                   <div class="card-footer d-flex justify-content-between align-items-center">
                     <!-- Botão de Ver Detalhes -->
                     <%= link_to 'Ver Detalhes', event_path(event),
-                    class: 'btn btn-sm btn-primary corner-rounded' %>
+                    class: 'btn btn-sm btn-primary corner-rounded', data: {turbo_frame: '_top'} %>
 
                     <!-- Botão de Remover Favorito -->
                     <%= link_to 'Remover', favorite_path(favorite, format: :html ),

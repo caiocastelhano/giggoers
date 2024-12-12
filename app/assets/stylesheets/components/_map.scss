@@ -9,6 +9,7 @@
   max-width: 300px;
 }
 
-.mapboxgl-popup-content {
+:host ::ng-deep .mapboxgl-popup-content {
   padding: 15px;
+  // background: #ED4E4E !important;
 }

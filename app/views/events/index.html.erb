@@ -1,9 +1,21 @@
 <div class="container py-4">
   <%# Container do mapa %>
-  <div class="map-container mb-4"
+  <div class="map-container mb-4 position-relative"
        data-controller="map"
        data-map-markers-value="<%= @markers.to_json %>"
        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+
+    <%# Botão de Compartilhar no topo direito %>
+    <div class="position-absolute top-0 end-0 m-2">
+      <a href="https://wa.me/?text=Confira%20esse%20evento:%20#{request.original_url}"
+         target="_blank"
+         rel="noopener"
+         class="text-primary"
+         style="font-size: 2rem;"
+         aria-label="Compartilhar">
+        <i class="fas fa-share-alt"></i>
+      </a>
+    </div>
   </div>
 
   <%# Filtro e ordenação %>
@@ -42,7 +54,7 @@
         <div class="form-group me-2 d-flex w-100">
           <%= label_tag :sort, "Ordenar por:", class: "form-label bg-primary text-warning me-2" %>
           <%= select_tag :sort,
-                options_for_select([ 
+                options_for_select([
                   ["Data (ascendente)", "date_asc"],
                   ["Data (descendente)", "date_desc"],
                   ["Preço (menor para maior)", "price_asc"],
@@ -74,16 +86,16 @@
   <%# Paginação %>
   <div class="d-flex justify-content-center gap-2 mb-4">
     <% if @events.prev_page %>
-      <%= link_to_previous_page @events, 'Anterior', 
-          class: 'btn btn-outline-primary', 
-          data: { turbo_frame: "events_results" }, 
+      <%= link_to_previous_page @events, 'Anterior',
+          class: 'btn btn-outline-primary',
+          data: { turbo_frame: "events_results" },
           params: { query: params[:query], genre: params[:genre], sort: params[:sort] } %>
     <% end %>
 
     <% if @events.next_page %>
-      <%= link_to_next_page @events, 'Próxima', 
-          class: 'btn btn-outline-primary', 
-          data: { turbo_frame: "events_results" }, 
+      <%= link_to_next_page @events, 'Próxima',
+          class: 'btn btn-outline-primary',
+          data: { turbo_frame: "events_results" },
           params: { query: params[:query], genre: params[:genre], sort: params[:sort] } %>
     <% end %>
   </div>

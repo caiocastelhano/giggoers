@@ -1,33 +1,35 @@
 class FavoritesController < ApplicationController
   before_action :authenticate_user!
 
-  # GET /favorites
   def index
-    @favorites = current_user.favorites.includes(:event).select { |favorite| favorite.event.present? }
+    # Carrega os favoritos do usuário atual com seus eventos e gêneros
+    @favorites = current_user.favorites.includes(event: [:genres, :venue])
 
-    # Aplicando filtros
+    # Filtro por gênero
     if params[:genre].present? && params[:genre] != "Todos"
-      @favorites = @favorites.select do |favorite|
-        favorite.event.genres.map(&:name).include?(params[:genre])
-      end
+      @favorites = @favorites.joins(event: :genres)
+                             .where(genres: { name: params[:genre] })
     end
 
-    # Ordenação
-    case params[:sort]
+    # Ordenação utilizando os scopes do modelo Event
+    @favorites = case params[:sort]
     when "date_asc"
-      @favorites = @favorites.sort_by { |favorite| favorite.event.start_date }
+      @favorites.sort_by { |favorite| favorite.event.start_date }
     when "date_desc"
-      @favorites = @favorites.sort_by { |favorite| favorite.event.start_date }.reverse
+      @favorites.sort_by { |favorite| favorite.event.start_date }.reverse
     when "price_asc"
-      @favorites = @favorites.sort_by { |favorite| favorite.event.price }
+      @favorites.sort_by { |favorite| favorite.event.price || 0 }
     when "price_desc"
-      @favorites = @favorites.sort_by { |favorite| favorite.event.price }.reverse
+      @favorites.sort_by { |favorite| favorite.event.price || 0 }.reverse
+    else
+      @favorites
     end
 
-    @favorite_event_ids = @favorites.map { |favorite| favorite.event.id }
+    # Garante que apenas eventos presentes sejam exibidos
+    @favorites = @favorites.select { |favorite| favorite.event.present? }
   end
 
-  # POST /favorites
+  # Restante do código permanece o mesmo
   def create
     event = Event.find(params[:event_id])
     current_user.favorites.create!(event: event)
@@ -35,7 +37,6 @@ class FavoritesController < ApplicationController
     render turbo_stream: turbo_stream.replace(event, partial: "favorites/btn", locals: { event: event })
   end
 
-  # DELETE /favorites/:id
   def destroy
     favorite = current_user.favorites.find(params[:id])
     event = favorite.event

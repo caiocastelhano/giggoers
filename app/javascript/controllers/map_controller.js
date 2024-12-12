@@ -18,29 +18,29 @@ export default class extends Controller {
     this.#addMarkersToMap()
     this.#fitMapToMarkers()
     this.#askForGeolocation()
+    
   }
 
   #addMarkersToMap() {
     this.markersValue.forEach((marker) => {
-      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html)
+      const popup = new mapboxgl.Popup().setHTML(marker.info_window_html);
 
-      // Determine marker color based on marker type
-      const color = marker.marker_type === "user" ? "blue" : "red"
-
-      // Create a custom marker element
-      const markerElement = document.createElement("div")
-      markerElement.className = "custom-marker"
-      markerElement.style.backgroundColor = color
-      markerElement.style.width = "20px"
-      markerElement.style.height = "20px"
-      markerElement.style.borderRadius = "50%"
+      // Create a custom marker element using an image
+      const markerElement = document.createElement("div");
+      const markerImage = document.createElement("img");
+      markerImage.src = "/assets/logo.png"; // Map the Rails asset pipeline path
+      markerImage.alt = "Custom Marker";
+      // markerImage.style.width = "30px"; // Set the desired width
+      // markerImage.style.height = "30px"; // Set the desired height
+      markerElement.appendChild(markerImage);
 
       new mapboxgl.Marker(markerElement)
         .setLngLat([marker.lng, marker.lat])
         .setPopup(popup)
-        .addTo(this.map)
-    })
+        .addTo(this.map);
+    });
   }
+
 
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
@@ -73,28 +73,21 @@ export default class extends Controller {
   }
 
   #addUserMarker(userLocation) {
-    // Create a popup for the user's location
-    const popup = new mapboxgl.Popup().setHTML("Your Location")
+    const popup = new mapboxgl.Popup().setHTML("Sua Localização");
 
-    // Create a blue marker for the user's location
-    const markerElement = document.createElement("div")
-    markerElement.className = "custom-marker"
-    markerElement.style.backgroundColor = "blue"
-    markerElement.style.width = "20px"
-    markerElement.style.height = "20px"
-    markerElement.style.borderRadius = "50%"
+    // Criar um elemento para o marcador com uma imagem
+    const markerElement = document.createElement("div");
+    const markerImage = document.createElement("img");
+    markerImage.src = "/assets/user_marker.png"; // Caminho do asset
+    markerImage.alt = "Localização do Usuário";
+    markerImage.style.width = "30px";
+    markerImage.style.height = "30px";
+    markerElement.appendChild(markerImage);
 
-    // Add the user's marker to the map
     new mapboxgl.Marker(markerElement)
       .setLngLat([userLocation.lng, userLocation.lat])
       .setPopup(popup)
-      .addTo(this.map)
-
-    // Dynamically add the user's location to the bounds
-    this.markersValue.push({
-      lat: userLocation.lat,
-      lng: userLocation.lng,
-      marker_type: "user"
-    })
+      .addTo(this.map);
   }
+
 }

@@ -103,6 +103,11 @@
             <% end %>
           </div>
         <% end %>
+
+        <!-- Links de navegação da paginação -->
+        <div class="d-flex justify-content-center my-4">
+          <%= paginate @favorites %>
+        </div>
       <% end %>
     <% else %>
       <%= render partial: "favorites/empty" %>

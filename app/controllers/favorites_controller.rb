@@ -11,7 +11,7 @@ class FavoritesController < ApplicationController
                              .where(genres: { name: params[:genre] })
     end
 
-    # Ordenação utilizando os scopes do modelo Event
+    # Ordenação utilizando os atributos do modelo Event
     @favorites = case params[:sort]
     when "date_asc"
       @favorites.sort_by { |favorite| favorite.event.start_date }
@@ -27,9 +27,11 @@ class FavoritesController < ApplicationController
 
     # Garante que apenas eventos presentes sejam exibidos
     @favorites = @favorites.select { |favorite| favorite.event.present? }
+
+    # Adiciona paginação
+    @favorites = Kaminari.paginate_array(@favorites).page(params[:page]).per(10)
   end
 
-  # Restante do código permanece o mesmo
   def create
     event = Event.find(params[:event_id])
     current_user.favorites.create!(event: event)
@@ -43,7 +45,9 @@ class FavoritesController < ApplicationController
     favorite.destroy
 
     respond_to do |format|
-      format.turbo_stream {render turbo_stream: turbo_stream.replace(event, partial: "favorites/btn", locals: { event: event })}
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(event, partial: "favorites/btn", locals: { event: event })
+      end
       format.html { redirect_to favorites_path, notice: "Favorito removido com sucesso." }
     end
   end

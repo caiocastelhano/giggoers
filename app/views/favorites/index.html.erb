@@ -1,111 +1,109 @@
 <div class="container mt-2">
-
   <div class="text-white pt-1 pb-1" style="text-align: center; font-weight: bold;">
-      <h2>Minha agenda</h2>
+    <h2>Minha agenda</h2>
   </div>
 
   <div id="favorites_list">
     <% if @favorites.present? %>
-
-    <!-- Filtros e Ordenação -->
-    <div class="row mb-4">
-      <!-- Filtro por gênero -->
-      <div class="col-md-6">
-        <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center mb-3" do %>
-          <div class="form-group me-2 d-flex w-100">
-            <%= label_tag :genre, "Filtrar por gênero:", class: "form-label bg-primary text-warning me-2" %>
-            <%= select_tag :genre,
-                  options_for_select(@favorites.map { |f| f.event.genres.map(&:name) }.flatten.uniq.sort.unshift("Todos")),
-                  class: "form-select bg-body-color text-primary rounded-start" %>
-            <%= submit_tag "Filtrar", class: "btn btn-warning text-primary btn-sm rounded-end" %>
-          </div>
-        <% end %>
-      </div>
-
-      <!-- Ordenar por -->
-      <div class="col-md-6 mt-2">
-        <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center" do %>
-          <div class="form-group me-2 d-flex w-100">
-            <%= label_tag :sort, "Ordenar por:", class: "form-label bg-primary text-warning me-2" %>
-            <%= select_tag :sort,
-                  options_for_select([["Data (ascendente)", "date_asc"],
-                                      ["Data (descendente)", "date_desc"],
-                                      ["Preço (menor para maior)", "price_asc"],
-                                      ["Preço (maior para menor)", "price_desc"]]),
-                  class: "form-select bg-body-color text-primary rounded-start" %>
-            <%= submit_tag "Ordenar", class: "btn btn-warning text-primary btn-sm rounded-end" %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-
-    <%# Ordenar favoritos por data de início e agrupá-los por mês %>
-    <% sorted_favorites = @favorites.sort_by { |favorite| favorite.event.start_date } %>
-    <% grouped_by_month = sorted_favorites.group_by { |favorite| favorite.event.start_date.beginning_of_month } %>
-
-    <% grouped_by_month.each do |month, favorites| %>
-      <h3 class="text-white mt-4"><%= I18n.l(month, format: "%B %Y") %></h3>
-
-      <div class="row">
-        <% favorites.each do |favorite| %>
-          <% event = favorite.event %>
-          <% next if event.nil? %> <%# Ignorar favoritos sem evento associado %>
-
-          <div id="favorite_<%= favorite.id %>" class="col-12 col-md-6 col-lg-4 mb-4">
-            <div class="card position-relative shadow-sm rounded-15">
-
-              <%# Imagem do evento %>
-              <% if event.url_image.present? %>
-                <%= image_tag(event.url_image, class: "card-img-top rounded-corner", alt: "Imagem do evento") %>
-              <% else %>
-                <%= image_tag("default-image.jpg", class: "card-img-top rounded-corner", alt: "Imagem padrão do evento") %>
-              <% end %>
-
-              <!-- Corpo do card -->
-              <div class="card-body">
-              <!-- Título do evento -->
-                <h3 class="card-title"><%= event.title %></h3>
-
-                <!-- Descrição do evento -->
-                <p class="card-text"><%= truncate(event.description, length: 100) %></p>
-
-                <!-- Informações do evento -->
-                <div class="d-flex justify-content-between align-items-center">
-                  <small class="text-muted">
-                    <%= event.start_date.strftime("%d/%m/%Y") %>
-                    <%= event.start_time.strftime("%H:%M") if event.start_time %>
-                  </small>
-
-                  <span class="badge bg-primary">R$ <%= number_with_precision(event.price, precision: 2) %></span>
-                </div>
-
-
-              <!-- Gêneros do evento -->
-              <div class="mt-2">
-                <% event.genres.each do |genre| %>
-                  <span class="badge bg-secondary"><%= genre.name %></span>
-                <% end %>
-              </div>
+      <!-- Filtros e Ordenação -->
+      <div class="row mb-4">
+        <!-- Filtro por gênero -->
+        <div class="col-md-6">
+          <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center mb-3", data: { turbo_frame: 'favorites_list' } do |f| %>
+            <div class="form-group me-2 d-flex w-100">
+              <%= label_tag :genre, "Filtrar por gênero:", class: "form-label bg-primary text-warning me-2" %>
+              <%= select_tag :genre,
+                    options_for_select(@favorites.map { |f| f.event.genres.map(&:name) }.flatten.uniq.sort.unshift("Todos"), selected: params[:genre]),
+                    class: "form-select bg-body-color text-primary rounded-start" %>
+              <%= submit_tag "Filtrar", class: "btn btn-warning text-primary btn-sm rounded-end" %>
             </div>
+          <% end %>
+        </div>
 
-                <!-- Rodapé do card -->
-                <div class="card-footer d-flex justify-content-between align-items-center">
+        <!-- Ordenar por -->
+        <div class="col-md-6 mt-2">
+          <%= form_with url: favorites_path, method: :get, local: true, class: "d-flex align-items-center", data: { turbo_frame: 'favorites_list' } do |f| %>
+            <div class="form-group me-2 d-flex w-100">
+              <%= label_tag :sort, "Ordenar por:", class: "form-label bg-primary text-warning me-2" %>
+              <%= select_tag :sort,
+                    options_for_select([
+                      ["Data (ascendente)", "date_asc"],
+                      ["Data (descendente)", "date_desc"],
+                      ["Preço (menor para maior)", "price_asc"],
+                      ["Preço (maior para menor)", "price_desc"]
+                    ], selected: params[:sort]),
+                    class: "form-select bg-body-color text-primary rounded-start" %>
+              <%= submit_tag "Ordenar", class: "btn btn-warning text-primary btn-sm rounded-end" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
 
-                  <!-- Botão de Ver Detalhes -->
-                  <%= link_to 'Ver Detalhes', event_path(event),
-                  class: 'btn btn-sm btn-primary corner-rounded' %>
+      <%= turbo_frame_tag 'favorites_list' do %>
+        <%# Ordenar favoritos por data de início e agrupá-los por mês %>
+        <% sorted_favorites = @favorites %>
+        <% grouped_by_month = sorted_favorites.group_by { |favorite| favorite.event.start_date.beginning_of_month } %>
 
-                <!-- Botão de Remover Favorito -->
-                  <%= link_to 'Remover', favorite_path(favorite, format: :html ),
-                  class: 'btn btn-sm btn-danger corner-rounded',
-                  data: { turbo_method: :delete, turbo_confirm: 'Tem certeza que deseja remover este evento dos seus favoritos?' }%>
+        <% grouped_by_month.each do |month, favorites| %>
+          <h3 class="text-white mt-4"><%= I18n.l(month, format: "%B %Y") %></h3>
+
+          <div class="row">
+            <% favorites.each do |favorite| %>
+              <% event = favorite.event %>
+              <% next if event.nil? %> <%# Ignorar favoritos sem evento associado %>
+
+              <div id="favorite_<%= favorite.id %>" class="col-12 col-md-6 col-lg-4 mb-4">
+                <div class="card position-relative shadow-sm rounded-15">
+                  <%# Imagem do evento %>
+                  <% if event.url_image.present? %>
+                    <%= image_tag(event.url_image, class: "card-img-top rounded-corner", alt: "Imagem do evento") %>
+                  <% else %>
+                    <%= image_tag("default-image.jpg", class: "card-img-top rounded-corner", alt: "Imagem padrão do evento") %>
+                  <% end %>
+
+                  <!-- Corpo do card -->
+                  <div class="card-body">
+                    <!-- Título do evento -->
+                    <h3 class="card-title"><%= event.title %></h3>
+
+                    <!-- Descrição do evento -->
+                    <p class="card-text"><%= truncate(event.description, length: 100) %></p>
+
+                    <!-- Informações do evento -->
+                    <div class="d-flex justify-content-between align-items-center">
+                      <small class="text-muted">
+                        <%= event.start_date.strftime("%d/%m/%Y") %>
+                        <%= event.start_time.strftime("%H:%M") if event.start_time %>
+                      </small>
+
+                      <span class="badge bg-primary">R$ <%= number_with_precision(event.price, precision: 2) %></span>
+                    </div>
+
+                    <!-- Gêneros do evento -->
+                    <div class="mt-2">
+                      <% event.genres.each do |genre| %>
+                        <span class="badge bg-secondary"><%= genre.name %></span>
+                      <% end %>
+                    </div>
+                  </div>
+
+                  <!-- Rodapé do card -->
+                  <div class="card-footer d-flex justify-content-between align-items-center">
+                    <!-- Botão de Ver Detalhes -->
+                    <%= link_to 'Ver Detalhes', event_path(event),
+                    class: 'btn btn-sm btn-primary corner-rounded' %>
+
+                    <!-- Botão de Remover Favorito -->
+                    <%= link_to 'Remover', favorite_path(favorite, format: :html ),
+                    class: 'btn btn-sm btn-danger corner-rounded',
+                    data: { turbo_method: :delete, turbo_confirm: 'Tem certeza que deseja remover este evento dos seus favoritos?' }%>
+                  </div>
                 </div>
               </div>
-            </div>
+            <% end %>
           </div>
         <% end %>
-      </div>
-    <% end %>
+      <% end %>
     <% else %>
       <%= render partial: "favorites/empty" %>
     <% end %>

@@ -15,6 +15,7 @@
 @import 'components/button';
 @import 'components/map';
 
+
 body {
   background-color: $primary;
   margin-bottom: 40px;
@@ -45,3 +46,29 @@ h2, h3 {
 // .form-select .btn{
 //   border-radius: 15px;
 // }
+.map-container .mapboxgl-popup .mapboxgl-popup-content {
+  padding: 15px;
+  background: white !important;
+
+  strong{
+    color: $primary !important;
+  }
+
+  p {
+    color: $primary !important;
+  }
+
+ h5 {
+  color: $primary !important;
+ }
+}
+
+.mapboxgl-popup-content {
+  color: $primary !important;
+ }
+
+ .custom-marker {
+  background-color: $primary !important;
+  border: 3px solid white; /* Define uma borda branca com 2px de espessura */
+  border-radius: 50%; /* Mantém o formato circular */
+ }

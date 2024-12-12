@@ -26,15 +26,19 @@ export default class extends Controller {
       const popup = new mapboxgl.Popup().setHTML(marker.info_window_html);
 
       // Create a custom marker element using an image
-      const markerElement = document.createElement("div");
-      const markerImage = document.createElement("img");
-      markerImage.src = "/assets/logo.png"; // Map the Rails asset pipeline path
-      markerImage.alt = "Custom Marker";
+      // const markerElement = document.createElement("div");
+      // const markerImage = document.createElement("img");
+      // markerImage.src = "/assets/logo.png"; // Map the Rails asset pipeline path
+      // markerImage.alt = "Custom Marker";
       // markerImage.style.width = "30px"; // Set the desired width
       // markerImage.style.height = "30px"; // Set the desired height
-      markerElement.appendChild(markerImage);
+      // markerElement.appendChild(markerImage);
 
-      new mapboxgl.Marker(markerElement)
+      // Create a HTML element for your custom marker
+      const customMarker = document.createElement("div")
+      customMarker.innerHTML = marker.marker_html
+
+      new mapboxgl.Marker(customMarker)
         .setLngLat([marker.lng, marker.lat])
         .setPopup(popup)
         .addTo(this.map);
@@ -76,15 +80,15 @@ export default class extends Controller {
     const popup = new mapboxgl.Popup().setHTML("Sua Localização");
 
     // Criar um elemento para o marcador com uma imagem
-    const markerElement = document.createElement("div");
-    const markerImage = document.createElement("img");
-    markerImage.src = "/assets/user_marker.png"; // Caminho do asset
-    markerImage.alt = "Localização do Usuário";
-    markerImage.style.width = "30px";
-    markerImage.style.height = "30px";
-    markerElement.appendChild(markerImage);
+    // const markerElement = document.createElement("div");
+    // const markerImage = document.createElement("img");
+    // markerImage.src = "/assets/user_marker.png"; // Caminho do asset
+    // markerImage.alt = "Localização do Usuário";
+    // markerImage.style.width = "30px";
+    // markerImage.style.height = "30px";
+    // markerElement.appendChild(markerImage);
 
-    new mapboxgl.Marker(markerElement)
+    new mapboxgl.Marker()
       .setLngLat([userLocation.lng, userLocation.lat])
       .setPopup(popup)
       .addTo(this.map);

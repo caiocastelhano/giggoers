@@ -1,18 +1,20 @@
 class PagesController < ApplicationController
-  
-    # Permite acesso à home sem autenticação
-    skip_before_action :authenticate_user!, only: [:home]
+  skip_before_action :authenticate_user!, only: [:home]
 
   def home
-    # Carrega os eventos destacados
-    @carousel_events = Event.limit(2) # Exemplos de eventos para o carrossel
-    @card_events = Event.all.page(params[:page]).per(10) # Eventos paginados para os cards
+    # Carrega os eventos destacados no carrossel
+    @carousel_events = Event.limit(5)
+
+    # Carrega os eventos para os cards, excluindo os do carrossel
+    @card_events = Event.where.not(id: @carousel_events.pluck(:id))
+                         .page(params[:page])
+                         .per(10)
 
     # Inicializa @favorites para verificar eventos favoritos
     if user_signed_in?
-      @favorites = current_user.favorites.pluck(:event_id) # IDs dos eventos favoritos
+      @favorites = current_user.favorites.pluck(:event_id)
     else
-      @favorites = [] # Lista vazia se o usuário não estiver logado
+      @favorites = []
     end
   end
 end

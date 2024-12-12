@@ -32,8 +32,8 @@
               </div>
 
               <!-- Campo Foto -->
-              <div class="mb-3">
-                <%= f.input :avatar, as: :file, label: "Alterar Foto de Perfil" %>
+              <div class="mb-3 file-upload">
+                <%= f.file_field :avatar, as: :file, label: "Alterar Foto de Perfil" %>
               </div>
 
               <!-- Campo Senha Atual -->

@@ -38,10 +38,7 @@ h2, h3 {
   display: none !important;
 }
 
-// .form-select {
-//   border-radius: 15px;
-// }
-
-// .form-select .btn{
-//   border-radius: 15px;
-// }
+.form-control.file.optional{
+  background-color: $body-color;
+  color: $primary;
+}

@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
   # Relacionamento: Um usuário pode ter muitos favoritos.
   has_many :favorites
-
+  
   has_one_attached :avatar
   # Relacionamento: Usuário tem acesso a eventos por meio dos favoritos.
   has_many :events, through: :favorites

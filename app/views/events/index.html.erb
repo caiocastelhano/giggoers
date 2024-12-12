@@ -6,8 +6,6 @@
        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 
-
-
   <%# Filtro e ordenação %>
   <div class="row mb-4">
     <%# Filtro por gênero %>
@@ -44,7 +42,7 @@
         <div class="form-group me-2 d-flex w-100">
           <%= label_tag :sort, "Ordenar por:", class: "form-label bg-primary text-warning me-2" %>
           <%= select_tag :sort,
-                options_for_select([
+                options_for_select([ 
                   ["Data (ascendente)", "date_asc"],
                   ["Data (descendente)", "date_desc"],
                   ["Preço (menor para maior)", "price_asc"],
@@ -64,7 +62,7 @@
 
   <%# Exibição dos eventos %>
   <div class="container py-2">
-
+    <div class="row">
       <% @events.each do |event| %>
         <div class="col-12 col-md-6 col-lg-3 mb-4">
           <%= render partial: 'events/event_card', locals: { event: event } %>
@@ -76,15 +74,20 @@
   <%# Paginação %>
   <div class="d-flex justify-content-center gap-2 mb-4">
     <% if @events.prev_page %>
-      <%= link_to_prev_page @events, 'Anterior',
-          class: 'btn btn-outline-primary',
-          data: { turbo_frame: "events_results" } %>
+      <%= link_to_previous_page @events, 'Anterior', 
+          class: 'btn btn-outline-primary', 
+          data: { turbo_frame: "events_results" }, 
+          params: { query: params[:query], genre: params[:genre], sort: params[:sort] } %>
     <% end %>
 
     <% if @events.next_page %>
-      <%= link_to_next_page @events, 'Próxima',
-          class: 'btn btn-outline-primary',
-          data: { turbo_frame: "events_results" } %>
+      <%= link_to_next_page @events, 'Próxima', 
+          class: 'btn btn-outline-primary', 
+          data: { turbo_frame: "events_results" }, 
+          params: { query: params[:query], genre: params[:genre], sort: params[:sort] } %>
     <% end %>
   </div>
+
+  <%# Exibe a paginação com parâmetros preservados %>
+  <%= paginate @events, params: { query: params[:query], genre: params[:genre], sort: params[:sort] } %>
 </div>

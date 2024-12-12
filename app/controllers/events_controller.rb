@@ -73,10 +73,12 @@ class EventsController < ApplicationController
     @favorites = user_signed_in? ? current_user.favorites.pluck(:event_id) : []
   end
 
-
   def search
-    # Lógica de busca aqui
+    # Lógica de busca
     @events = Event.where("title ILIKE ?", "%#{params[:query]}%")
+
+    # Aplica a paginação
+    @events = @events.page(params[:page]).per(10)
   end
 
   private

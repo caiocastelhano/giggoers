@@ -45,6 +45,7 @@ class FavoritesController < ApplicationController
     favorite.destroy
 
     respond_to do |format|
+      format.turbo_stream {render turbo_stream: turbo_stream.replace(event, partial: "favorites/btn", locals: { event: event })}
       format.turbo_stream do
         render turbo_stream: turbo_stream.replace(event, partial: "favorites/btn", locals: { event: event })
       end

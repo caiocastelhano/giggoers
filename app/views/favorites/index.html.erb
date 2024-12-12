@@ -44,7 +44,7 @@
     <% grouped_by_month = sorted_favorites.group_by { |favorite| favorite.event.start_date.beginning_of_month } %>
 
     <% grouped_by_month.each do |month, favorites| %>
-      <h3 class="text-secondary mt-4"><%= I18n.l(month, format: "%B %Y") %></h3>
+      <h3 class="text-white mt-4"><%= I18n.l(month, format: "%B %Y") %></h3>
 
       <div class="row">
         <% favorites.each do |favorite| %>

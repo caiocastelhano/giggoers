@@ -11,25 +11,28 @@ class FavoritesController < ApplicationController
                              .where(genres: { name: params[:genre] })
     end
 
-    # Ordenação utilizando os atributos do modelo Event
-    @favorites = case params[:sort]
-    when "date_asc"
-      @favorites.sort_by { |favorite| favorite.event.start_date }
-    when "date_desc"
-      @favorites.sort_by { |favorite| favorite.event.start_date }.reverse
-    when "price_asc"
-      @favorites.sort_by { |favorite| favorite.event.price || 0 }
-    when "price_desc"
-      @favorites.sort_by { |favorite| favorite.event.price || 0 }.reverse
-    else
-      @favorites
-    end
+  # Define ordenação padrão para "date_asc" se nenhum parâmetro for fornecido
+  sort_option = params[:sort] || "date_asc"
 
-    # Garante que apenas eventos presentes sejam exibidos
-    @favorites = @favorites.select { |favorite| favorite.event.present? }
+  # Ordenação utilizando os atributos do modelo Event
+  @favorites = case sort_option
+  when "date_asc"
+    @favorites.sort_by { |favorite| favorite.event.start_date }
+  when "date_desc"
+    @favorites.sort_by { |favorite| favorite.event.start_date }.reverse
+  when "price_asc"
+    @favorites.sort_by { |favorite| favorite.event.price || 0 }
+  when "price_desc"
+    @favorites.sort_by { |favorite| favorite.event.price || 0 }.reverse
+  else
+    @favorites
+  end
 
-    # Adiciona paginação
-    @favorites = Kaminari.paginate_array(@favorites).page(params[:page]).per(10)
+  # Garante que apenas eventos presentes sejam exibidos
+  @favorites = @favorites.select { |favorite| favorite.event.present? }
+
+  # Adiciona paginação
+  @favorites = Kaminari.paginate_array(@favorites).page(params[:page]).per(10)
   end
 
   def create

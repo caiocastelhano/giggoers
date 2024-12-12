@@ -13,7 +13,7 @@ users = User.create!([
   { name: 'Admin', email: 'admin@admin.com', password: 'admin123' },
   { name: 'Caio', email: 'caio@gmail.com', password: 'caio1234' },
   { name: 'Virginie', email: 'virginie@gmail.com', password: 'virginie123' },
-  { name: 'Máira Senna', email: 'maira@gmail.com', password: 'maira123' }
+  { name: 'Máira', email: 'maira@gmail.com', password: 'maira123' }
 ])
 
 # 3. Create Venues

@@ -1,6 +1,6 @@
 <!-- Título "DESTAQUES", centralizado e em negrito -->
 <div class="text-white pt-1 pb-1" style="text-align: center; font-weight: bold;">
- <h2>Destaques</h2>
+  <h2>Destaques</h2>
 </div>
 
 <!-- Carrossel de Eventos -->
@@ -41,20 +41,19 @@
 <div class="container py-4">
   <% @card_events.each do |event| %>
     <div class="card mb-3 position-relative">
-
       <!-- Imagem do evento -->
       <% if event.url_image.present? %>
         <%= image_tag(event.url_image, class: "card-img-top rounded-corner", alt: "Imagem do evento") %>
       <% end %>
 
       <!-- Botão de coração -->
-      <% if current_user.present? %>
-        <%= render 'favorites/btn', event:%>
+      <% if user_signed_in? %>
+        <%= render 'favorites/btn', event: event %>
       <% else %>
-        <%= link_to new_user_session_path, data: {turbo_method: :post}, class: "favorite-toggle position-absolute top-0 end-0 m-2 p-2" do %>
-       <i class="fa-regular fa-heart outline-heart fa-lg"></i>
+        <%= link_to new_user_session_path, class: "favorite-toggle position-absolute top-0 end-0 m-2 p-2" do %>
+          <i class="fa-regular fa-heart outline-heart fa-lg"></i>
+        <% end %>
       <% end %>
-    <% end %>
 
       <!-- Corpo do card -->
       <div class="card-body">
@@ -88,7 +87,11 @@
       <div class="card-footer text-center">
         <%= link_to "Ver Detalhes", event_path(event.id), class: "btn btn-primary btn-sm corner-rounded" %>
       </div>
-
     </div>
   <% end %>
+
+  <!-- Links de navegação da paginação -->
+  <div class="d-flex justify-content-center my-4">
+    <%= paginate @card_events %>
+  </div>
 </div>

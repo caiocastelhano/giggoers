@@ -63,3 +63,11 @@ pt-BR:
       - "out"
       - "nov"
       - "dez"
+  
+  views:
+    pagination:
+      next: "Próxima"
+      previous: "Anterior"
+      first: "Primeira"
+      last: "Última"
+      truncate: "..."
